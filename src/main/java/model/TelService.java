@@ -62,10 +62,12 @@ public class TelService {
         Statement statement = new DAO().getConnection().createStatement();
         String s = "SELECT * FROM daotalk.abonents WHERE login='"+request.getParameter("login")+"';";
         ResultSet rs = statement.executeQuery(s);
-        while (rs.next()){
+        if (rs.next()){
             if (!request.getParameter("password").equals(rs.getString("password"))){
-                request.setAttribute("wrongPassword", "wrongPassword!!!!!!!!!!!!!!!!!!");
+                request.setAttribute("wrongPassword", "Wrong password!");
             }
+        }else {
+            request.setAttribute("wrongLogin", "Wrong login!");
         }
         return request;
     }

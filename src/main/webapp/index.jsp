@@ -19,14 +19,12 @@
                 <div class="aboutcont ">
                     <form action="./home2" method="get">
                         <br>
-                        <p class="wrongLogin" >${wrongLogin}<br> </p>
                         login:
-                        <br>
+                        <p class="wrongLogin" >${wrongLogin}</p>
                         <input type="text" name="login">
                         <br>
-                        ${wrongPassword}
                         password:
-                        <br>
+                        <p class="wrongLogin" >${wrongPassword}</p>
                         <input type="password" name="password">
                         <br>
                         <input type="submit" value="Enter">
