@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="MoreLess" />
+        <module name="Tsk4v2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="MoreLess" target="1.5" />
+      <module name="Tsk4v2" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

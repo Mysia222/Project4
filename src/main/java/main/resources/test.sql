@@ -1,0 +1,1 @@
+SELECT * FROM daotalk.abonents WHERE login='Qwerty123' and password='password';
