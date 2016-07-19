@@ -25,8 +25,17 @@
                         ${contract}<br>
                         Balance:
                         <br>
-                        startbalance:
-                        ${balance} end balance
+                        ${balance}<br>
+                        User Data:<br>
+                        Name:
+                        ${fName}<br>
+                        Second Name:
+                        ${sName}<br>
+                        Password:
+                        ${pass}<br>
+                        Login:
+                        ${log}<br>
+
                     </form>
                 </div>
             </div>

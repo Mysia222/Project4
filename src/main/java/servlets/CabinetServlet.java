@@ -1,5 +1,6 @@
 package servlets;
 
+import main.ent.Subscriber;
 import model.TelService;
 
 import javax.naming.NamingException;
@@ -27,7 +28,14 @@ public class CabinetServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.setAttribute("balance", TelService.getInstance().getBalance(request));
+            Subscriber sub = TelService.getInstance().getSub(request);
+            request.setAttribute("balance", sub.getBalance());
+            request.setAttribute("contract", sub.getContract());
+            request.setAttribute("fName", sub.getInfo().getFirstName());
+            request.setAttribute("sName", sub.getInfo().getSecondName());
+            request.setAttribute("pass", sub.getInfo().getPassword());
+            request.setAttribute("log", sub.getInfo().getLogin());
+//            request.setAttribute("contract", sub.getContract());
         } catch (NamingException e) {
             e.printStackTrace();
         } catch (SQLException e) {

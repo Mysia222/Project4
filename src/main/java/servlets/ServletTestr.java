@@ -15,7 +15,7 @@ import java.sql.SQLException;
 /**
  * Created by Potaychuk Sviatoslav on 11.07.2016.
  */
-@WebServlet("/home2")
+@WebServlet("/home")
 public class ServletTestr extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

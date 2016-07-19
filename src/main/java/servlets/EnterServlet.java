@@ -13,7 +13,7 @@ import java.io.IOException;
 /**
  * Created by Potaychuk Sviatoslav on 11.07.2016.
  */
-@WebServlet("/home")
+@WebServlet("/home2")
 public class EnterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

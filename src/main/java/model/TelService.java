@@ -1,5 +1,6 @@
 package model;
 
+import main.ent.Subscriber;
 import main.jdbc.DAO;
 
 import javax.naming.InitialContext;
@@ -18,6 +19,8 @@ public class TelService {
 
     private InitialContext ic;
     private DataSource ds;
+    private TelService(){}
+
 
     public Connection getConnection() throws SQLException, NamingException {
         ic = new InitialContext();
@@ -55,7 +58,7 @@ public class TelService {
     *
     * */
 
-   private TelService(){}
+
 
 
     public HttpServletRequest reRequest(HttpServletRequest request) throws SQLException, NamingException {
@@ -90,8 +93,26 @@ public class TelService {
         return false;
     }
 
-//    public User makeUser(){
-//        User user = new User();
+    public Subscriber getSub(HttpServletRequest request) throws SQLException, NamingException {
+        Subscriber sub = new Subscriber();
+        String log = request.getParameter("login");
+        String pass = request.getParameter("password");
+
+        Statement statement = new DAO().getConnection().createStatement();
+        String s = "SELECT * FROM daotalk.abonents WHERE login='"+log
+                +"' and password='"+pass+"';";
+        ResultSet rs = statement.executeQuery(s);
+        while (rs.next()){
+            sub.setBalance(rs.getDouble("balance"));
+            sub.setContract(rs.getInt("contract"));
+            sub.setInfo(sub.new SubInfo(rs.getString("second_name"), rs.getString("first_name"), pass, log ));
+        }
+        return sub;
+    }
+
+
+//    public Subscriber makeUser(){
+//        Subscriber user = new Subscriber();
 //        try {
 //            Statement statement = new DAO().getConnection().createStatement();
 //            String s = "SELECT * FROM daotalk.abonents WHERE login='"+login+"' and password='"+password+"';";
