@@ -1,15 +1,15 @@
 <%--
   Created by IntelliJ IDEA.
   User: Славик
-  Date: 16.07.2016
-  Time: 20:08
+  Date: 23.07.2016
+  Time: 14:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
-    <title>Home</title>
+    <title>DirectInfo</title>
 </head>
 <body>
 <div>
@@ -19,25 +19,19 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
-                    <form action="./cabinet" method="get">
-                        Contrtact:
-                        <br>
-                        ${contract}<br>
-                        Balance:
-                        <br>
-                        ${balance}<br>
-                        User Data:<br>
+                    <form action="./T1Servlet" method="get">
+
+                        New User Data:<br>
                         Name:
-                        ${fName}<br>
+                        <input type="text" name="first_name"><br>
                         Second Name:
-                        ${sName}<br>
+                        <input type="text" name="second_name"><br>
                         Password:
-                        ${pass}<br>
+                        <input type="text" name="password"><br>
                         Login:
-                        ${log}<br>
-                        <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a><br>
-                        <a href="/T1Servlet?command=ORDER_SERVICE">Order service</a><br>
-                        <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a>
+                        <input type="text" name="login"><br>
+                        <input type="submit" name ="command" value="SAVE_NEW_INFO">
+                        <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
 
 
                     </form>

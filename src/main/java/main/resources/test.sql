@@ -1,1 +1,1 @@
-SELECT * FROM daotalk.abonents WHERE login='Qwerty123' and password='password';
+UPDATE daotalk.abonents SET balance="123"  WHERE contract="78956" ;

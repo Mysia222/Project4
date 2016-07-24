@@ -20,15 +20,24 @@ import static model.TelService.*;
  */
 @WebServlet("/cabinet")
 public class CabinetServlet extends HttpServlet {
+    private static Subscriber sub;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        request.setAttribute("balance", "2nd_servlet ");
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
 //        dispatcher.forward(request,response);
     }
 
+    public static Subscriber getSub() {
+        return sub;
+    }
+
+    public static void setSub(Subscriber sub) {
+        CabinetServlet.sub = sub;
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Subscriber sub = TelService.getInstance().getSub(request);
+            sub = TelService.getInstance().getSub(request);
             request.setAttribute("balance", sub.getBalance());
             request.setAttribute("contract", sub.getContract());
             request.setAttribute("fName", sub.getInfo().getFirstName());

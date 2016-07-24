@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Created by Славик on 16.07.2016.
  */
-    public class DAO {
+    public class JDBCRunner {
     private InitialContext ic;
     private DataSource ds;
 
@@ -19,6 +19,17 @@ import java.sql.SQLException;
         return ds.getConnection();
     }
 
+    void saveNewInfo(){
+        try {
+            Connection cn = getConnection();
 
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
     }
+
+}
 

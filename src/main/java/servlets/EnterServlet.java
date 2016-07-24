@@ -63,7 +63,7 @@ public class EnterServlet extends HttpServlet {
 //
 //
 //        }
-//        DAO d = new DAO();
+//        JDBCRunner d = new JDBCRunner();
 //        d.get
 //        RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
 //        dispatcher.forward(request,response);

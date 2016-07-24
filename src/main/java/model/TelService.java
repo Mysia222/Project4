@@ -1,13 +1,18 @@
 package model;
 
+import main.ent.Service;
 import main.ent.Subscriber;
-import main.jdbc.DAO;
+import main.jdbc.JDBCRunner;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Created by Славик on 17.07.2016.
@@ -22,7 +27,11 @@ public class TelService {
     private TelService(){}
 
 
-    public Connection getConnection() throws SQLException, NamingException {
+
+
+
+
+    private Connection getConnection() throws SQLException, NamingException {
         ic = new InitialContext();
         ds = (DataSource) ic.lookup("java:comp/env/jdbc/mysql"); // вместо написать java:/comp/env/jdbc/TestDB
         return ds.getConnection();
@@ -39,30 +48,24 @@ public class TelService {
         return 0;
     }
 
-
-    /*
-    * try {
-            initContext = new InitialContext();
-            DataSource ds = (DataSource) initContext.lookup("java:comp/env/jdbc/mysql");
-            Connection conn = ds.getConnection();
-            Statement statement=conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM daotalk.abonents WHERE login='Qwerty123' and password='password';");
-            PrintWriter out = response.getWriter();
-            out.println(rs.next());
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public ConcurrentMap<Integer,Service> getServiceList() throws SQLException, NamingException {
+        Statement statement = new JDBCRunner().getConnection().createStatement();
+        String s = "SELECT * FROM  daotalk.tel_service;";
+        ResultSet rs = statement.executeQuery(s);
+        ConcurrentMap<Integer,Service> map = new ConcurrentHashMap<Integer, Service>();
+        while (rs.next()){
+            map.putIfAbsent(rs.getInt("id"),new Service(rs.getString("name"),rs.getDouble("price")));
         }
-    *
-    *
-    * */
+        return map;
+    }
 
-
-
-
+    public void changeBalance(Subscriber subscriber) throws SQLException, NamingException {
+        Statement statement = new JDBCRunner().getConnection().createStatement();
+        String s = "UPDATE daotalk.abonents SET balance='"+subscriber.getBalance()+"' WHERE contract='"+subscriber.getContract()+"';";
+        statement.execute(s);
+    }
     public HttpServletRequest reRequest(HttpServletRequest request) throws SQLException, NamingException {
-        Statement statement = new DAO().getConnection().createStatement();
+        Statement statement = new JDBCRunner().getConnection().createStatement();
         String s = "SELECT * FROM daotalk.abonents WHERE login='"+request.getParameter("login")+"';";
         ResultSet rs = statement.executeQuery(s);
         if (rs.next()){
@@ -74,12 +77,11 @@ public class TelService {
         }
         return request;
     }
-
-
     public boolean isExist(String login, String password){
         try {
-            Statement statement = new DAO().getConnection().createStatement();
+            Statement statement = new JDBCRunner().getConnection().createStatement();
             String s = "SELECT * FROM daotalk.abonents WHERE login='"+login+"' and password='"+password+"';";
+
             ResultSet rs = statement.executeQuery(s);
             return rs.next();
 //            while (rs.next()){
@@ -97,58 +99,36 @@ public class TelService {
         Subscriber sub = new Subscriber();
         String log = request.getParameter("login");
         String pass = request.getParameter("password");
-
-        Statement statement = new DAO().getConnection().createStatement();
-        String s = "SELECT * FROM daotalk.abonents WHERE login='"+log
-                +"' and password='"+pass+"';";
+        String contract = request.getParameter("contract");
+    if (log!=null&&pass!=null) {
+        Statement statement = new JDBCRunner().getConnection().createStatement();
+        String s = "SELECT * FROM daotalk.abonents WHERE login='" + log
+                + "' and password='" + pass + "';";
         ResultSet rs = statement.executeQuery(s);
-        while (rs.next()){
+        while (rs.next()) {
             sub.setBalance(rs.getDouble("balance"));
             sub.setContract(rs.getInt("contract"));
-            sub.setInfo(sub.new SubInfo(rs.getString("second_name"), rs.getString("first_name"), pass, log ));
+            sub.setInfo(sub.new SubInfo(rs.getString("second_name"), rs.getString("first_name"), pass, log));
+        }
+        return sub;
+    }else if (contract!=null){
+        Statement statement = new JDBCRunner().getConnection().createStatement();
+        String s = "SELECT * FROM daotalk.abonents WHERE contract='" + contract + "';";
+        ResultSet rs = statement.executeQuery(s);
+        while (rs.next()) {
+            sub.setBalance(rs.getDouble("balance"));
+            sub.setInfo(sub.new SubInfo(rs.getString("second_name"), rs.getString("first_name"),
+                    rs.getString("login"), rs.getString("password")));
         }
         return sub;
     }
-
-
-//    public Subscriber makeUser(){
-//        Subscriber user = new Subscriber();
-//        try {
-//            Statement statement = new DAO().getConnection().createStatement();
-//            String s = "SELECT * FROM daotalk.abonents WHERE login='"+login+"' and password='"+password+"';";
-//            ResultSet rs = statement.executeQuery(s);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } catch (NamingException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
-    public static void main() {
-
-        System.out.println(TelService.getInstance().isExist("Qwerty123", "password"));
+        return sub;
     }
-
-
-//    public List<TelService> getAll(){
-//        DaoFactory factory = DaoFactory.getFactory();
-//        BouqetDao  bouqetDao = factory.createBouqetDao();
-//        return bouqetDao.findAll();
-//    }
-
-//    public List find(final String name){
-//        DaoFactory factory = DaoFactory.getFactory();
-//        BouqetDao  bouqetDao = factory.createBouqetDao();
-//        return   bouqetDao.findAll().stream().filter( new Predicate<Bouqet>() {
-//
-//            @Override
-//            public boolean test(Bouqet t) {
-//                // TODO Auto-generated method stub
-//                return t.getName().contains(name);
-//            }
-//        }).collect(Collectors.toList());
-//
-//    }
-
+    public void setSub(Subscriber subscriber) throws SQLException, NamingException {
+        Statement statement = new JDBCRunner().getConnection().createStatement();
+        String s = "UPDATE daotalk.abonents SET login='"+subscriber.getInfo().getLogin()+
+                "' ,password='"+subscriber.getInfo().getPassword()+"' ,first_name='"+subscriber.getInfo().getFirstName()+
+                "', second_name='"+subscriber.getInfo().getSecondName()+"' WHERE contract='"+subscriber.getContract()+"';";
+        statement.execute(s);
+    }
 }
