@@ -13,8 +13,6 @@ import java.io.IOException;
 public class FootTheBill implements Command {
 
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("login", CabinetServlet.getSub().getInfo().getLogin());
-        request.setAttribute("password", CabinetServlet.getSub().getInfo().getPassword());
         return "/view/FillBalance.jsp";
     }
 }

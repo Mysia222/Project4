@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" pageEncoding="UTF-8"  session="true" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
@@ -21,15 +21,21 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
                     <%--<form action="./T1Servlet" method="get">--%>
-                        <table>
-                            <tr><th>Name</th><TH>Price</TH></tr>
-                        <c:forEach var="service" items="${services}"   varStatus="status">
-                        <tr>
-                            <td>${service.name}</td>
-                            <td>${service.price}</td>
-                        </tr>
-                        </c:forEach>
-                        <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
+
+                            <table>
+                             <tr><th>Name</th><TH>Price</TH></tr>
+                                <c:forEach var="service" items="${services}"   varStatus="status">
+                                <form action="/T1Servlet">
+                                        <tr>
+                                             <td>${service.name}</td>
+                                             <td>${service.price}</td>
+                                            <%--<td><a href="/setService?id=${service.id}">Set</a> </td>--%>
+                                             <td><input type="submit" name="command" value="SET_SERVICE"/></td>
+                                            <td><input type="hidden" name="id" value="${service.id}"/></td>
+                                        </tr>
+                                </form>
+                                </c:forEach>
+                                <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
                             </table>
 
                     <%--</form>--%>

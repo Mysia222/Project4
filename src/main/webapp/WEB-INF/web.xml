@@ -5,9 +5,22 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
            version="3.0">
     <description>MySQL Test App</description>
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>/log4j2.xml</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
     <resource-ref>
         <description>DB Connection</description>
-        <res-ref-name>jdbc/mysql</res-ref-name> <!-- тут можно также написать jdbc/TestDB -->
+        <res-ref-name>jdbc/mysql</res-ref-name> <!-- тут можно также написать dao/TestDB -->
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>

@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -36,31 +37,31 @@ public class CabinetServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            sub = TelService.getInstance().getSub(request);
-            request.setAttribute("balance", sub.getBalance());
-            request.setAttribute("contract", sub.getContract());
-            request.setAttribute("fName", sub.getInfo().getFirstName());
-            request.setAttribute("sName", sub.getInfo().getSecondName());
-            request.setAttribute("pass", sub.getInfo().getPassword());
-            request.setAttribute("log", sub.getInfo().getLogin());
-//            request.setAttribute("contract", sub.getContract());
-        } catch (NamingException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        Subscriber subscriber = new Subscriber();
+
+        if (request.getSession().getAttribute("sub")==null) {
+            try {
+                String log = request.getParameter("login");
+                subscriber = TelService.getInstance().subByLog(log);
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            } catch (NamingException e1) {
+                e1.printStackTrace();
+            }
+        }else {
+                subscriber = (Subscriber) request.getSession().getAttribute("sub");
         }
+            request.setAttribute("balance", subscriber.getBalance());
+            request.setAttribute("contract", subscriber.getContract());
+            request.setAttribute("fName", subscriber.getInfo().getFirstName());
+            request.setAttribute("sName", subscriber.getInfo().getSecondName());
+            request.setAttribute("pass", subscriber.getInfo().getPassword());
+            request.setAttribute("log", subscriber.getInfo().getLogin());
+            request.setAttribute("service", subscriber.getCurrentService());
+            HttpSession session = request.getSession();
+            session.setAttribute("sub", subscriber);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");
         dispatcher.forward(request,response);
-
-//        String login = request.getParameter("login");
-//        String password = request.getParameter("password");
-//        try {
-//            TelService.getInstance().getBalance(request);
-//        } catch (NamingException e) {
-//            e.printStackTrace();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 }

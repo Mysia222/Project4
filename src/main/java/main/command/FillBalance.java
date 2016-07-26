@@ -18,15 +18,18 @@ public class FillBalance implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String d = request.getParameter("addBalance");
-        Double value = CabinetServlet.getSub().getBalance()+Double.valueOf(d);
+        Subscriber sub = (Subscriber) request.getSession().getAttribute("sub");
+
+        Double value = sub.getBalance()+Double.valueOf(d);
 
 //        request.setAttribute("login", CabinetServlet.getSub().getInfo().getLogin());
 //        request.setAttribute("password", CabinetServlet.getSub().getInfo().getPassword());
         if (value!=null){
-            CabinetServlet.getSub().setBalance(value);
+            sub.setBalance(value);
+            request.getSession().setAttribute("sub",sub);
         }
         try {
-            telService.changeBalance(CabinetServlet.getSub());
+            telService.setSub(sub);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {

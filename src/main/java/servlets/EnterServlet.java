@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -23,7 +24,8 @@ public class EnterServlet extends HttpServlet {
         response.setContentType("text/html");
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        if(TelService.getInstance().isExist(login,password)){
+
+        if(TelService.getInstance().existByLogPas(login,password)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/cabinet");
             dispatcher.forward(request,response);
         }

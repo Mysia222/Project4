@@ -10,9 +10,12 @@ public class Subscriber {
 
     private int contract;
     private SubInfo info;
+    private String currentService;
 
     public Subscriber() {
     }
+
+
 
     public class SubInfo{
 
@@ -20,6 +23,7 @@ public class Subscriber {
         private String secondName;
         private String password;
         private String login;
+
 
 
         public SubInfo(String firstName, String secondName, String password, String login) {
@@ -32,6 +36,7 @@ public class Subscriber {
         public String getPassword() {
             return password;
         }
+
 
         public void setPassword(String password) {
             this.password = password;
@@ -80,7 +85,13 @@ public class Subscriber {
                 ", personal info=" + info +
                 '}';
     }
+    public void setCurrentService(String currentService) {
+        this.currentService = currentService;
+    }
 
+    public String getCurrentService() {
+        return currentService;
+    }
     public SubInfo getInfo() {
         return info;
     }

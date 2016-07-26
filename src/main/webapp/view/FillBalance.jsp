@@ -21,9 +21,9 @@
                     <%--${pageContext.servletContext.contextPath}--%>
                     <form action="./T1Servlet" method="get">
                         PAY!:
-                        <input type="text" name="addBalance"><br>
-                        <input type="hidden" name ="login" value=${login}>
-                        <input type="hidden" name ="password" value=${password}>
+                        <input type="number" name="addBalance"><br>
+                        <%--<input type="hidden" name ="login" value=${login}>--%>
+                        <%--<input type="hidden" name ="password" value=${password}>--%>
                         <input type="submit" name ="command" value="FILL_BALANCE">
                         <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
 

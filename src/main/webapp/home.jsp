@@ -26,6 +26,9 @@
                         Balance:
                         <br>
                         ${balance}<br>
+                        Current service:
+                        <br>
+                        ${service}<br>
                         User Data:<br>
                         Name:
                         ${fName}<br>

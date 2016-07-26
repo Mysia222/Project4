@@ -9,7 +9,8 @@ public enum CommandList {
     SAVE_NEW_INFO(new SaveInfo()),
     FILL_BALANCE(new FillBalance()),
     FOOT_THE_BILL(new FootTheBill()),
-    ORDER_SERVICE(new OrderService());
+    ORDER_SERVICE(new OrderService()),
+    SET_SERVICE(new SetService());
 
 
     private Command command;

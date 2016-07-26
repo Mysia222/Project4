@@ -20,12 +20,14 @@ public class SaveInfo implements Command {
         String sName = request.getParameter("second_name");
         String pass = request.getParameter("password");
         String log = request.getParameter("login");
-        CabinetServlet.getSub().getInfo().setLogin(log);
-        CabinetServlet.getSub().getInfo().setPassword(pass);
-        CabinetServlet.getSub().getInfo().setFirstName(fName);
-        CabinetServlet.getSub().getInfo().setSecondName(sName);
+        Subscriber sub = (Subscriber) request.getSession().getAttribute("sub");
+        sub.getInfo().setLogin(log);
+        sub.getInfo().setPassword(pass);
+        sub.getInfo().setFirstName(fName);
+        sub.getInfo().setSecondName(sName);
+        request.getSession().setAttribute("sub", sub);
         try {
-            telService.setSub(CabinetServlet.getSub());
+            telService.setSub(sub);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {

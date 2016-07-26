@@ -1,5 +1,6 @@
 package main.command;
 
+import main.ent.Service;
 import model.TelService;
 import servlets.CabinetServlet;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -17,10 +19,11 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class OrderService implements Command {
     ConcurrentMap rm;
+    List <Service> services;
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            rm = telService.getServiceList();
-            request.setAttribute("services",rm.values());
+            services = telService.getServiceList();
+            request.setAttribute("services",services);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {
