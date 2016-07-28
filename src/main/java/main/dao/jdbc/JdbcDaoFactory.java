@@ -19,14 +19,7 @@ public class JdbcDaoFactory extends DaoFactory {
     private static InitialContext ic;
 
     public JdbcDaoFactory() {
-//        try {
-//            InitialContext ic = new InitialContext();
-//            ds = (DataSource) ic.lookup("java:comp/env/dao/mysql");
-//        } catch (NamingException e) {
-//            e.printStackTrace();
-//        }
     }
-
 
     public ServicesDao createServicesDao() {
         return new JdbcServiceDao();
@@ -35,7 +28,6 @@ public class JdbcDaoFactory extends DaoFactory {
     public SubsDao createSubsDao() {
         return new JdbcSubsDao();
     }
-
 
     public static Connection getConnection() throws SQLException, NamingException {
         ic = new InitialContext();

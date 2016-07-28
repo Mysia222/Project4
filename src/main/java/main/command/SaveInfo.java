@@ -26,14 +26,7 @@ public class SaveInfo implements Command {
         sub.getInfo().setFirstName(fName);
         sub.getInfo().setSecondName(sName);
         request.getSession().setAttribute("sub", sub);
-        try {
             telService.setSub(sub);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-        System.out.println(CabinetServlet.getSub());
         return "/cabinet";
     }
 }

@@ -29,11 +29,24 @@ public class TelService {
          return sd.findAll();
     }
 
+    public List<Subscriber> getSubsList() throws SQLException, NamingException {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        return sd.findAll();
+    }
+
     public boolean existByLogPas(String login, String password){
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
         return sd.existByLogPas(login,password);
     }
+
+    public Subscriber subByContract(int contract){
+        DaoFactory df =  DaoFactory.getFactory();
+        SubsDao sd =  df.createSubsDao();
+        return (Subscriber)sd.find(contract);
+    }
+
 
     public Subscriber subByLog(String log) throws SQLException, NamingException {
         DaoFactory df =  DaoFactory.getFactory();
@@ -49,7 +62,7 @@ public class TelService {
         return service;
     }
 
-    public void setSub(Subscriber subscriber) throws SQLException, NamingException {
+    public void setSub(Subscriber subscriber)  {
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
         sd.update(subscriber);
@@ -58,5 +71,29 @@ public class TelService {
 //                "' ,password='"+subscriber.getInfo().getPassword()+"' ,first_name='"+subscriber.getInfo().getFirstName()+
 //                "', second_name='"+subscriber.getInfo().getSecondName()+"' WHERE contract='"+subscriber.getContract()+"';";
 //        statement.execute(s);
+    }
+
+    public List<Subscriber> getDebtorsList() {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        return sd.getDebtors();
+
+    }
+
+    public void blockId(int contract) {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        sd.blockId(contract);
+    }
+    public void unlockId(int contract) {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        sd.unlock(contract);
+    }
+
+    public void create(Subscriber subscriber) {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        sd.create(subscriber);
     }
 }

@@ -15,8 +15,8 @@ import java.sql.SQLException;
 /**
  * Created by Potaychuk Sviatoslav on 11.07.2016.
  */
-@WebServlet("/home")
-public class ServletTestr extends HttpServlet {
+@WebServlet("/admin")
+public class AdminServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }

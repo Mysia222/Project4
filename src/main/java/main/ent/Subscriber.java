@@ -7,11 +7,12 @@ public class Subscriber {
 
 
     private double balance;
+    private boolean admin;
+    private boolean blocked;
 
     private int contract;
     private SubInfo info;
     private String currentService;
-
     public Subscriber() {
     }
 
@@ -81,12 +82,24 @@ public class Subscriber {
     public String toString() {
         return "Subscriber{" +
                 "balance=" + balance +
+                ", admin=" + admin +
+                ", blocked=" + blocked +
                 ", contract=" + contract +
-                ", personal info=" + info +
+                ", info=" + info +
+                ", currentService='" + currentService + '\'' +
                 '}';
     }
+
     public void setCurrentService(String currentService) {
         this.currentService = currentService;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public String getCurrentService() {
@@ -114,6 +127,14 @@ public class Subscriber {
 
     public void setContract(int contract) {
         this.contract = contract;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 }
 

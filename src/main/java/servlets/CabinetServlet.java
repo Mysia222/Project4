@@ -41,9 +41,14 @@ public class CabinetServlet extends HttpServlet {
         Subscriber subscriber = new Subscriber();
 
         if (request.getSession().getAttribute("sub")==null) {
+
             try {
                 String log = request.getParameter("login");
                 subscriber = TelService.getInstance().subByLog(log);
+                if (subscriber.isAdmin()){
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/view/Admin.jsp");
+                    dispatcher.forward(request,response);
+                }
             } catch (SQLException e1) {
                 e1.printStackTrace();
             } catch (NamingException e1) {
@@ -59,6 +64,9 @@ public class CabinetServlet extends HttpServlet {
             request.setAttribute("pass", subscriber.getInfo().getPassword());
             request.setAttribute("log", subscriber.getInfo().getLogin());
             request.setAttribute("service", subscriber.getCurrentService());
+            if (subscriber.isBlocked()) {
+                request.setAttribute("blocked", "STATUS BLOCKED!");
+            }
             HttpSession session = request.getSession();
             session.setAttribute("sub", subscriber);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/home.jsp");

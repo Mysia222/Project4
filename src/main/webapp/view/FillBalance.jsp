@@ -20,7 +20,8 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
                     <form action="./T1Servlet" method="get">
-                        PAY!:
+                        <a href="/cabinet">Cabinet</a><br>
+                        Input value:
                         <input type="number" name="addBalance"><br>
                         <%--<input type="hidden" name ="login" value=${login}>--%>
                         <%--<input type="hidden" name ="password" value=${password}>--%>

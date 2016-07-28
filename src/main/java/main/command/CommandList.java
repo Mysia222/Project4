@@ -10,7 +10,12 @@ public enum CommandList {
     FILL_BALANCE(new FillBalance()),
     FOOT_THE_BILL(new FootTheBill()),
     ORDER_SERVICE(new OrderService()),
-    SET_SERVICE(new SetService());
+    SET_SERVICE(new SetService()),
+    SHOW_USERS(new ShowSubs()),
+    SHOW_DEBTORS(new ShowDebtors()),
+    BLOCK_USER(new BlockUser()),
+    UNLOCK_USER(new UnlockUser()),
+            CREATE(new CreateUser());
 
 
     private Command command;

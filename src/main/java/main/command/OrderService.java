@@ -1,6 +1,7 @@
 package main.command;
 
 import main.ent.Service;
+import main.ent.Subscriber;
 import model.TelService;
 import servlets.CabinetServlet;
 
@@ -18,9 +19,14 @@ import java.util.concurrent.ConcurrentMap;
  * Created by Славик on 24.07.2016.
  */
 public class OrderService implements Command {
-    ConcurrentMap rm;
-    List <Service> services;
+
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Subscriber sub = (Subscriber) request.getSession().getAttribute("sub");
+        if (telService.subByContract(sub.getContract()).isBlocked()){
+            request.setAttribute("blocked", "STATUS: BLOCKED");
+            return "/cabinet";
+        }
+        List <Service> services;
         try {
             services = telService.getServiceList();
             request.setAttribute("services",services);

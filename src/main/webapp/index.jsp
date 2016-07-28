@@ -27,7 +27,8 @@
                         <p class="wrongLogin" >${wrongPassword}</p>
                         <input type="password" name="password">
                         <br>
-                        <input type="submit" value="Enter">
+                        <input type="submit" value="Enter"><br>
+                        <a href="/view/CreateForm.html">Create account</a>
                     </form>
                 </div>
             </div>

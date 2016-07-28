@@ -21,6 +21,9 @@ public class FillBalance implements Command {
         Subscriber sub = (Subscriber) request.getSession().getAttribute("sub");
 
         Double value = sub.getBalance()+Double.valueOf(d);
+//        if (value>0){
+//            telService.unlockId(sub.getContract());
+//        }
 
 //        request.setAttribute("login", CabinetServlet.getSub().getInfo().getLogin());
 //        request.setAttribute("password", CabinetServlet.getSub().getInfo().getPassword());
@@ -28,13 +31,9 @@ public class FillBalance implements Command {
             sub.setBalance(value);
             request.getSession().setAttribute("sub",sub);
         }
-        try {
+
             telService.setSub(sub);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
+
         return "/cabinet";
     }
 

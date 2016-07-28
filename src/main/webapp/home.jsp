@@ -12,6 +12,7 @@
     <title>Home</title>
 </head>
 <body>
+
 <div>
     <div  class="wrapper ">
 
@@ -19,30 +20,43 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
+
                     <form action="./cabinet" method="get">
-                        Contrtact:
-                        <br>
-                        ${contract}<br>
-                        Balance:
-                        <br>
-                        ${balance}<br>
-                        Current service:
-                        <br>
-                        ${service}<br>
-                        User Data:<br>
-                        Name:
-                        ${fName}<br>
-                        Second Name:
-                        ${sName}<br>
-                        Password:
-                        ${pass}<br>
-                        Login:
-                        ${log}<br>
+                        <a href="/cabinet">Cabinet</a><br>
+                        ${blocked}
+                        <table>
+                            <tr>
+                                <td>Contrtact:</td>
+                                <td>${contract}</td>
+                            </tr>
+                            <tr>
+                                <td>Balance</td>
+                                <td>${balance}</td>
+                            </tr>
+                            <tr>
+                                <td>Current service:</td>
+                                <td>${service}</td>
+                            </tr>
+                            <tr>
+                                <td>Name:</td>
+                                <td>${fName}</td>
+                            </tr>
+                            <tr>
+                                <td>Second Name:</td>
+                                <td>${sName}</td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>${pass}</td>
+                            </tr>
+                            <tr>
+                                <td>Login:</td>
+                                <td>${log}</td>
+                            </tr>
+                        </table>
                         <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a><br>
                         <a href="/T1Servlet?command=ORDER_SERVICE">Order service</a><br>
                         <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a>
-
-
                     </form>
                 </div>
             </div>
