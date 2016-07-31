@@ -11,12 +11,16 @@
     <title>admin</title>
 </head>
 <body>
-<a href="/T1Servlet?command=SHOW_USERS" >Subs List</a>
-<a href="/T1Servlet?command=SHOW_DEBTORS" >Subs List</a>
-<form action="/T1Servlet">
-    <input type="submit" name="command" value="SHOW_USERS">
-    <input type="submit" name="command" value="SHOW_DEBTORS">
-
+<%--<a href="/T1Servlet?command=SHOW_USERS" >Subs List</a>--%>
+<%--<a href="/T1Servlet?command=SHOW_DEBTORS" >Subs List</a>--%>
+<form action="/secure/Controller" method="get">
+    <input type="submit" name="command" value="show subs">
+</form>
+<form action="/secure/Controller2" method="get">
+    <input type="submit" name="command" value="show services">
+</form>
+<form action="/secure/CreateService">
+    <input type="submit" name="command" value="new service">
 </form>
 <%--<table>--%>
     <%--<tr><th>Name</th><TH>Price</TH></tr>--%>

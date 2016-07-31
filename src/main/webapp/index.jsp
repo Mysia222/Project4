@@ -28,7 +28,7 @@
                         <input type="password" name="password">
                         <br>
                         <input type="submit" value="Enter"><br>
-                        <a href="/view/CreateForm.html">Create account</a>
+                        <a href="/view/CreateSub.jsp">Create account</a>
                     </form>
                 </div>
             </div>

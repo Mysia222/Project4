@@ -14,20 +14,11 @@ import java.util.List;
 /**
  * Created by Славик on 17.07.2016.
  */
-public class TelService {
+public class SubService {
 
-//    Logger log = LogManager.getLogger(TelService.class);
-
-
-    private static TelService instance = new TelService();
-    public static TelService getInstance(){return instance;}
-    private TelService(){}
-
-     public List<Service> getServiceList() throws SQLException, NamingException {
-         DaoFactory df = DaoFactory.getFactory();
-         ServicesDao sd = df.createServicesDao();
-         return sd.findAll();
-    }
+    private static SubService instance = new SubService();
+    public static SubService getInstance(){return instance;}
+    private SubService(){}
 
     public List<Subscriber> getSubsList() throws SQLException, NamingException {
         DaoFactory df = DaoFactory.getFactory();
@@ -38,13 +29,13 @@ public class TelService {
     public boolean existByLogPas(String login, String password){
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return sd.existByLogPas(login,password);
+        return sd.findByLogPas(login,password);
     }
 
     public Subscriber subByContract(int contract){
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return (Subscriber)sd.find(contract);
+        return sd.find(contract);
     }
 
 
@@ -55,22 +46,11 @@ public class TelService {
         return sub;
     }
 
-    public Service getService(int id){
-        DaoFactory df =  DaoFactory.getFactory();
-        ServicesDao sd =  df.createServicesDao();
-        Service service = (Service) sd.find(id);
-        return service;
-    }
 
     public void setSub(Subscriber subscriber)  {
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
         sd.update(subscriber);
-//        Statement statement = new JDBCRunner().getConnection().createStatement();
-//        String s = "UPDATE daotalk.abonents SET login='"+subscriber.getInfo().getLogin()+
-//                "' ,password='"+subscriber.getInfo().getPassword()+"' ,first_name='"+subscriber.getInfo().getFirstName()+
-//                "', second_name='"+subscriber.getInfo().getSecondName()+"' WHERE contract='"+subscriber.getContract()+"';";
-//        statement.execute(s);
     }
 
     public List<Subscriber> getDebtorsList() {
@@ -83,7 +63,7 @@ public class TelService {
     public void blockId(int contract) {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        sd.blockId(contract);
+        sd.block(contract);
     }
     public void unlockId(int contract) {
         DaoFactory df = DaoFactory.getFactory();
@@ -95,5 +75,17 @@ public class TelService {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
         sd.create(subscriber);
+    }
+
+    public void setBalance(Subscriber sub) {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        sd.updateBalance(sub);
+    }
+
+    public void setService(Subscriber sub) {
+        DaoFactory df = DaoFactory.getFactory();
+        SubsDao sd = df.createSubsDao();
+        sd.updateSubsServices(sub);
     }
 }

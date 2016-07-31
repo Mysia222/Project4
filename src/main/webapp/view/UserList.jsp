@@ -7,7 +7,7 @@
 --%>
 <%@ page language="java" pageEncoding="UTF-8"  session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="style.css" type="text/css" media="screen" rel="stylesheet" />
+<link href="/style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
     <title>Users List</title>
@@ -21,8 +21,8 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
                     <%--<form action="./T1Servlet" method="get">--%>
-                    <a href="/T1Servlet?command=SHOW_USERS" >Subs List</a>
-                    <a href="/T1Servlet?command=SHOW_DEBTORS" >Debtors List</a>
+                    <a href="/secure/Controller?command=show+subs" >Subs List</a>
+                    <a href="/cabinet" >Return to the cabinet</a>
                     <table border="1px">
                         <tr>
                             <th>Contract</th>

@@ -19,10 +19,10 @@
 -- Table structure for table `abonents`
 --
 
-DROP TABLE IF EXISTS `abonents`;
+DROP TABLE IF EXISTS daotalk.abonents;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `abonents` (
+CREATE TABLE daotalk.abonents (
   `first_name` varchar(45) NOT NULL,
   `second_name` varchar(45) NOT NULL,
   `contract` int(11) NOT NULL AUTO_INCREMENT,
@@ -42,10 +42,10 @@ CREATE TABLE `abonents` (
 -- Dumping data for table `abonents`
 --
 
-LOCK TABLES `abonents` WRITE;
-/*!40000 ALTER TABLE `abonents` DISABLE KEYS */;
-INSERT INTO `abonents` VALUES ('Иван','Петров',0,0,'pass','Ivan','Default Service',1,0),('Steve','Pet',13,891,'1','1','3g+',0,0),('Semen','Slepakov',14,0,'s','s','Default Service',0,0),('Piter','Griffin',15,-50,'g','p','Default Service',0,0),('Oleg','Valuev',16,-20,'v','o','Default Service',0,1),('1','2',17,0,'qwe','qwe','Default Service',0,0);
-/*!40000 ALTER TABLE `abonents` ENABLE KEYS */;
+LOCK TABLES daotalk.abonents WRITE;
+/*!40000 ALTER TABLE daotalk.abonents DISABLE KEYS */;
+INSERT INTO daotalk.abonents VALUES ('Иван','Петров',0,0,'pass','Ivan','Default Service',1,0),('Steve','Pet',13,891,'1','1','3g+',0,0),('Semen','Slepakov',14,0,'s','s','Default Service',0,0),('Piter','Griffin',15,-50,'g','p','Default Service',0,0),('Oleg','Valuev',16,-20,'v','o','Default Service',0,1),('1','2',17,0,'qwe','qwe','Default Service',0,0);
+/*!40000 ALTER TABLE daotalk.abonents ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

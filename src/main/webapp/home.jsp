@@ -21,12 +21,14 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
 
-                    <form action="./cabinet" method="get">
-                        <a href="/cabinet">Cabinet</a><br>
+                    <form action="/cabinet" method="get">
+                        <a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>
+                        <a href="/T1Servlet?command=ORDER_SERVICE">Order service</a>
+                        <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a><br>
                         ${blocked}
-                        <table>
+                        <table border="1px solid black">
                             <tr>
-                                <td>Contrtact:</td>
+                                <td>Contract:</td>
                                 <td>${contract}</td>
                             </tr>
                             <tr>
@@ -35,28 +37,26 @@
                             </tr>
                             <tr>
                                 <td>Current service:</td>
-                                <td>${service}</td>
+                                <td>${current_service}</td>
                             </tr>
                             <tr>
                                 <td>Name:</td>
-                                <td>${fName}</td>
+                                <td>${first_name}</td>
                             </tr>
                             <tr>
                                 <td>Second Name:</td>
-                                <td>${sName}</td>
+                                <td>${second_name}</td>
                             </tr>
                             <tr>
                                 <td>Password:</td>
-                                <td>${pass}</td>
+                                <td>${password}</td>
                             </tr>
                             <tr>
                                 <td>Login:</td>
-                                <td>${log}</td>
+                                <td>${login}</td>
                             </tr>
                         </table>
-                        <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a><br>
-                        <a href="/T1Servlet?command=ORDER_SERVICE">Order service</a><br>
-                        <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a>
+
                     </form>
                 </div>
             </div>

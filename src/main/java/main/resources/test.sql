@@ -1,1 +1,0 @@
-SELECT * FROM daotalk.abonents WHERE admin=TRUE ;

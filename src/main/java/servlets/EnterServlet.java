@@ -1,6 +1,6 @@
 package servlets;
 
-import model.TelService;
+import model.SubService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -25,7 +24,7 @@ public class EnterServlet extends HttpServlet {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        if(TelService.getInstance().existByLogPas(login,password)){
+        if(SubService.getInstance().existByLogPas(login,password)){
             RequestDispatcher dispatcher = request.getRequestDispatcher("/cabinet");
             dispatcher.forward(request,response);
         }
@@ -41,7 +40,7 @@ public class EnterServlet extends HttpServlet {
 
 
 
-        //        TelService telService = new TelService();
+        //        SubService subService = new SubService();
 
 //        if (number!=null){
 //            try {

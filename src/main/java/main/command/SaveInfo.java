@@ -1,14 +1,11 @@
 package main.command;
 
 import main.ent.Subscriber;
-import servlets.CabinetServlet;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * Created by Славик on 23.07.2016.
@@ -26,7 +23,7 @@ public class SaveInfo implements Command {
         sub.getInfo().setFirstName(fName);
         sub.getInfo().setSecondName(sName);
         request.getSession().setAttribute("sub", sub);
-            telService.setSub(sub);
+        subService.setSub(sub);
         return "/cabinet";
     }
 }

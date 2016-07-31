@@ -9,12 +9,12 @@ import java.util.List;
  */
 public interface SubsDao extends GenericDao<Subscriber> {
 
-    Subscriber getSubByLog(String log);
-
+    boolean findByLogPas(String login, String password);
     List getDebtors();
-
-    Subscriber find(int contract);
-    public void blockId(int id);
-
-    void unlock(int contract);
+    Subscriber find(int id);
+    Subscriber getSubByLog(String log);
+    void block(int id);
+    void unlock(int id);
+    void updateBalance(Subscriber subscriber);
+    void updateSubsServices(Subscriber sub);
 }

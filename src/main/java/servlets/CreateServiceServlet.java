@@ -1,8 +1,8 @@
 package servlets;
 
-import main.command.Command;
-import main.command.CommandList;
-import model.TelService;
+import main.ent.Service;
+import model.ServService;
+import model.SubService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Славик on 27.07.2016.
+ * Created by Славик on 31.07.2016.
  */
-@WebServlet("/setService")
-public class SetServiceServlet extends HttpServlet {
+@WebServlet("/secure/CreateService")
+public class CreateServiceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ServService.getInstance().create(new Service(request.getParameter("name"), Double.valueOf(request.getParameter("price")),0));
+        request.getRequestDispatcher("/view/Admin.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        String commandName = "SET_SERVICE";
-        Command command = CommandList.valueOf(commandName).getCommand();
-        String goTo = command.execute(request, response);
-        request.getRequestDispatcher(goTo).forward(request, response);
+        request.getRequestDispatcher("/view/ServiceCreate.jsp").forward(request, response);
     }
 }

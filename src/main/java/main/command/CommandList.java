@@ -15,7 +15,9 @@ public enum CommandList {
     SHOW_DEBTORS(new ShowDebtors()),
     BLOCK_USER(new BlockUser()),
     UNLOCK_USER(new UnlockUser()),
-            CREATE(new CreateUser());
+    CREATE_NEW_SUBSCRIBER(new CreateUser()),
+    DELETE_SERVICE(new DeleteService()),
+    SERVICE_CHANGE(new ServiceChange());
 
 
     private Command command;

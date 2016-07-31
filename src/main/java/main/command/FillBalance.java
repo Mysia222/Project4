@@ -1,14 +1,11 @@
 package main.command;
 
 import main.ent.Subscriber;
-import servlets.CabinetServlet;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * Created by Славик on 24.07.2016.
@@ -22,7 +19,7 @@ public class FillBalance implements Command {
 
         Double value = sub.getBalance()+Double.valueOf(d);
 //        if (value>0){
-//            telService.unlockId(sub.getContract());
+//            subService.unlockId(sub.getContract());
 //        }
 
 //        request.setAttribute("login", CabinetServlet.getSub().getInfo().getLogin());
@@ -32,7 +29,7 @@ public class FillBalance implements Command {
             request.getSession().setAttribute("sub",sub);
         }
 
-            telService.setSub(sub);
+            subService.setSub(sub);
 
         return "/cabinet";
     }

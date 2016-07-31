@@ -1,5 +1,9 @@
 package main.ent;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 /**
  * Created by Славик on 16.07.2016.
  */
@@ -12,7 +16,8 @@ public class Subscriber {
 
     private int contract;
     private SubInfo info;
-    private String currentService;
+    private Set<Service> currentService = new TreeSet<Service>();
+
     public Subscriber() {
     }
 
@@ -25,7 +30,8 @@ public class Subscriber {
         private String password;
         private String login;
 
-
+        public SubInfo() {
+        }
 
         public SubInfo(String firstName, String secondName, String password, String login) {
             this.firstName = firstName;
@@ -70,27 +76,20 @@ public class Subscriber {
         @Override
         public String toString() {
             return "SubInfo{" +
-                    "firstName='" + firstName + '\'' +
-                    ", secondName='" + secondName + '\'' +
-                    ", password='" + password + '\'' +
-                    ", login='" + login + '\'' +
+                    "firstName='" + firstName +
+                    ", secondName='" + secondName +
+                    ", password='" + password +
+                    ", login='" + login +
                     '}';
         }
     }
 
-    @Override
-    public String toString() {
-        return "Subscriber{" +
-                "balance=" + balance +
-                ", admin=" + admin +
-                ", blocked=" + blocked +
-                ", contract=" + contract +
-                ", info=" + info +
-                ", currentService='" + currentService + '\'' +
-                '}';
+
+    public Set<Service> getCurrentService() {
+        return currentService;
     }
 
-    public void setCurrentService(String currentService) {
+    public void setCurrentService(Set<Service> currentService) {
         this.currentService = currentService;
     }
 
@@ -102,9 +101,6 @@ public class Subscriber {
         this.admin = admin;
     }
 
-    public String getCurrentService() {
-        return currentService;
-    }
     public SubInfo getInfo() {
         return info;
     }
@@ -135,6 +131,18 @@ public class Subscriber {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    @Override
+    public String toString() {
+        return "Subscriber{" +
+                "balance=" + balance +
+                ", admin=" + admin +
+                ", blocked=" + blocked +
+                ", contract=" + contract +
+                ", info=" + info +
+                ", currentService=" + currentService +
+                '}';
     }
 }
 

@@ -19,11 +19,16 @@ public class SetService implements Command {
 //            return "/cabinet";
 //        }
         int id = Integer.parseInt(request.getParameter("id"));
-        Service service=telService.getService(id);
-        sub.setCurrentService(service.getName());
+        Service service= servService.getService(id);
+        if (sub.getCurrentService().contains(service)){
+            request.setAttribute("enableService","SERVICE IS ALREADY ABLE TO YOU");
+            return "/T1Servlet?command=ORDER_SERVICE";
+        }
+        sub.getCurrentService().add(service);
         sub.setBalance(sub.getBalance()-service.getPrice());
-        telService.setSub(sub);
-        request.getSession().setAttribute("sub",sub);
+        subService.setBalance(sub);
+        subService.setService(sub);
+       request.getSession().setAttribute("sub",sub);
         return "/cabinet";
     }
 }

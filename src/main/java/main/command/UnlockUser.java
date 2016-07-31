@@ -12,9 +12,9 @@ import java.io.IOException;
  */
 public class UnlockUser implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Subscriber sub = telService.subByContract(Integer.parseInt(request.getParameter("id")));
+        Subscriber sub = subService.subByContract(Integer.parseInt(request.getParameter("id")));
         sub.setBlocked(false);
-        telService.unlockId(sub.getContract());
+        subService.unlockId(sub.getContract());
 //        response.sendRedirect("/view/UserLis.jsp");
 //        request.removeAttribute("id");
         return "/T1Servlet?command=SHOW_USERS";

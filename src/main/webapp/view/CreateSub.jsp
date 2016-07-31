@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false" %>
-<link href="style.css" type="text/css" media="screen" rel="stylesheet" />
+<link href="../style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
     <title>Create account</title>
@@ -14,12 +14,13 @@
 <body>
 <div>
     <div  class="wrapper ">
-
         <div class="mainbody ">
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
-                    <form action="./T1Servlet" method="get">
+
+                    <form action="/T1Servlet" method="get">
+                        ${loginInUse}
                        User Data:<br>
                         <table>
                             <tr>
@@ -39,15 +40,10 @@
                                 <td><input type="text" name="login"></td>
                             </tr>
                         </table>
-                        <input type="submit" name ="command" value="CREATE">
-                        <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
-
-
+                        <input type="submit" name ="command" value="CREATE_NEW_SUBSCRIBER">
                     </form>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
