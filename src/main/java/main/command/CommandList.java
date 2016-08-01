@@ -17,6 +17,7 @@ public enum CommandList {
     CREATE_NEW_SUBSCRIBER(new CreateUser()),
     DELETE_SERVICE(new DeleteService()),
     SERVICE_CHANGE(new ServiceChange()),
+    LOGOUT(new UserLogout()),
     SERVICE_REMOVE(new ServiceRemove());
 
     /**

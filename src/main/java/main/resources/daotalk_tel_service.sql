@@ -19,15 +19,15 @@
 -- Table structure for table `tel_service`
 --
 
-DROP TABLE IF EXISTS `tel_service`;
+DROP TABLE IF EXISTS daotalk.tel_service;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tel_service` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `price` double NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tel_service_id_uindex` (`id`)
+CREATE TABLE daotalk.tel_service (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(45) NOT NULL,
+  price double NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY tel_service_id_uindex (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

@@ -23,7 +23,7 @@
                     <%--<form action="./T1Servlet" method="get">--%>
                     <a href="/secure/Controller?command=show+subs" >Subs List</a>
                     <a href="/cabinet" >Return to the cabinet</a>
-                    <table border="1px">
+                    <table >
                         <tr>
                             <th>Contract</th>
                             <TH>Balance</TH>
@@ -40,7 +40,13 @@
                                 <tr>
                                      <td>${service.contract}</td>
                                      <td>${service.balance}</td>
-                                     <td>${service.currentService}</td>
+                                     <td>
+                                         <c:forEach items="${service.currentService}" var="item">
+                                         ${item.name}<br>
+                                        </c:forEach>
+
+                                     <%--${service.currentService}</td>--%>
+                                    </td>
                                      <td>${service.info.login}</td>
                                      <td>${service.info.password}</td>
                                      <td>${service.info.firstName}</td>

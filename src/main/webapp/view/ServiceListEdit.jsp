@@ -20,7 +20,8 @@
                 <div class="aboutcont ">
                     <a href="/secure/CreateService">Create new</a>
                     <table>
-                        <tr><th>Name</th><TH>Price</TH></tr>
+                        <tr><th>Name</th><TH>Price</TH>
+                            <TH>Delete</TH><TH>Change</TH></tr>
                         <c:forEach var="service" items="${services}"   varStatus="status">
                             <form action="/T1Servlet">
                                 <tr>
@@ -30,7 +31,7 @@
                                     <td><input type="submit" name="command" value="SERVICE_CHANGE"/></td>
                                     <%--<td><c:if test="${service.balance<0 && !service.blocked}"><a href="/T1Servlet?command=BLOCK_USER&id=${service.contract}">Block this subscriber</a></c:if>--%>
                                         <%--<c:if test="${service.balance>0 && service.blocked}"><a href="/T1Servlet?command=UNLOCK_USER&id=${service.contract}">Unlock this subscriber</a></c:if></td>--%>
-                                    <td><input type="hidden" name="id" value="${service.id}"/></td>
+                                    <td class="hiddenTD"><input type="hidden" name="id" value="${service.id}"/></td>
                                 </tr>
                             </form>
                         </c:forEach>

@@ -133,6 +133,27 @@ public class Subscriber {
                     ", login='" + login +
                     '}';
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            SubInfo subInfo = (SubInfo) o;
+
+            return firstName.equals(subInfo.firstName) && secondName.equals(subInfo.secondName) &&
+                    password.equals(subInfo.password) && login.equals(subInfo.login);
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = firstName.hashCode();
+            result = 31 * result + secondName.hashCode();
+            result = 31 * result + password.hashCode();
+            result = 31 * result + login.hashCode();
+            return result;
+        }
     }
 
 

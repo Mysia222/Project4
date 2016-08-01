@@ -24,8 +24,10 @@
 
                     <form action="/cabinet" method="get">
                         <a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>
+
                         <a href="/T1Servlet?command=ORDER_SERVICE">Order service</a>
-                        <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a><br>
+                        <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a>
+                        <a href="/T1Servlet?command=LOGOUT">Logout</a><br>
                         ${blocked}
                         <table border="1px solid black">
                             <tr>
