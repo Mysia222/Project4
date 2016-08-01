@@ -20,10 +20,14 @@ import java.util.List;
  */
 @WebServlet("/secure/Controller")
 public class ShowSubsServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
+    /**
+     * This method sets attributes on UserList.jsp and redirect there
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             List<Subscriber> list = SubService.getInstance().getSubsList();

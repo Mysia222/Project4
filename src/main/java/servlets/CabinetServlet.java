@@ -24,6 +24,13 @@ public class CabinetServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     }
 
+    /**
+     * This method sets/gets  Subscriber object to/from session and setts attributes from it to /home.jsp
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Subscriber subscriber = new Subscriber();

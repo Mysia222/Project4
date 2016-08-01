@@ -18,10 +18,14 @@ import java.util.List;
  */
 @WebServlet("/secure/Controller2")
 public class ShowServicesServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
+    /**
+     * This method sets attributes on ServiceListEdit.jsp and redirect there
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             List<Service> list = ServService.getInstance().getServiceList();

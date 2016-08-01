@@ -5,19 +5,40 @@ package main.ent;
  */
 public class Service {
 
+    /**
+     * It's name of service
+     */
     public String name;
+
+    /**
+     * It's price of service
+     */
     public double price;
+
+    /**
+     * It's id of service
+     */
     public int id;
 
+    /**
+     * Default constructor
+     */
     public Service() {
     }
 
+    /**
+     * Constructor
+     * @param name is name
+     * @param price is price
+     * @param id is id
+     */
     public Service(String name, double price, int id) {
         this.name = name;
         this.price = price;
         this.id = id;
     }
 
+    //setters & getters
     public int getId() {
         return id;
     }

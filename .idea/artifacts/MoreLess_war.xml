@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="MoreLess:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="MoreLess-1.0-SNAPSHOT.war">
+    <root id="archive" name="Task4.war">
       <element id="artifact" artifact-name="MoreLess:war exploded" />
     </root>
   </artifact>

@@ -12,19 +12,30 @@ public enum CommandList {
     ORDER_SERVICE(new OrderService()),
     SET_SERVICE(new SetService()),
     SHOW_USERS(new ShowSubs()),
-    SHOW_DEBTORS(new ShowDebtors()),
     BLOCK_USER(new BlockUser()),
     UNLOCK_USER(new UnlockUser()),
     CREATE_NEW_SUBSCRIBER(new CreateUser()),
     DELETE_SERVICE(new DeleteService()),
-    SERVICE_CHANGE(new ServiceChange());
+    SERVICE_CHANGE(new ServiceChange()),
+    SERVICE_REMOVE(new ServiceRemove());
 
-
+    /**
+     * Command object
+     */
     private Command command;
 
+    /**
+     * Constructor
+     * @param command is Command object
+     */
     CommandList(Command command) {
         this.command=command;
     }
+
+    /**
+     * getter
+     * @return Command object
+     */
     public Command getCommand() {
             return command;
     }

@@ -16,10 +16,14 @@ import java.io.IOException;
  */
 @WebServlet("/T1Servlet")
 public class T1Servlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-    }
-
+    /**
+     * It's a controller method which is according to command pattern implementation
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String commandName = request.getParameter("command");

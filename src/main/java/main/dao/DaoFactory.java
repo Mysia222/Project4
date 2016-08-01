@@ -4,10 +4,23 @@ package main.dao;
  * Created by Славик on 26.07.2016.
  */
 public abstract class DaoFactory {
-    public abstract ServicesDao createServicesDao();
-    public abstract SubsDao createSubsDao();
-//    public abstract FlowerDao createFlowerDao();
 
+    /**
+     * This fabric method creates and returns ServicesDao
+     * @return ServicesDao
+     */
+    public abstract ServicesDao createServicesDao();
+
+    /**
+     * This fabric method creates and returns SubsDao
+     * @return SubsDao
+     */
+    public abstract SubsDao createSubsDao();
+
+    /**
+     * This method return factory
+     * @return DaoFactory
+     */
     public static DaoFactory getFactory(){
         try {
             return (DaoFactory) Class.forName("main.dao.jdbc.JdbcDaoFactory").newInstance();

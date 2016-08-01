@@ -14,6 +14,17 @@ import java.sql.SQLException;
  * Created by Славик on 17.07.2016.
  */
 public class CreateUser implements Command{
+
+
+    /**
+     * This method check existing of Login and creates user if login isn't already in use
+     * else user will be informed about it
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return string url
+     * @throws ServletException
+     * @throws IOException
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Subscriber sub = subService.subByLog(request.getParameter(View.QUERY_LOGIN));

@@ -9,16 +9,23 @@ import java.util.ResourceBundle;
 public class View {
 
     public static final String BUNDLE_NAME="main.resources.labels";
+    public static final String WRONG_ENTER = "Wrong enter! Please repeat input login and password.";
     static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
 
-//    public static final String LOGIN_B = bundle.getString("msg.login");
+    public static final String PAGE_LOGIN = "login";
+    public static final String PAGE_PASSWORD = "password";
+
+
+
     public static final String LOGIN_B = "Login";
     public static final String LOGIN_L = "Login_l";
-//    public static final String PASSWORD_B = bundle.getString("msg.password");
     public static final String PASSWORD_B = "Password";
     public static final String PASSWORD_L = "Password_l";
 
     public static final String QUERY_LOGIN = "login";
+    public static final String QUERY_SERVICE_NAME = "name";
+    public static final String QUERY_SERVICE_PRICE = "price";
+    public static final String QUERY_SERVICE_ID = "id";
     public static final String QUERY_PASSWORD = "password";
     public static final String QUERY_BALANCE = "balance";
     public static final String QUERY_CONTRACT = "contract";
@@ -29,7 +36,11 @@ public class View {
     public static final String QUERY_S_NAME = "second_name";
     public static final String QUERY_F_NAME = "first_name";
     public static final String STATUS_BLOCKED = "STATUS: BLOCKED!";
-    public static final String STATUS_ACTIVE = "STATUS: ACTIVE";
+
+    public static final String CLOSE_EXCEPTION = "Close exception";
+    public static final String EXECUTE_EXCEPTION = "Execute exception";
+
+    public static final String DB_URL = "java:comp/env/jdbc/mysql";
 
     public static ResourceBundle getBundle() {
         return bundle;

@@ -19,6 +19,14 @@ import java.util.Set;
  */
 public class OrderService implements Command {
 
+    /**
+     * This method sets parameters on ServiceList.jsp and redirects user there
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return string url
+     * @throws ServletException
+     * @throws IOException
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Subscriber sub = (Subscriber) request.getSession().getAttribute("sub");
         if (subService.subByContract(sub.getContract()).isBlocked()){

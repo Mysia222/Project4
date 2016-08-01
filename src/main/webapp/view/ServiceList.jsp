@@ -32,7 +32,7 @@
                                             <%--<td><a href="/setService?id=${service.id}">Set</a> </td>--%>
                                              <td><input type="hidden" name="id" value="${service.id}"/></td>
                                              <td><c:if test="${idSet.contains(service.id)}">
-                                                 <a href="/T1Servlet?command=REMOVE_SERVICE&id=${service.id}">Remove service</a></c:if>
+                                                 <a href="/T1Servlet?command=SERVICE_REMOVE&id=${service.id}">Remove service</a></c:if>
                                              <c:if test="${!idSet.contains(service.id)}">
                                                  <a href="/T1Servlet?command=SET_SERVICE&id=${service.id}">Set service</a></c:if></td>
                                         </tr>

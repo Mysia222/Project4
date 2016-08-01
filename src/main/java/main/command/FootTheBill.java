@@ -12,6 +12,14 @@ import java.io.IOException;
  */
 public class FootTheBill implements Command {
 
+    /**
+     * This method redirect user  to FillBalance.jsp
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return string url
+     * @throws ServletException
+     * @throws IOException
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         return "/view/FillBalance.jsp";
     }

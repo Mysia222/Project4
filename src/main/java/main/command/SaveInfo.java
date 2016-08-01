@@ -11,6 +11,15 @@ import java.io.IOException;
  * Created by Славик on 23.07.2016.
  */
 public class SaveInfo implements Command {
+
+    /**
+     * This method updates users info and redirects him to cabinet
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return String url
+     * @throws ServletException
+     * @throws IOException
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         String fName = request.getParameter("first_name");

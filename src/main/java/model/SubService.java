@@ -1,5 +1,6 @@
 package model;
 
+import main.dao.DAOException;
 import main.dao.ServicesDao;
 import main.dao.SubsDao;
 import main.ent.Service;
@@ -16,76 +17,171 @@ import java.util.List;
  */
 public class SubService {
 
+    /**
+     * Instance
+     */
     private static SubService instance = new SubService();
+
+    /**
+     * This method returns Instance
+     * @return
+     */
     public static SubService getInstance(){return instance;}
+
+    /**
+     * Private default constructor
+     */
     private SubService(){}
 
+    /**
+     * This method returns list of all subscribers
+     * @return
+     * @throws SQLException
+     * @throws NamingException
+     */
     public List<Subscriber> getSubsList() throws SQLException, NamingException {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        return sd.findAll();
+        try {
+            return sd.findAll();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
+    /**
+     * This method checks existing of subs in DB by login and password
+     * @param login
+     * @param password
+     * @return
+     */
     public boolean existByLogPas(String login, String password){
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return sd.findByLogPas(login,password);
+        try {
+            return sd.findByLogPas(login,password);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
+    /**
+     * This method finds item in DB by ID and creates Subscriber object
+     * @param contract is items id
+     * @return Subscriber object
+     */
     public Subscriber subByContract(int contract){
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return sd.find(contract);
+        try {
+            return sd.find(contract);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-
+    /**
+     * This method finds item by login and returns Subscriber object
+     * @param log is login
+     * @return Subscriber object
+     * @throws SQLException
+     * @throws NamingException
+     */
     public Subscriber subByLog(String log) throws SQLException, NamingException {
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        Subscriber sub =  sd.getSubByLog(log);
-        return sub;
+        try {
+            return sd.getSubByLog(log);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-
+    /**
+     * This method updates item in DB by  Subscriber object
+     * @param subscriber is  Subscriber object
+     */
     public void setSub(Subscriber subscriber)  {
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        sd.update(subscriber);
+        try {
+            sd.update(subscriber);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<Subscriber> getDebtorsList() {
-        DaoFactory df = DaoFactory.getFactory();
-        SubsDao sd = df.createSubsDao();
-        return sd.getDebtors();
-
-    }
-
+    /**
+     * This method blocks item in DB by id
+     * @param contract is id
+     */
     public void blockId(int contract) {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        sd.block(contract);
+        try {
+            sd.block(contract);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
+
+    /**
+     * This method unlocks itm in DB by id
+     * @param contract
+     */
     public void unlockId(int contract) {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        sd.unlock(contract);
+        try {
+            sd.unlock(contract);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * This method creates item in DB by  Subscriber object
+     * @param subscriber is Subscriber object
+     */
     public void create(Subscriber subscriber) {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        sd.create(subscriber);
+        try {
+            sd.create(subscriber);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * This method update balnce of item in DB by Subscriber object
+     * @param sub is Subscriber object
+     */
     public void setBalance(Subscriber sub) {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        sd.updateBalance(sub);
+        try {
+            sd.updateBalance(sub);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * This method sets services to subscriber item in DB by Subscriber object
+     * @param sub is Subscriber object
+     */
     public void setService(Subscriber sub) {
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
-        sd.updateSubsServices(sub);
+        try {
+            sd.updateSubsServices(sub);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 }

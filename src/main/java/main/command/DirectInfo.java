@@ -10,8 +10,15 @@ import java.io.IOException;
  */
 public class DirectInfo implements Command{
 
+    /**
+     * This method redirect user on /DirectInfo.jsp
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return String url
+     * @throws ServletException
+     * @throws IOException
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         return "/view/DirectInfo.jsp";
     }
 }

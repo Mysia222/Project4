@@ -9,30 +9,81 @@ import java.util.TreeSet;
  */
 public class Subscriber {
 
-
+    /**
+     * It's balance of subscriber
+     */
     private double balance;
+
+    /**
+     * Admin status
+     */
     private boolean admin;
+
+    /**
+     * Block status
+     */
     private boolean blocked;
 
+    /**
+     * It's id of subscriber
+     */
     private int contract;
+
+    /**
+     * It's information of subscriber which subscriber can edit
+     */
     private SubInfo info;
+
+    /**
+     * Set of subscriber's services
+     */
     private Set<Service> currentService = new TreeSet<Service>();
 
+
+    /**
+     * Default constructor
+     */
     public Subscriber() {
     }
 
-
-
+    /**
+     * This class describe subscriber
+     */
     public class SubInfo{
 
+        /**
+         * Sub's firs name
+         */
         private String firstName;
+
+        /**
+         * Sub's second name
+         */
         private String secondName;
+
+        /**
+         * Sub's password
+         */
         private String password;
+
+        /**
+         * Sub's login
+         */
         private String login;
 
+        /**
+         * Default constructor
+         */
         public SubInfo() {
         }
 
+        /**
+         * Constructor
+         * @param firstName is first name
+         * @param secondName is second name
+         * @param password is password
+         * @param login is login
+         */
         public SubInfo(String firstName, String secondName, String password, String login) {
             this.firstName = firstName;
             this.secondName = secondName;
@@ -40,10 +91,10 @@ public class Subscriber {
             this.login = login;
         }
 
+        //getters & setters
         public String getPassword() {
             return password;
         }
-
 
         public void setPassword(String password) {
             this.password = password;

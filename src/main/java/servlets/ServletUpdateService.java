@@ -15,9 +15,14 @@ import java.io.IOException;
  */
 @WebServlet("/secure/UpdateService")
 public class ServletUpdateService extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
 
+    /**
+     * This method updates Service with parameters from request
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Service service = new Service(request.getParameter("name"), Double.valueOf(request.getParameter("price")),Integer.valueOf(request.getParameter("id")));
         ServService.getInstance().update(service);

@@ -3,6 +3,7 @@ package main.dao.jdbc;
 import main.dao.DaoFactory;
 import main.dao.ServicesDao;
 import main.dao.SubsDao;
+import main.resources.View;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,23 +16,47 @@ import java.sql.SQLException;
  */
 public class JdbcDaoFactory extends DaoFactory {
 
+    /**
+     * Data source
+     */
     private static DataSource ds;
+
+    /**
+     * Initial context
+     */
     private static InitialContext ic;
 
+    /**
+     * Default Constructor
+     */
     public JdbcDaoFactory() {
     }
 
+    /**
+     * Fabric method
+     * @return new JdbcServiceDao()
+     */
     public ServicesDao createServicesDao() {
         return new JdbcServiceDao();
     }
 
+    /**
+     * Fabric method
+     * @return new JdbcSubsDao()
+     */
     public SubsDao createSubsDao() {
         return new JdbcSubsDao();
     }
 
+    /**
+     * This method makes connection with DB
+     * @return connection
+     * @throws SQLException
+     * @throws NamingException
+     */
     public static Connection getConnection() throws SQLException, NamingException {
         ic = new InitialContext();
-        ds = (DataSource) ic.lookup("java:comp/env/jdbc/mysql");
+        ds = (DataSource) ic.lookup(View.DB_URL);
         return ds.getConnection();
     }
 }
