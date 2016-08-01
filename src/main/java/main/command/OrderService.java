@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Славик on 24.07.2016.
@@ -27,6 +29,11 @@ public class OrderService implements Command {
         try {
             services = servService.getServiceList();
             request.setAttribute("services",services);
+            Set idSet = new HashSet();
+            for(Service s: sub.getCurrentService()){
+                idSet.add(s.getId());
+            }
+            request.setAttribute("idSet",idSet);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NamingException e) {

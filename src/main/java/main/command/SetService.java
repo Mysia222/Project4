@@ -21,7 +21,7 @@ public class SetService implements Command {
         int id = Integer.parseInt(request.getParameter("id"));
         Service service= servService.getService(id);
         if (sub.getCurrentService().contains(service)){
-            request.setAttribute("enableService","SERVICE IS ALREADY ABLE TO YOU");
+            request.getRequestDispatcher("/view/ServiceAlreadyInUse.html");
             return "/T1Servlet?command=ORDER_SERVICE";
         }
         sub.getCurrentService().add(service);

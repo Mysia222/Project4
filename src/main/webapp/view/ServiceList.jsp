@@ -25,16 +25,21 @@
                             <table>
                              <tr><th>Name</th><TH>Price</TH></tr>
                                 <c:forEach var="service" items="${services}"   varStatus="status">
-                                <form action="/T1Servlet">
+                                <%--<form action="/T1Servlet">--%>
                                         <tr>
                                              <td>${service.name}</td>
                                              <td>${service.price}</td>
                                             <%--<td><a href="/setService?id=${service.id}">Set</a> </td>--%>
-                                             <td><input type="submit" name="command" value="SET_SERVICE"/></td>
-                                            <td><input type="hidden" name="id" value="${service.id}"/></td>
+                                             <td><input type="hidden" name="id" value="${service.id}"/></td>
+                                             <td><c:if test="${idSet.contains(service.id)}">
+                                                 <a href="/T1Servlet?command=REMOVE_SERVICE&id=${service.id}">Remove service</a></c:if>
+                                             <c:if test="${!idSet.contains(service.id)}">
+                                                 <a href="/T1Servlet?command=SET_SERVICE&id=${service.id}">Set service</a></c:if></td>
                                         </tr>
-                                </form>
+                                <%--</form>--%>
                                 </c:forEach>
+                                <%--<input type="submit" name="command" value="SET_SERVICE"/><br>--%>
+                                <%--<input type="submit" name="command" value="REMOVE_SERVICE"/><br>--%>
                                 <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
                             </table>
 

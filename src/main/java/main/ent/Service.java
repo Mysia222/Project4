@@ -50,4 +50,15 @@ public class Service {
                 ", id=" + id +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Service temp = (Service)obj;
+        return temp.getId()==this.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id;
+    }
 }
