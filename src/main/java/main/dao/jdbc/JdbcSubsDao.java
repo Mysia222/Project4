@@ -31,12 +31,10 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public void create(Subscriber sub) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
+
         String s = "INSERT INTO daotalk.abonents  (first_name, second_name, password, login) VALUES (?,?,?,?)";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setString(1, sub.getInfo().getFirstName());
             query.setString(2, sub.getInfo().getSecondName());
             query.setString(3, sub.getInfo().getPassword());
@@ -48,15 +46,6 @@ public class JdbcSubsDao implements SubsDao {
         } catch (NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-
-            }
         }
         initService(sub);
     }
@@ -67,12 +56,9 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public void delete(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
         String s = "UPDATE daotalk.abonents SET deleted=TRUE WHERE contract=?;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setInt(1,id);
             query.executeQuery();
         } catch (SQLException e) {
@@ -81,14 +67,6 @@ public class JdbcSubsDao implements SubsDao {
         } catch (NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                log.error(View.CLOSE_EXCEPTION, e);
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -100,40 +78,18 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public boolean findByLogPas(String login, String password) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
         String s = "SELECT * FROM daotalk.abonents WHERE login=? and password=?;";
-        try {
-
-            connection = JdbcDaoFactory.getConnection();
-            log.trace("Connection is opened");
-            query = connection.prepareStatement(s);
-            log.trace("Statement is created");
+        try (PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
             query.setString(1,login);
             query.setString(2,password);
-            rs = query.executeQuery();
+            ResultSet rs = query.executeQuery();
             log.trace("Result set is executed");
             boolean exist = rs.next();
+            rs.close();
             return exist;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                rs.close();
-                log.trace("Result set closed");
-                query.close();
-                log.trace("Statement closed ");
-                connection.close();
-                log.trace("Connection closed");
-            } catch (SQLException e) {
-                log.error("Close exception, SQLException:" + e);
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -143,40 +99,20 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public List<Subscriber> findAll() throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
         List list = new ArrayList();
         String s = "SELECT * FROM daotalk.abonents WHERE admin=FALSE AND deleted=FALSE ;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            log.trace("Open connection");
-            query = connection.prepareStatement(s);
-            log.trace("Create statement");
-            rs = query.executeQuery();
+        try (Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)){
+            ResultSet rs = query.executeQuery();
             log.trace("Execute result set, QUERY: " + s);
             while (rs.next()){
                 list.add(getSubByLog(rs.getString(View.QUERY_LOGIN)));
             }
+            rs.close();
             return list;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                rs.close();  //MAKE !=null CHECK
-                log.trace("Result set closed");
-                query.close();
-                log.trace("Statement closed");
-                connection.close();
-                log.trace("Connection closed");
-            } catch (SQLException e) {
-                log.error(View.CLOSE_EXCEPTION, e);
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -187,16 +123,11 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public Subscriber getSubByLog(String log) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
         Subscriber sub = null;
         String s = "SELECT * FROM daotalk.abonents WHERE login=?;";
-        try {
-            connection=JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try (PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
             query.setString(1,log);
-            rs = query.executeQuery();
+            ResultSet rs = query.executeQuery();
             while(rs.next()){
                 sub= new Subscriber();
                 sub.setBalance(rs.getDouble(View.QUERY_BALANCE));
@@ -206,22 +137,11 @@ public class JdbcSubsDao implements SubsDao {
                 sub.setCurrentService(getSubsServices(sub.getContract()));
                 sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_PASSWORD), log));
             }
+            rs.close();
             return sub;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                rs.close();
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -233,18 +153,11 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public Subscriber find(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
-
         Subscriber sub = new Subscriber();
         String s = "SELECT * FROM daotalk.abonents WHERE contract=? AND deleted=FALSE ;";
-        try {
-
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try (PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
             query.setInt(1,id);
-            rs = query.executeQuery();
+            ResultSet rs = query.executeQuery();
             while(rs.next()){
                 sub.setBalance(rs.getDouble(View.QUERY_BALANCE));
                 sub.setContract(id);
@@ -252,24 +165,13 @@ public class JdbcSubsDao implements SubsDao {
                 sub.setBlocked(rs.getBoolean(View.QUERY_BLOCKED));
                 sub.setCurrentService(getSubsServices(sub.getContract()));
                 sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_F_NAME),
-                        rs.getString(View.QUERY_PASSWORD), rs.getString(View.QUERY_LOGIN)));
+                rs.getString(View.QUERY_PASSWORD), rs.getString(View.QUERY_LOGIN)));
             }
+            rs.close();
             return sub;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                rs.close();
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -310,28 +212,15 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public void unlock(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
+
         String s = "UPDATE daotalk.abonents SET blocked=FALSE WHERE contract=?;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setInt(1, id);
             query.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -341,12 +230,9 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public void updateBalance(Subscriber subscriber) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
         String s = "UPDATE daotalk.abonents SET balance=? WHERE contract=?;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setDouble(1, subscriber.getBalance());
             query.setInt(2, subscriber.getContract());
             query.execute();
@@ -356,14 +242,6 @@ public class JdbcSubsDao implements SubsDao {
         } catch (NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -373,12 +251,9 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public void update(Subscriber sub) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
         String s = "UPDATE daotalk.abonents SET login=? ,balance=? ,password=? ,first_name=?, second_name=? WHERE contract=?;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setString(1,sub.getInfo().getLogin());
             query.setDouble(2,sub.getBalance());
             query.setString(3,sub.getInfo().getPassword());
@@ -386,21 +261,9 @@ public class JdbcSubsDao implements SubsDao {
             query.setString(5,sub.getInfo().getSecondName());
             query.setInt(6,sub.getContract());
             query.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-//                rs.close();
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -410,31 +273,15 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     private void deleteSubsServices(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        String s2 = "UPDATE daotalk.sub_services SET deleted=TRUE WHERE sub_id=?";
-
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s2);
+        String s = "UPDATE daotalk.sub_services SET deleted=TRUE WHERE sub_id=?";
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setInt(1, id);
             query.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
-
     }
 
     /**
@@ -444,31 +291,17 @@ public class JdbcSubsDao implements SubsDao {
      */
     public void updateSubsServices(Subscriber sub) throws DAOException {
         deleteSubsServices(sub.getContract());
-        Connection connection = null;
-        PreparedStatement query = null;
-        String s2 = "INSERT INTO daotalk.sub_services  (sub_id, service_id) VALUES (?,?)";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s2);
+        String s = "INSERT INTO daotalk.sub_services  (sub_id, service_id) VALUES (?,?)";
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setInt(1,sub.getContract());
-            for (Service s:sub.getCurrentService()){
-                query.setInt(2,s.getId());
+            for (Service service:sub.getCurrentService()){
+                query.setInt(2,service.getId());
                 query.execute();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -479,35 +312,18 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     private Set<Service> getSubsServices(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
-        String s2 = "SELECT * FROM  daotalk.sub_services WHERE sub_id=? AND deleted=FALSE ";
-
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s2);
+        String s = "SELECT * FROM  daotalk.sub_services WHERE sub_id=? AND deleted=FALSE ";
+        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)) {
             query.setInt(1, id);
             Set<Service> set = new HashSet<Service>();
-            rs=query.executeQuery();
+            ResultSet rs=query.executeQuery();
             while (rs.next()){
-                set.add(ServService.getInstance().getService(rs.getInt("service_id")));
+                set.add(ServService.getInstance().getService(rs.getInt(View.QUERY_SERVICE_ID)));
             }
             return set;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -518,30 +334,14 @@ public class JdbcSubsDao implements SubsDao {
      */
     private void initService(Subscriber sub) throws DAOException {
         sub = getSubByLog(sub.getInfo().getLogin());
-        Connection connection = null;
-        PreparedStatement query = null;
-        String s2 = "INSERT INTO daotalk.sub_services  (sub_id) VALUES (?)";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s2);
+        String s = "INSERT INTO daotalk.sub_services  (sub_id) VALUES (?)";
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)) {
             query.setInt(1, sub.getContract());
             query.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
-
-
 }

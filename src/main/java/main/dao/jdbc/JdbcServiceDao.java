@@ -22,74 +22,40 @@ public class JdbcServiceDao implements ServicesDao {
      * @throws DAOException
      */
     public Service find(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
-        ResultSet rs = null;
         String s = "SELECT * FROM daotalk.tel_service WHERE id=?;";
-
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
             query.setInt(1,id);
-            rs = query.executeQuery();
+            ResultSet rs = query.executeQuery();
+
             while (rs.next()){
-                return new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE), rs.getInt(View.QUERY_SERVICE_ID));
+               Service temp = new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE), rs.getInt(View.QUERY_SERVICE_ID));
+               rs.close();
+               return temp;
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION, e);
-        }
-        finally {
-            try {
-                rs.close();
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                    throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
         return null;
     }
 
     /**
-     * SThis method returns collection of all Service objects by items in DB
+     * This method returns collection of all Service objects by items in DB
      * @return
      * @throws DAOException
      */
     public List<Service> findAll() throws DAOException {
-        Connection connection = null;
-        Statement statement = null;
-        ResultSet rs = null;
-        List<Service> list = new ArrayList<Service>();
         String s = "SELECT * FROM daotalk.tel_service WHERE deleted=FALSE ;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            statement = connection.createStatement();
-            rs = statement.executeQuery(s);
+        try(Statement statement = JdbcDaoFactory.getConnection().createStatement()) {
+            ResultSet rs = statement.executeQuery(s);
+            List<Service> list = new ArrayList<>();
             while (rs.next()){
                 list.add(new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE),rs.getInt(View.QUERY_SERVICE_ID)));
             }
             return list;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }
-        finally {
-            try {
-                rs.close();
-                statement.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -99,29 +65,14 @@ public class JdbcServiceDao implements ServicesDao {
      * @throws DAOException
      */
     public void create(Service service) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
         String s = "INSERT INTO daotalk.tel_service  (name, price) VALUES (?,?)";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)) {
             query.setString(1, service.getName());
             query.setDouble(2, service.getPrice());
             query.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -131,30 +82,15 @@ public class JdbcServiceDao implements ServicesDao {
      * @throws DAOException
      */
     public void update(Service service) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
         String s = "UPDATE daotalk.tel_service SET name=? ,price=? WHERE id=?;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)) {
             query.setString(1,service.getName());
             query.setDouble(2,service.getPrice());
             query.setInt(3,service.getId());
             query.execute();
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
     }
 
@@ -164,36 +100,18 @@ public class JdbcServiceDao implements ServicesDao {
      * @throws DAOException
      */
     public void delete(int id) throws DAOException {
-        Connection connection = null;
-        PreparedStatement query = null;
         String s = "UPDATE daotalk.tel_service SET deleted=TRUE WHERE id=?;";
         String s2 = "UPDATE daotalk.sub_services SET deleted=TRUE WHERE service_id=?;";
-        try {
-            connection = JdbcDaoFactory.getConnection();
-            query = connection.prepareStatement(s);
+        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s);
+            PreparedStatement query2 = JdbcDaoFactory.getConnection().prepareStatement(s2)) {
             query.setInt(1, id);
             query.execute();
-            query = connection.prepareStatement(s2);
-            query.setInt(1, id);
+            query2.setInt(1, id);
             query.execute();
 
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        } catch (NamingException e) {
-            e.printStackTrace();
-            throw new DAOException(View.EXECUTE_EXCEPTION,e);
-        }finally {
-            try {
-                query.close();
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new DAOException(View.CLOSE_EXCEPTION,e);
-            }
         }
-
-
-
     }
 }
