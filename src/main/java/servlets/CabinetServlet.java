@@ -58,7 +58,7 @@ public class CabinetServlet extends HttpServlet {
             request.setAttribute(View.QUERY_S_NAME, subscriber.getInfo().getSecondName());
             request.setAttribute(View.QUERY_PASSWORD, subscriber.getInfo().getPassword());
             request.setAttribute(View.QUERY_LOGIN, subscriber.getInfo().getLogin());
-            request.setAttribute(View.QUERY_SERVICE, subscriber.getCurrentService());
+            request.setAttribute("current_service", subscriber.getCurrentService());
             if (subscriber.isBlocked()) {
                 request.setAttribute(View.QUERY_BLOCKED, "STATUS BLOCKED!");
             }else {
