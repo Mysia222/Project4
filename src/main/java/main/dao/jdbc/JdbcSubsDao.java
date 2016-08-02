@@ -123,6 +123,7 @@ public class JdbcSubsDao implements SubsDao {
      * @throws DAOException
      */
     public Subscriber getSubByLog(String log) throws DAOException {
+
         Subscriber sub = null;
         String s = "SELECT * FROM daotalk.abonents WHERE login=?;";
         try (PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
@@ -130,12 +131,13 @@ public class JdbcSubsDao implements SubsDao {
             ResultSet rs = query.executeQuery();
             while(rs.next()){
                 sub= new Subscriber();
+
                 sub.setBalance(rs.getDouble(View.QUERY_BALANCE));
                 sub.setContract(rs.getInt(View.QUERY_CONTRACT));
                 sub.setAdmin(rs.getBoolean(View.QUERY_ADMIN));
                 sub.setBlocked(rs.getBoolean(View.QUERY_BLOCKED));
-                sub.setCurrentService(getSubsServices(sub.getContract()));
                 sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_PASSWORD), log));
+                sub.setCurrentService(getSubsServices(sub.getContract()));
             }
             rs.close();
             return sub;
@@ -314,12 +316,13 @@ public class JdbcSubsDao implements SubsDao {
     private Set<Service> getSubsServices(int id) throws DAOException {
         String s = "SELECT * FROM  daotalk.sub_services WHERE sub_id=? AND deleted=FALSE ";
         try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)) {
-            query.setInt(1, id);
-            Set<Service> set = new HashSet<Service>();
+            query.setInt(1,id);
+            Set<Service> set = new HashSet<>();
             ResultSet rs=query.executeQuery();
             while (rs.next()){
-                set.add(ServService.getInstance().getService(rs.getInt(View.QUERY_SERVICE_ID)));
+                set.add(ServService.getInstance().getService(rs.getInt("service_id")));
             }
+            System.out.println(set);
             return set;
         } catch (SQLException | NamingException e) {
             e.printStackTrace();

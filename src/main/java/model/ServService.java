@@ -55,6 +55,7 @@ public class ServService {
      * @return
      */
     public Service getService(int id){
+
         DaoFactory df =  DaoFactory.getFactory();
         ServicesDao sd =  df.createServicesDao();
         Service service = null;

@@ -37,7 +37,7 @@ public class Subscriber {
     /**
      * Set of subscriber's services
      */
-    private Set<Service> currentService = new TreeSet<Service>();
+    private Set<Service> currentService = new HashSet<>();
 
 
     /**
