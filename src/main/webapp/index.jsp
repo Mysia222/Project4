@@ -9,6 +9,7 @@
 <link href="style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>tell</title>
 </head>
 <body>
@@ -19,19 +20,19 @@
                 <div class="aboutcont ">
                     <form action="/Controller" method="post">
                         <br>
-                        login:
+                        ${login}:
                         <p class="wrongLogin" >${wrongLogin}</p>
                         <input type="text" name="login">
                         <br>
-                        password:
+                        ${password}:
                         <p class="wrongLogin" >${wrongPassword}</p>
                         <input type="password" name="password">
                         <br>
-                        <input type="submit" name="submit" value="Enter">
+                        <input type="submit" name="submit_enter" value="${submit_enter}">
                         <input type="hidden" name="command" value="ENTER">
                     </form>
                     <form action="/Controller" method="post">
-                        <input type="submit" name="create" value="Create account">
+                        <input type="submit" name="create_account" value="${create_account}">
                         <input type="hidden" name="command" value="USER_CREATE">
                     </form>
 

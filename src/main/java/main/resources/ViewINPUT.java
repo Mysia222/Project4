@@ -12,11 +12,11 @@ public class ViewINPUT {
     public static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
 //    private static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("en" ,"EN"));
 
-    public static final String PASS_KEY="msg.password";
+    private static final String PASS_KEY="msg.password";
     public static final String PASS=bundle.getString(PASS_KEY);
 
-    public static final String CREATE_NEW_LOGIN = "Create account";
-    public static final String CREATE = "create";
+    public static final String CREATE_NEW_LOGIN = "Create account";  //index
+    public static final String CREATE = "create";                    //CreateUser
     public static final String FIRST_NAME = "First Name";
     public static final String SECOND_NAME = "Create new login";
     public static final String LOGIN = "Create new login";

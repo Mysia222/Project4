@@ -31,15 +31,15 @@
                         ${blocked}
                         <table border="1px solid black">
                             <tr>
-                                <td>Contract:</td>
+                                <td>${contractH}:</td>
                                 <td>${contract}</td>
                             </tr>
                             <tr>
-                                <td>Balance</td>
+                                <td>${balanceH}</td>
                                 <td>${balance}</td>
                             </tr>
                             <tr>
-                                <td>Current service:</td>
+                                <td>${current_serviceH}:</td>
                                 <td>
                                     <c:forEach items="${current_service}" var="item">
                                         ${item.name}<br>
@@ -47,20 +47,20 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Name:</td>
-                                <td>${first_name}</td>
+                                <td>${fNameH}:</td>
+                                <td>${fName}</td>
                             </tr>
                             <tr>
-                                <td>Second Name:</td>
-                                <td>${second_name}</td>
+                                <td>${sNameH}:</td>
+                                <td>${sName}</td>
                             </tr>
                             <tr>
-                                <td>Password:</td>
-                                <td>${password}</td>
-                            </tr>
-                            <tr>
-                                <td>Login:</td>
+                                <td>${loginH}:</td>
                                 <td>${login}</td>
+                            </tr>
+                            <tr>
+                                <td>${passwordH}:</td>
+                                <td>${password}</td>
                             </tr>
                         </table>
 
