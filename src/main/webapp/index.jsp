@@ -17,7 +17,7 @@
         <div class="mainbody ">
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
-                    <form action="./home2" method="get">
+                    <form action="/Controller" method="post">
                         <br>
                         login:
                         <p class="wrongLogin" >${wrongLogin}</p>
@@ -27,9 +27,14 @@
                         <p class="wrongLogin" >${wrongPassword}</p>
                         <input type="password" name="password">
                         <br>
-                        <input type="submit" value="Enter"><br>
-                        <a href="/view/CreateSub.jsp">Create account</a>
+                        <input type="submit" name="submit" value="Enter">
+                        <input type="hidden" name="command" value="ENTER">
                     </form>
+                    <form action="/Controller" method="post">
+                        <input type="submit" name="create" value="Create account">
+                        <input type="hidden" name="command" value="USER_CREATE">
+                    </form>
+
                 </div>
             </div>
 

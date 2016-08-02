@@ -19,12 +19,12 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
 
-                    <form action="/T1Servlet" method="get">
+                    <form action="/Controller" method="post">
                         ${loginInUse}
                        User Data:<br>
                         <table>
                             <tr>
-                                <td>Name:</td>
+                                <td>First Name:</td>
                                 <td><input type="text" name="first_name"></td>
                             </tr>
                             <tr>
@@ -40,7 +40,11 @@
                                 <td><input type="text" name="login"></td>
                             </tr>
                         </table>
-                        <input type="submit" name ="command" value="CREATE_NEW_SUBSCRIBER">
+                            <input type="submit" name="create" value="Create subscriber">
+                            <input type="submit" name="test" value="${testSetAttribute}">
+                            <input type="submit" name="test1" value="${testSetAttribute1}">
+                            <input type="submit" name="test2" value="${testSetAttribute2}">
+                            <input type="hidden" name="command" value="USER_CREATE">
                     </form>
                 </div>
             </div>

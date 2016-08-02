@@ -25,10 +25,10 @@ public class T1Servlet extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        String commandName = request.getParameter("command");
-        Command command = CommandList.valueOf(commandName).getCommand();
-        String goTo = command.execute(request, response);
-        request.getRequestDispatcher(goTo).forward(request, response);
+//        response.setContentType("text/html");
+//        String commandName = request.getParameter("command");
+//        Command command = CommandList.valueOf(commandName).getCommand();
+//        String goTo = command.execute(request, response);
+//        request.getRequestDispatcher(goTo).forward(request, response);
     }
 }

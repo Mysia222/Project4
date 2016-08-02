@@ -5,6 +5,9 @@ package main.command;
  */
 public enum CommandList {
 
+    ENTER(new CommandEnter()),
+    USER_CREATE(new UserCreate()),
+
     DIRECT_USER_INFO(new DirectInfo()),
     SAVE_NEW_INFO(new SaveInfo()),
     FILL_BALANCE(new FillBalance()),

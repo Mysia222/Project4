@@ -23,7 +23,8 @@ public class JdbcServiceDao implements ServicesDao {
      */
     public Service find(int id) throws DAOException {
         String s = "SELECT * FROM daotalk.tel_service WHERE id=?;";
-        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
+        try(Connection connection = JdbcDaoFactory.getConnection();
+            PreparedStatement query = connection.prepareStatement(s)){
             query.setInt(1,id);
             ResultSet rs = query.executeQuery();
 

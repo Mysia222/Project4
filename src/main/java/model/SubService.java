@@ -90,7 +90,7 @@ public class SubService {
      * @throws SQLException
      * @throws NamingException
      */
-    public Subscriber subByLog(String log) throws SQLException, NamingException {
+    public Subscriber subByLog(String log) {
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
         try {

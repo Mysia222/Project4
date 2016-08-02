@@ -79,7 +79,8 @@ public class JdbcSubsDao implements SubsDao {
      */
     public boolean findByLogPas(String login, String password) throws DAOException {
         String s = "SELECT * FROM daotalk.abonents WHERE login=? and password=?;";
-        try (PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
+        try (Connection connection = JdbcDaoFactory.getConnection();
+             PreparedStatement query = connection.prepareStatement(s)){
             query.setString(1,login);
             query.setString(2,password);
             ResultSet rs = query.executeQuery();
@@ -126,7 +127,8 @@ public class JdbcSubsDao implements SubsDao {
 
         Subscriber sub = null;
         String s = "SELECT * FROM daotalk.abonents WHERE login=?;";
-        try (PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)){
+        try (Connection connection =JdbcDaoFactory.getConnection();
+             PreparedStatement query = connection.prepareStatement(s)){
             query.setString(1,log);
             ResultSet rs = query.executeQuery();
             while(rs.next()){
@@ -315,7 +317,8 @@ public class JdbcSubsDao implements SubsDao {
      */
     private Set<Service> getSubsServices(int id) throws DAOException {
         String s = "SELECT * FROM  daotalk.sub_services WHERE sub_id=? AND deleted=FALSE ";
-        try(PreparedStatement query = JdbcDaoFactory.getConnection().prepareStatement(s)) {
+        try(Connection connection = JdbcDaoFactory.getConnection();
+                PreparedStatement query = connection.prepareStatement(s)) {
             query.setInt(1,id);
             Set<Service> set = new HashSet<>();
             ResultSet rs=query.executeQuery();
