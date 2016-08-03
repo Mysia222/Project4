@@ -1,8 +1,5 @@
 package servlets;
 
-import main.command.Command;
-import main.command.CommandList;
-
 import javax.servlet.ServletException;
 
 import javax.servlet.annotation.WebServlet;

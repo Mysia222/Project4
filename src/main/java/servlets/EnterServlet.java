@@ -1,6 +1,6 @@
 package servlets;
 
-import main.resources.View;
+import resources.View;
 import model.SubService;
 
 import javax.servlet.RequestDispatcher;

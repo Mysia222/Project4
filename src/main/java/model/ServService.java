@@ -1,11 +1,9 @@
 package model;
 
-import main.dao.DAOException;
-import main.dao.DaoFactory;
-import main.dao.ServicesDao;
-import main.dao.SubsDao;
-import main.ent.Service;
-import main.ent.Subscriber;
+import dao.DAOException;
+import dao.DaoFactory;
+import dao.ServicesDao;
+import ent.Service;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;

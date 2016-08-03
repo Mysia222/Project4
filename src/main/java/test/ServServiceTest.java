@@ -1,6 +1,6 @@
 package test;
 
-import main.ent.Service;
+import ent.Service;
 import model.ServService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Potaychuk Sviatoslav on 01.08.2016.

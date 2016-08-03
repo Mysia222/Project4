@@ -1,6 +1,6 @@
 package test;
 
-import main.ent.Service;
+import ent.Service;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

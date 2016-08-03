@@ -1,10 +1,9 @@
 package servlets;
 
-import main.command.Command;
-import main.command.CommandList;
-import main.resources.View;
-import main.resources.ViewINPUT;
-import main.resources.ViewURL;
+import command.Command;
+import command.CommandList;
+import resources.View;
+import resources.ViewURL;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

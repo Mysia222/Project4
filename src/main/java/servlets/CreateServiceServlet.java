@@ -1,8 +1,7 @@
 package servlets;
 
-import main.ent.Service;
+import ent.Service;
 import model.ServService;
-import model.SubService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

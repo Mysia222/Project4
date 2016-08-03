@@ -1,8 +1,6 @@
 package servlets;
 
-import main.ent.Service;
-import main.ent.Subscriber;
-import model.ServService;
+import ent.Subscriber;
 import model.SubService;
 
 import javax.naming.NamingException;

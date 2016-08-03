@@ -1,14 +1,12 @@
 package test;
 
-import main.ent.Service;
-import main.ent.Subscriber;
+import ent.Service;
+import ent.Subscriber;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Potaychuk Sviatoslav on 01.08.2016.
