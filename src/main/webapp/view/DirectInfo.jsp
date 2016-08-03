@@ -20,23 +20,24 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
                     <form action="/Controller" method="post">
+                        <p class="wrongLogin"> ${loginInUse}</p>
                         ${userInfo}:<br>
                         <table>
                             <tr>
                                 <td>${fNameH}:</td>
-                                <td><input type="text" name="fName"></td>
+                                <td><input type="text" name="fName" value="${savedFName}"></td>
                             </tr>
                             <tr>
                                 <td>${sNameH}:</td>
-                                <td><input type="text" name="sName"></td>
+                                <td><input type="text" name="sName" value="${savedSName}"></td>
                             </tr>
                             <tr>
                                 <td>${loginH}:</td>
-                                <td><input type="text" name="login"></td>
+                                <td><input type="text" name="login" value="${savedLogin}"></td>
                             </tr>
                             <tr>
                                 <td>${passwordH}:</td>
-                                <td><input type="text" name="password"></td>
+                                <td><input type="text" name="password" value="${savedPassword}"></td>
                             </tr>
                             </table>
                         <input type="submit" name ="direct_info" value="${save}">
@@ -44,6 +45,10 @@
 
 
                     </form>
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="cabinet" value="${toTheCabinet}">
+                            <input type="hidden" name="command" value="USER_CABINET">
+                        </form>
                 </div>
             </div>
 

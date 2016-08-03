@@ -18,9 +18,10 @@ public class UserFootTheBill implements Command {
         response.setContentType ("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
-        if(request.getParameter(View.FOOT_THE_BILL_BUTTON).equals(View.FOOT_THE_BILL)){
+        if(request.getParameter(View.FOOT_THE_BILL_BUTTON).equals(View.FOOT_THE_BILL)){   //from Home jsp
             request.setAttribute(View.MONEY_VALUE_PAGE_L,View.MONEY_VALUE_L);
             request.setAttribute(View.MONEY_PAY_PAGE,View.MONEY_PAY );
+            request.setAttribute(View.RETURN_CABINET_PAGE, View.RETURN_CABINET);
             return ViewURL.FILL_BALANCE_JSP;
         }else {
             String d = request.getParameter(View.MONEY_VALUE_PAGE);

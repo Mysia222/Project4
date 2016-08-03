@@ -8,17 +8,22 @@ public class Service {
     /**
      * It's name of service
      */
-    public String name;
+    private String name;
 
     /**
      * It's price of service
      */
-    public double price;
+    private double price;
 
     /**
      * It's id of service
      */
-    public int id;
+    private int id;
+
+    /**
+     * It's editing status
+     */
+    private boolean edit;
 
     /**
      * Default constructor
@@ -32,13 +37,24 @@ public class Service {
      * @param price is price
      * @param id is id
      */
-    public Service(String name, double price, int id) {
+    public Service(String name, double price, int id, boolean edit) {
         this.name = name;
         this.price = price;
         this.id = id;
+        this.edit = edit;
     }
 
     //setters & getters
+
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
+    }
+
     public int getId() {
         return id;
     }

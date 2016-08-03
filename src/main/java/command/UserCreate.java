@@ -19,6 +19,9 @@ public class UserCreate implements Command {
         request.setCharacterEncoding("UTF-8");
 
        if(request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(View.CREATE_ACCOUNT)){
+           request.setAttribute(View.SAVED_FIRST_NAME, "");
+           request.setAttribute(View.SAVED_SECOND_NAME, "");
+           request.setAttribute(View.SAVED_PASSWORD,"");
            request.setAttribute(View.USER_INFO_PAGE, View.USER_INFO);
            request.setAttribute(View.FIRST_NAME_PAGE, View.FIRST_NAME);
            request.setAttribute(View.SECOND_NAME_PAGE, View.SECOND_NAME);
@@ -42,23 +45,19 @@ public class UserCreate implements Command {
             request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
             Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
             return command.execute(request, response);
-//            request.setAttribute(View.FIRST_NAME_PAGE, sub.getInfo().getFirstName());
-//            request.setAttribute(View.SECOND_NAME_PAGE, sub.getInfo().getSecondName());
-//            request.setAttribute(View.LOGIN_PAGE, sub.getInfo().getLogin());
-//            request.setAttribute(View.PASSWORD_PAGE, sub.getInfo().getPassword());
-//            request.setAttribute(View.BALANCE_PAGE, sub.getBalance());
-//            request.setAttribute(View.CONTRACT_PAGE, sub.getContract());
-//            request.setAttribute(View.CURRENT_SERVICE_PAGE, sub.getCurrentService());
-//            request.setAttribute(View.FIRST_NAME_PAGE_H, View.FIRST_NAME);
-//            request.setAttribute(View.SECOND_NAME_PAGE_H, View.SECOND_NAME);
-//            request.setAttribute(View.LOGIN_PAGE_H, View.LOGIN);
-//            request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
-//            request.setAttribute(View.BALANCE_PAGE_H, View.BALANCE);
-//            request.setAttribute(View.CONTRACT_PAGE_H, View.CONTRACT);
-//            request.setAttribute(View.CURRENT_SERVICE_PAGE_H, View.CURRENT_SERVICE);
-//            return ViewURL.HOME_JSP;
+//
         }else {
+            request.setAttribute(View.SAVED_FIRST_NAME, request.getParameter(View.FIRST_NAME_PAGE));
+            request.setAttribute(View.SAVED_SECOND_NAME, request.getParameter(View.SECOND_NAME_PAGE));
+            request.setAttribute(View.SAVED_PASSWORD, request.getParameter(View.PASSWORD_PAGE));
             request.setAttribute(View.LOGIN_IN_USE_PAGE, View.LOGIN_IN_USE);
+            request.setAttribute(View.USER_INFO_PAGE, View.USER_INFO);
+            request.setAttribute(View.FIRST_NAME_PAGE, View.FIRST_NAME);
+            request.setAttribute(View.SECOND_NAME_PAGE, View.SECOND_NAME);
+            request.setAttribute(View.LOGIN_PAGE, View.LOGIN);
+            request.setAttribute(View.PASSWORD_PAGE, View.PASSWORD);
+            request.setAttribute(View.PASSWORD_PAGE, View.PASSWORD);
+            request.setAttribute(View.CREATE_PAGE, View.CREATE);
             return ViewURL.CREATE_SUB_JSP;
         }
 

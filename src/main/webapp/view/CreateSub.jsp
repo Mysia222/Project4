@@ -22,16 +22,16 @@
                     <%--${pageContext.servletContext.contextPath}--%>
 
                     <form action="/Controller" method="post">
-                        ${loginInUse}
-                       ${userInfo}:<br>
+                       <p class="wrongLogin">${loginInUse}</p>
+                        ${userInfo}:<br>
                         <table>
                             <tr>
                                 <td>${fName}:</td>
-                                <td><input type="text" name="fName"></td>
+                                <td><input type="text" name="fName" value="${savedFName}"></td>
                             </tr>
                             <tr>
                                 <td>${sName}:</td>
-                                <td><input type="text" name="sName"></td>
+                                <td><input type="text" name="sName" value="${savedSName}"></td>
                             </tr>
                             <tr>
                                 <td>${login}:</td>
@@ -39,7 +39,7 @@
                             </tr>
                             <tr>
                                 <td>${password}:</td>
-                                <td><input type="text" name="password"></td>
+                                <td><input type="text" name="password" value="${savedPassword}"></td>
                             </tr>
                         </table>
                            <input type="submit" name="create_account" value="${create}">

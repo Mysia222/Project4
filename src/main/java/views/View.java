@@ -15,6 +15,10 @@ public class View {
     public static final String BUNDLE_NAME="labels";
     public static final String SUBSCRIBER_SESSION ="subscriber" ;
     public static final String USER_CABINET ="USER_CABINET" ;
+    public static final  String ADMIN_CABINET = "SERVICE_ADMIN_CABINET";
+    public static final String SERVICE_SUBSCRIBERS = "SERVICE_SUBSCRIBERS";
+    public static final String SERVICES_LIST_EDIT = "SERVICE_SERVICES";
+
 
 
     public static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
@@ -109,6 +113,7 @@ public class View {
 
     public static final String LOGOUT = bundle.getString("msg.logout");
     public static final String LOGOUT_PAGE = "logout";
+    public static final String LOGOUT_BUTTON = "logout";
 
     public static final String RETURN_CABINET = bundle.getString("msg.toTheCabinet");
     public static final String RETURN_CABINET_PAGE = "toTheCabinet";
@@ -119,6 +124,48 @@ public class View {
 
     public static final String SAVE = bundle.getString("msg.save");
     public static final String SAVE_PAGE = "save";
+
+    public static final String SAVED_FIRST_NAME = "savedFName";
+    public static final String SAVED_SECOND_NAME = "savedSName";
+    public static final String SAVED_PASSWORD = "savedPassword";
+    public static final String SAVED_LOGIN = "savedLogin";
+
+
+    public static final String ADMIN_VIEW_SUBS_BUTTON = "showSubs";
+    public static final String ADMIN_VIEW_SUBS = bundle.getString("msg.showSubs");
+
+    public static final String ADMIN_VIEW_SERVICES_BUTTON = "showServices";
+    public static final String ADMIN_VIEW_SERVICES = bundle.getString("msg.showServices");
+
+    public static final String ADMIN_CREATE_SERVICE_BUTTON = "createService";
+    public static final String ADMIN_CREATE_SERVICE = bundle.getString("msg.createService");
+
+    public static final String USER_LIST_PAGE = "users";
+    public static final String SERVICES_LIST_PAGE = "services";
+
+
+    public static final String BLOCK_SUBSCRIBER_BUTTON = "blockSubscriber";
+    public static final String BLOCK_SUBSCRIBER = bundle.getString("msg.blockSubscriber");
+
+    public static final String UNLOCK_SUBSCRIBER_BUTTON = "unlockSubscriber";
+    public static final String UNLOCK_SUBSCRIBER = bundle.getString("msg.unlockSubscriber");
+
+    public static final String REFRESH_BUTTON ="refresh";
+    public static final String REFRESH = bundle.getString("msg.refresh");
+
+    public static final String CREATE_SERVICE_BUTTON ="createService";
+    public static final String CREATE_SERVICE = bundle.getString("msg.createService");
+
+    public static final String DELETE_PAGE ="delete";
+    public static final String DELETE = bundle.getString("msg.delete");
+
+    public static final String CHANGE_PAGE ="change";
+    public static final String CHANGE = bundle.getString("msg.change");
+
+    public static final String NAME_IN_USE = bundle.getString("msg.nameInUse");;
+    public static final String NAME_IN_USE_PAGE = "nameInUse";
+
+
 
 
 //*****************************************
@@ -136,6 +183,7 @@ public class View {
     public static final String QUERY_SERVICE_NAME = "name";
     public static final String QUERY_SERVICE_PRICE = "price";
     public static final String QUERY_SERVICE_ID = "id";
+    public static final String QUERY_SERVICE_EDIT = "edit" ;
     public static final String QUERY_PASSWORD = "password";
     public static final String QUERY_BALANCE = "balance";
     public static final String QUERY_CONTRACT = "contract";

@@ -1,4 +1,4 @@
-package servlets;
+package controller;
 
 import command.Command;
 import command.CommandList;

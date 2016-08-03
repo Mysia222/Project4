@@ -1,4 +1,4 @@
-package model;
+package services;
 
 import dao.DAOException;
 import dao.DaoFactory;
@@ -105,5 +105,36 @@ public class ServService {
         } catch (DAOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void editService(int id) {
+        DaoFactory df = DaoFactory.getFactory();
+        ServicesDao sd = df.createServicesDao();
+        try {
+            sd.edit(id);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void unEditService(int id) {
+        DaoFactory df = DaoFactory.getFactory();
+        ServicesDao sd = df.createServicesDao();
+        try {
+            sd.unEdit(id);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean nameInUse(String name) {
+        DaoFactory df = DaoFactory.getFactory();
+        ServicesDao sd = df.createServicesDao();
+        try {
+            return sd.nameInUse(name);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

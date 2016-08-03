@@ -1,7 +1,7 @@
 package command;
 
-import model.ServService;
-import model.SubService;
+import services.ServService;
+import services.SubService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

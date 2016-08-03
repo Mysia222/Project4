@@ -1,4 +1,4 @@
-package model;
+package services;
 
 import dao.DAOException;
 import dao.SubsDao;
@@ -37,7 +37,7 @@ public class SubService {
      * @throws SQLException
      * @throws NamingException
      */
-    public List<Subscriber> getSubsList() throws SQLException, NamingException {
+    public List<Subscriber> getSubsList(){
         DaoFactory df = DaoFactory.getFactory();
         SubsDao sd = df.createSubsDao();
         try {

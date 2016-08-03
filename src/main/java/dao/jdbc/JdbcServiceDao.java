@@ -29,7 +29,7 @@ public class JdbcServiceDao implements ServicesDao {
             ResultSet rs = query.executeQuery();
 
             while (rs.next()){
-               Service temp = new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE), rs.getInt(View.QUERY_SERVICE_ID));
+               Service temp = new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE), rs.getInt(View.QUERY_SERVICE_ID),rs.getBoolean(View.QUERY_SERVICE_EDIT));
                rs.close();
                return temp;
             }
@@ -51,7 +51,7 @@ public class JdbcServiceDao implements ServicesDao {
             ResultSet rs = statement.executeQuery(s);
             List<Service> list = new ArrayList<>();
             while (rs.next()){
-                list.add(new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE),rs.getInt(View.QUERY_SERVICE_ID)));
+                list.add(new Service(rs.getString(View.QUERY_SERVICE_NAME),rs.getDouble(View.QUERY_SERVICE_PRICE),rs.getInt(View.QUERY_SERVICE_ID), rs.getBoolean(View.QUERY_SERVICE_EDIT)));
             }
             return list;
         } catch (SQLException | NamingException e) {
@@ -113,6 +113,54 @@ public class JdbcServiceDao implements ServicesDao {
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
             throw new DAOException(View.EXECUTE_EXCEPTION,e);
+        }
+    }
+
+    /**
+     * This method marks item with edit
+     * @param id is item id
+     */
+    public void edit(int id) throws DAOException {
+        String s = "UPDATE daotalk.tel_service SET edit=TRUE WHERE id=?;";
+        try(Connection connection = JdbcDaoFactory.getConnection()) {
+            PreparedStatement query = connection.prepareStatement(s);
+            query.setInt(1, id);
+            query.execute();
+            query.close();
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+            throw new DAOException(View.EXECUTE_EXCEPTION, e);
+        }
+    }
+
+    @Override
+    public void unEdit(int id) throws DAOException {
+        String s = "UPDATE daotalk.tel_service SET edit=FALSE WHERE id=?;";
+        try(Connection connection = JdbcDaoFactory.getConnection()) {
+            PreparedStatement query = connection.prepareStatement(s);
+            query.setInt(1, id);
+            query.execute();
+            query.close();
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+            throw new DAOException(View.EXECUTE_EXCEPTION, e);
+        }
+    }
+
+    @Override
+    public boolean nameInUse(String name) throws DAOException {
+        String s = "SELECT * FROM  daotalk.tel_service WHERE name=?;";
+        try(Connection connection = JdbcDaoFactory.getConnection()) {
+            PreparedStatement query = connection.prepareStatement(s);
+            query.setString(1, name);
+            ResultSet rs = query.executeQuery();
+            boolean temp = rs.next();
+            rs.close();
+            query.close();
+            return temp;
+        } catch (SQLException | NamingException e) {
+            e.printStackTrace();
+            throw new DAOException(View.EXECUTE_EXCEPTION, e);
         }
     }
 }

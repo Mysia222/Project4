@@ -25,6 +25,10 @@
                         <input type="submit" name ="foot_the_bill" value="${payMoney}">
                         <input type="hidden" name="command" value="USER_FOOT_THE_BILL">
                     </form>
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="cabinet" value="${toTheCabinet}">
+                            <input type="hidden" name="command" value="USER_CABINET">
+                        </form>
                 </div>
             </div>
 

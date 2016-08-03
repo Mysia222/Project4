@@ -24,6 +24,7 @@
 
 
                         <%--<a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>--%>
+                        <a href="/view/secure/Test.jsp">Go test jsp</a>
                          <form action="/Controller" method="post">
                              <input type="submit" name="direct_service" value="${direct_service_button}">
                              <input type="hidden" name="command" value="USER_DIRECT_SERVICE">

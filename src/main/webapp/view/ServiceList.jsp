@@ -19,7 +19,7 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                 <form action="/Controller" method="post">
-                    <input type="submit" name="cabinet" value="${toTheCabinet}}">
+                    <input type="submit" name="cabinet" value="${toTheCabinet}">
                     <input type="hidden" name="command" value="USER_CABINET">
                 </form>
 

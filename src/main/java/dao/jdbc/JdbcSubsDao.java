@@ -5,7 +5,7 @@ import dao.SubsDao;
 import ent.Service;
 import ent.Subscriber;
 import views.View;
-import model.ServService;
+import services.ServService;
 import org.apache.log4j.Logger;
 
 import javax.naming.NamingException;
