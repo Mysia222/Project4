@@ -56,6 +56,17 @@
                                 </tr></c:if>
 
                         </c:forEach>
+                        <c:if test="${createFlag==true}">
+                            <tr>
+                                <form action="/Controller" method="post">
+                                    <td><input type="text" name="name"></td>
+                                    <td><input type="number" min="0" name="price" ></td>
+                                    <td colspan="2">
+                                        <input type="submit"  value ="${save}"/>
+                                        <input type="hidden" name="command" value="SERVICE_SAVE_SERVICE"/>
+                                        <input type="hidden" name="newFlag" value="${createFlag}"/>
+                                </form></td>
+                            </tr></c:if>
                     </table>
                 </div>
             </div>

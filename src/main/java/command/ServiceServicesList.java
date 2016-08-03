@@ -24,6 +24,9 @@ public class ServiceServicesList implements Command {
         request.setAttribute(View.CHANGE_PAGE, View.CHANGE);
         request.setAttribute(View.DELETE_PAGE, View.DELETE);
         request.setAttribute(View.SAVE_PAGE, View.SAVE);
+        request.setAttribute(View.CREATE_NEW_FLAG, View.CREATE_NEW_FLAG_FALSE);
+        request.setAttribute(View.CREATE_NEW_FLAG_BUTTON, false);
+
 
         request.setAttribute(View.CREATE_SERVICE_BUTTON, View.CREATE_SERVICE);
         return ViewURL.SERVICE_LIST_EDIT_JSP;

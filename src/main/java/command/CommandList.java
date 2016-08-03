@@ -21,6 +21,7 @@ public enum CommandList {
     SERVICE_SERVICES(new ServiceServicesList()),
     SERVICE_DELETE_SERVICE(new ServiceDeleteService()),
     SERVICE_CHANGE_SERVICE(new ServiceChangeService()),
+    SERVICE_CREATE_NEW(new ServiceCreateNewService()),
     SERVICE_SAVE_SERVICE(new ServiceSaveService());
 
     /**

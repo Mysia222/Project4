@@ -18,7 +18,10 @@ public class View {
     public static final  String ADMIN_CABINET = "SERVICE_ADMIN_CABINET";
     public static final String SERVICE_SUBSCRIBERS = "SERVICE_SUBSCRIBERS";
     public static final String SERVICES_LIST_EDIT = "SERVICE_SERVICES";
-
+    public static final String  CREATE_NEW_FLAG = "createFlag";
+    public static final String CREATE_NEW_FLAG_BUTTON = "newFlag";
+    public static final String CREATE_NEW_FLAG_TRUE = "true";
+    public static final String CREATE_NEW_FLAG_FALSE = "false";
 
 
     public static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
