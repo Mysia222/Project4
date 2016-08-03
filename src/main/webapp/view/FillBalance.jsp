@@ -19,16 +19,11 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
-                    <form action="./T1Servlet" method="get">
-                        <a href="/cabinet">Cabinet</a><br>
-                        Input value:
-                        <input type="number" name="addBalance"><br>
-                        <%--<input type="hidden" name ="login" value=${login}>--%>
-                        <%--<input type="hidden" name ="password" value=${password}>--%>
-                        <input type="submit" name ="command" value="FILL_BALANCE">
-                        <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
-
-
+                    <form action="/Controller" method="post">
+                        ${moneyValue}:
+                        <input type="number" name="addToBalance"><br>
+                        <input type="submit" name ="foot_the_bill" value="${payMoney}">
+                        <input type="hidden" name="command" value="USER_FOOT_THE_BILL">
                     </form>
                 </div>
             </div>

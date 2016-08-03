@@ -2,10 +2,10 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/d1f4046f-3aa1-4f62-856c-b8a89a20c412/console.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/resources/CREATE_serv_SS.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/resources/daotalk_abonents.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/resources/daotalk_sub_services.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/resources/daotalk_tel_service.sql" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/resources/test.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/views/CREATE_serv_SS.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/views/daotalk_abonents.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/views/daotalk_sub_services.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/views/daotalk_tel_service.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/views/test.sql" dialect="MySQL" />
   </component>
 </project>

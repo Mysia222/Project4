@@ -27,14 +27,8 @@ public class ShowServicesServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
             List<Service> list = ServService.getInstance().getServiceList();
             request.setAttribute("services", list);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
         request.getRequestDispatcher("/view/ServiceListEdit.jsp").forward(request, response);
     }
 }

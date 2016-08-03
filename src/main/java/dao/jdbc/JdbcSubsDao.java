@@ -4,7 +4,7 @@ import dao.DAOException;
 import dao.SubsDao;
 import ent.Service;
 import ent.Subscriber;
-import resources.View;
+import views.View;
 import model.ServService;
 import org.apache.log4j.Logger;
 

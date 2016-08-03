@@ -1,8 +1,8 @@
 package command;
 
 import ent.Subscriber;
-import resources.View;
-import resources.ViewURL;
+import views.View;
+import views.ViewURL;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -39,22 +39,24 @@ public class UserCreate implements Command {
             sub.getInfo().setPassword(request.getParameter(View.PASSWORD_PAGE));
             subService.create(sub);
             sub = subService.subByLog(sub.getInfo().getLogin());
-//            request.getSession().setAttribute(subsub);
-            request.setAttribute(View.FIRST_NAME_PAGE, sub.getInfo().getFirstName());
-            request.setAttribute(View.SECOND_NAME_PAGE, sub.getInfo().getSecondName());
-            request.setAttribute(View.LOGIN_PAGE, sub.getInfo().getLogin());
-            request.setAttribute(View.PASSWORD_PAGE, sub.getInfo().getPassword());
-            request.setAttribute(View.BALANCE_PAGE, sub.getBalance());
-            request.setAttribute(View.CONTRACT_PAGE, sub.getContract());
-            request.setAttribute(View.CURRENT_SERVICE_PAGE, sub.getCurrentService());
-            request.setAttribute(View.FIRST_NAME_PAGE_H, View.FIRST_NAME);
-            request.setAttribute(View.SECOND_NAME_PAGE_H, View.SECOND_NAME);
-            request.setAttribute(View.LOGIN_PAGE_H, View.LOGIN);
-            request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
-            request.setAttribute(View.BALANCE_PAGE_H, View.BALANCE);
-            request.setAttribute(View.CONTRACT_PAGE_H, View.CONTRACT);
-            request.setAttribute(View.CURRENT_SERVICE_PAGE_H, View.CURRENT_SERVICE);
-            return ViewURL.HOME_JSP;
+            request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
+            Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
+            return command.execute(request, response);
+//            request.setAttribute(View.FIRST_NAME_PAGE, sub.getInfo().getFirstName());
+//            request.setAttribute(View.SECOND_NAME_PAGE, sub.getInfo().getSecondName());
+//            request.setAttribute(View.LOGIN_PAGE, sub.getInfo().getLogin());
+//            request.setAttribute(View.PASSWORD_PAGE, sub.getInfo().getPassword());
+//            request.setAttribute(View.BALANCE_PAGE, sub.getBalance());
+//            request.setAttribute(View.CONTRACT_PAGE, sub.getContract());
+//            request.setAttribute(View.CURRENT_SERVICE_PAGE, sub.getCurrentService());
+//            request.setAttribute(View.FIRST_NAME_PAGE_H, View.FIRST_NAME);
+//            request.setAttribute(View.SECOND_NAME_PAGE_H, View.SECOND_NAME);
+//            request.setAttribute(View.LOGIN_PAGE_H, View.LOGIN);
+//            request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
+//            request.setAttribute(View.BALANCE_PAGE_H, View.BALANCE);
+//            request.setAttribute(View.CONTRACT_PAGE_H, View.CONTRACT);
+//            request.setAttribute(View.CURRENT_SERVICE_PAGE_H, View.CURRENT_SERVICE);
+//            return ViewURL.HOME_JSP;
         }else {
             request.setAttribute(View.LOGIN_IN_USE_PAGE, View.LOGIN_IN_USE);
             return ViewURL.CREATE_SUB_JSP;

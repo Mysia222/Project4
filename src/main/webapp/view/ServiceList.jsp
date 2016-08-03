@@ -15,39 +15,40 @@
 <body>
 <div>
     <div  class="wrapper ">
-
         <div class="mainbody ">
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
-                    <%--${pageContext.servletContext.contextPath}--%>
-                    <%--<form action="./T1Servlet" method="get">--%>
+                <form action="/Controller" method="post">
+                    <input type="submit" name="cabinet" value="${toTheCabinet}}">
+                    <input type="hidden" name="command" value="USER_CABINET">
+                </form>
 
-                            <table>
-                             <tr><th>Name</th><TH>Price</TH></tr>
-                                <c:forEach var="service" items="${services}"   varStatus="status">
-                                <%--<form action="/T1Servlet">--%>
-                                        <tr>
-                                             <td>${service.name}</td>
-                                             <td>${service.price}</td>
-                                            <%--<td><a href="/setService?id=${service.id}">Set</a> </td>--%>
-                                             <td><input type="hidden" name="id" value="${service.id}"/></td>
-                                             <td><c:if test="${idSet.contains(service.id)}">
-                                                 <a href="/T1Servlet?command=SERVICE_REMOVE&id=${service.id}">Remove service</a></c:if>
-                                             <c:if test="${!idSet.contains(service.id)}">
-                                                 <a href="/T1Servlet?command=SET_SERVICE&id=${service.id}">Set service</a></c:if></td>
-                                        </tr>
-                                <%--</form>--%>
-                                </c:forEach>
-                                <%--<input type="submit" name="command" value="SET_SERVICE"/><br>--%>
-                                <%--<input type="submit" name="command" value="REMOVE_SERVICE"/><br>--%>
-                                <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
-                            </table>
-
-                    <%--</form>--%>
+                <table>
+                <tr><th>${name}</th><TH>${price}</TH><TH>${enableAction}</TH></tr>
+                <c:forEach var="service" items="${services}" varStatus="status">
+                 <tr>
+                    <td>${service.name}</td>
+                    <td>${service.price}</td>
+                    <%--<td><input type="hidden" name="id" value="${service.id}"/></td>--%>
+                    <td><c:if test="${idSet.contains(service.id)}">
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="remove_user_service" value="${remove_service}">
+                            <input type="hidden" name="command" value="USER_REMOVE_SERVICE">
+                            <input type="hidden" name="id" value="${service.id}"/>
+                        </form>
+                        </c:if>
+                        <c:if test="${!idSet.contains(service.id)}">
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="set_user_service" value="${set_service}">
+                            <input type="hidden" name="command" value="USER_SET_SERVICE">
+                            <input type="hidden" name="id" value="${service.id}"/>
+                        </form>
+                    </c:if></td>
+                 </tr>
+                </c:forEach>
+                </table>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>

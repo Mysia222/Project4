@@ -3,7 +3,7 @@ package dao.jdbc;
 import dao.DAOException;
 import dao.ServicesDao;
 import ent.Service;
-import resources.View;
+import views.View;
 
 import javax.naming.NamingException;
 import java.sql.*;

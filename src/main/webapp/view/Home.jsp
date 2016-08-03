@@ -22,12 +22,25 @@
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
 
-                    <form action="/cabinet" method="get">
-                        <a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>
 
-                        <a href="/T1Servlet?command=ORDER_SERVICE">Order service</a>
-                        <a href="/T1Servlet?command=FOOT_THE_BILL">Foot the bill</a>
-                        <a href="/T1Servlet?command=LOGOUT">Logout</a><br>
+                        <%--<a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>--%>
+                         <form action="/Controller" method="post">
+                             <input type="submit" name="direct_service" value="${direct_service_button}">
+                             <input type="hidden" name="command" value="USER_DIRECT_SERVICE">
+                         </form>
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="foot_the_bill" value="${foot_the_bill_button}">
+                            <input type="hidden" name="command" value="USER_FOOT_THE_BILL">
+                        </form>
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="direct_info" value="${direct_info}">
+                            <input type="hidden" name="command" value="USER_DIRECT_INFO">
+                        </form>
+                        <form action="/Controller" method="post">
+                            <input type="submit" name="logout" value="${logout}">
+                            <input type="hidden" name="command" value="LOGOUT">
+                        </form>
+                        <%--<a href="/T1Servlet?command=LOGOUT">Logout</a><br>--%>
                         ${blocked}
                         <table border="1px solid black">
                             <tr>
@@ -64,7 +77,7 @@
                             </tr>
                         </table>
 
-                    </form>
+
                 </div>
             </div>
 

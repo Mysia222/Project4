@@ -20,16 +20,15 @@
                 <div class="aboutcont ">
                     <form action="/Controller" method="post">
                         <br>
-                        ${login}:
                         <p class="wrongLogin" >${wrongLogin}</p>
-                        <input type="text" name="login">
+                        ${login}:
+                        <input type="text" name="login" value="${preparedLogin}">
                         <br>
                         ${password}:
-                        <p class="wrongLogin" >${wrongPassword}</p>
                         <input type="password" name="password">
                         <br>
                         <input type="submit" name="submit_enter" value="${submit_enter}">
-                        <input type="hidden" name="command" value="ENTER">
+                        <input type="hidden" name="command" value="USER_ENTER">
                     </form>
                     <form action="/Controller" method="post">
                         <input type="submit" name="create_account" value="${create_account}">

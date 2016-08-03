@@ -2,8 +2,8 @@ package servlets;
 
 import command.Command;
 import command.CommandList;
-import resources.View;
-import resources.ViewURL;
+import views.View;
+import views.ViewURL;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

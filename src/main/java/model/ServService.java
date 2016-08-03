@@ -36,7 +36,7 @@ public class ServService {
      * @throws SQLException
      * @throws NamingException
      */
-    public List<Service> getServiceList() throws SQLException, NamingException {
+    public List<Service> getServiceList() {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
         try {

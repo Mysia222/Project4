@@ -7,20 +7,22 @@ public enum CommandList {
 
     ENTER(new CommandEnter()),
     USER_CREATE(new UserCreate()),
+    USER_CABINET(new UserCabinet()),
+    USER_ENTER(new UserEnter()),
+    USER_DIRECT_SERVICE(new UserDirectService()),
+    USER_REMOVE_SERVICE(new UserRemoveService()),
+    USER_SET_SERVICE(new UserSetService()),
+    USER_FOOT_THE_BILL(new UserFootTheBill()),
+    LOGOUT(new UserLogout()),
+    USER_DIRECT_INFO(new UserDirectInfo()),
 
-    DIRECT_USER_INFO(new DirectInfo()),
-    SAVE_NEW_INFO(new SaveInfo()),
-    FILL_BALANCE(new FillBalance()),
-    FOOT_THE_BILL(new FootTheBill()),
-    ORDER_SERVICE(new OrderService()),
-    SET_SERVICE(new SetService()),
+
     SHOW_USERS(new ShowSubs()),
     BLOCK_USER(new BlockUser()),
     UNLOCK_USER(new UnlockUser()),
-    CREATE_NEW_SUBSCRIBER(new CreateUser()),
     DELETE_SERVICE(new DeleteService()),
     SERVICE_CHANGE(new ServiceChange()),
-    LOGOUT(new UserLogout()),
+
     SERVICE_REMOVE(new ServiceRemove());
 
     /**

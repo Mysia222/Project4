@@ -19,29 +19,28 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
-                    <form action="./T1Servlet" method="get">
-                        <a href="/cabinet">Cabinet</a><br>
-                        New User Data:<br>
+                    <form action="/Controller" method="post">
+                        ${userInfo}:<br>
                         <table>
                             <tr>
-                                <td>Name:</td>
-                                <td><input type="text" name="first_name"></td>
+                                <td>${fNameH}:</td>
+                                <td><input type="text" name="fName"></td>
                             </tr>
                             <tr>
-                                <td>Second Name:</td>
-                                <td><input type="text" name="second_name"></td>
+                                <td>${sNameH}:</td>
+                                <td><input type="text" name="sName"></td>
                             </tr>
                             <tr>
-                                <td>Password:</td>
-                                <td><input type="text" name="password"></td>
-                            </tr>
-                            <tr>
-                                <td>Login:</td>
+                                <td>${loginH}:</td>
                                 <td><input type="text" name="login"></td>
                             </tr>
+                            <tr>
+                                <td>${passwordH}:</td>
+                                <td><input type="text" name="password"></td>
+                            </tr>
                             </table>
-                        <input type="submit" name ="command" value="SAVE_NEW_INFO">
-                                <%--<a href="/T1Servlet?command=SAVE_NEW_INFO">Save info</a>--%>
+                        <input type="submit" name ="direct_info" value="${save}">
+                        <input type="hidden" name ="command" value="USER_DIRECT_INFO">
 
 
                     </form>
