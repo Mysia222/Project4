@@ -1,5 +1,6 @@
 package command;
 
+import dao.DAOException;
 import ent.Service;
 import services.ServService;
 import views.View;
@@ -17,17 +18,20 @@ import java.util.List;
 public class ServiceServicesList implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Service> list = ServService.getInstance().getServiceList();
+        List<Service> list = null;
+        try {
+            list = ServService.getInstance().getServiceList();
+        } catch (DAOException e) {
+            request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            return ViewURL.ERROR_PAGE;
+        }
         request.setAttribute(View.SERVICES_LIST_PAGE, list);
         request.setAttribute(View.NAME_PAGE, View.NAME);
         request.setAttribute(View.PRICE_PAGE, View.PRICE);
         request.setAttribute(View.CHANGE_PAGE, View.CHANGE);
         request.setAttribute(View.DELETE_PAGE, View.DELETE);
+        request.setAttribute(View.RETURN_CABINET_PAGE, View.RETURN_CABINET);
         request.setAttribute(View.SAVE_PAGE, View.SAVE);
-        request.setAttribute(View.CREATE_NEW_FLAG, View.CREATE_NEW_FLAG_FALSE);
-        request.setAttribute(View.CREATE_NEW_FLAG_BUTTON, false);
-
-
         request.setAttribute(View.CREATE_SERVICE_BUTTON, View.CREATE_SERVICE);
         return ViewURL.SERVICE_LIST_EDIT_JSP;
     }

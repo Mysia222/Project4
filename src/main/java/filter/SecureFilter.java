@@ -2,6 +2,7 @@ package filter;
 
 import ent.Subscriber;
 import views.View;
+import views.ViewURL;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -18,7 +19,7 @@ public class SecureFilter implements Filter {
 
     /**
      * This method checks session for containing administrator and let him access
-     * else block access and redirect to errorPage.html
+     * else block access and redirect to ErrorPage.jsp
      * @param req is request
      * @param resp is response
      * @param chain is chain of filters
@@ -28,7 +29,8 @@ public class SecureFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         Subscriber sub =(Subscriber)((HttpServletRequest) req).getSession().getAttribute(View.SUBSCRIBER_SESSION);
         if (!sub.isAdmin()){
-            req.getRequestDispatcher("/view/errorPage.html").forward(req, resp);
+            req.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            req.getRequestDispatcher(ViewURL.ERROR_PAGE).forward(req, resp);
         }else {
             chain.doFilter(req,resp);
         }

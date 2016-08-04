@@ -51,3 +51,34 @@ th{
 .hiddenTD{
     border: 0px solid black;
 }
+.flags_EN{
+    width: 45px;
+    background-image: url(../resources/en_EN.png);
+
+    background-repeat: no-repeat; /*Убираем повтор изображения*/
+    background-position: 100%; /*Позиционируем*/
+    outline: none; /*убираем стандартную обводку браузера*/
+    -moz-border-radius: 5px; /*закругляем углы для Mozilla*/
+    -webkit-border-radius: 5px; /*закругляем углы для Chrome, Safari*/
+    border-radius: 5px; /*закругляем углы для остальных браузеров*/
+    padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/
+    height: 30px; /*высота строки ввода*/
+    font-size: 13px; /*размер шрифта*/
+}
+.flags_UA{
+
+    width: 45px;
+    background-image: url(../resources/uk_UA.png);
+    background-repeat: no-repeat; /*Убираем повтор изображения*/
+    background-position: 100%; /*Позиционируем*/
+    outline: none; /*убираем стандартную обводку браузера*/
+    -moz-border-radius: 5px; /*закругляем углы для Mozilla*/
+    -webkit-border-radius: 5px; /*закругляем углы для Chrome, Safari*/
+    border-radius: 5px; /*закругляем углы для остальных браузеров*/
+    padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/
+    height: 30px; /*высота строки ввода*/
+    font-size: 13px; /*размер шрифта*/
+}
+.flags{
+    display: inline-block;
+}

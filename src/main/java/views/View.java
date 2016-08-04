@@ -13,20 +13,37 @@ public class View {
 
     //nice
     public static final String BUNDLE_NAME="labels";
+
+    public static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
+    //    static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("en" ,"EN"));
+
     public static final String SUBSCRIBER_SESSION ="subscriber" ;
     public static final String USER_CABINET ="USER_CABINET" ;
-    public static final  String ADMIN_CABINET = "SERVICE_ADMIN_CABINET";
+    public static final String ADMIN_CABINET = "SERVICE_ADMIN_CABINET";
     public static final String SERVICE_SUBSCRIBERS = "SERVICE_SUBSCRIBERS";
     public static final String SERVICES_LIST_EDIT = "SERVICE_SERVICES";
+    public static final String USER_DIRECT_SERVICE = "USER_DIRECT_SERVICE";
     public static final String  CREATE_NEW_FLAG = "createFlag";
     public static final String CREATE_NEW_FLAG_BUTTON = "newFlag";
     public static final String CREATE_NEW_FLAG_TRUE = "true";
     public static final String CREATE_NEW_FLAG_FALSE = "false";
+    public static final String JUST_CREATED_SERVICE_NAME = "New Service";
+    public static final String LOG_CREATE_SUBSCRIBER = "Creating new subscriber.";
+    public static final String LOG_CONNECTED = "Successfully connected to Data Source.";
+    public static final String LOG_INIT_SERVICE = "Initializing subscriber's service(Default), sub: ";
+    public static final String GET_SUB_BY_LOGIN = "Getting subscriber by login: ";
+    public static final String LOG_GET_SUBS_SERVICES = "Getting subscriber's services, id: ";
+    public static final String LOG_FINISHED = " Finished without Exceptions!";
+    public static final String  LOG_FIND_ALL_SUBSCRIBERS = "Searching for all subscribers.";
+    public static final String LOG_FIND_SUBSCRIBER = "Searching for subscriber, id: ";
+    public static final String JDBS_DAO_FACTORY = "dao.jdbc.JdbcDaoFactory";
+    public static final String LOG_GET_FACTORY = "Getting DAOFactory.";
+    public static final String LOG_DAO_FACTORY_EXCEPTION = "Can't get DAOFactory!";
+    public static final String ERROR_CAUSE = "cause";
+    public static final String CANT_DO_REQUEST = bundle.getString("msg.errorCause");
 
 
-    public static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
 
-//    static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("en" ,"EN"));
 
     public static final String CONTRACT =  bundle.getString("msg.contract");
     public static final String CONTRACT_PAGE ="contract";
@@ -162,11 +179,16 @@ public class View {
     public static final String DELETE_PAGE ="delete";
     public static final String DELETE = bundle.getString("msg.delete");
 
+    public static final String USER_SERVICE_IN_USE_PAGE = "serviceInUse";
+    public static final String USER_SERVICE_IN_USE = bundle.getString("msg.serviceInUse");
+
     public static final String CHANGE_PAGE ="change";
     public static final String CHANGE = bundle.getString("msg.change");
 
-    public static final String NAME_IN_USE = bundle.getString("msg.nameInUse");;
+    public static final String NAME_IN_USE = bundle.getString("msg.nameInUse");
     public static final String NAME_IN_USE_PAGE = "nameInUse";
+
+    public static final String EDIT_SERVICE_NAME_FIRST = bundle.getString("msg.editServiceNameFirst");
 
 
 
@@ -193,15 +215,34 @@ public class View {
     public static final String QUERY_ADMIN = "admin";
     public static final String QUERY_BLOCKED = "blocked";
     public static final String QUERY_DELETED = "deleted";
-    public static final String QUERY_SERVICE = "current_service";
     public static final String QUERY_S_NAME = "second_name";
     public static final String QUERY_F_NAME = "first_name";
-    public static final String STATUS_BLOCKED = "STATUS: BLOCKED!";
+    public static final String QUERY_SUB_SERVICE_ID = "service_id";
 
     public static final String CLOSE_EXCEPTION = "Close exception";
-    public static final String EXECUTE_EXCEPTION = "Execute exception";
+    public static final String LOG_EXECUTE_EXCEPTION = "Execute exception";
 
     public static final String DB_URL = "java:comp/env/jdbc/mysql";
+
+
+    public static String LOG_FIND_BY_LOG_PAS = "Checking for login and password in DB: ";
+    public static final String LOG_FIND_BY_LOG_PAS_EXCEPTION = "Exception while searching subscriber by login and password!";
+    public static String LOG_DELETE_SUBSCRIBER = "Deleting subscriber, id: ";
+    public static String LOG_RESULT = "Result: ";
+    public static String LOG_LOCK_SUBSCRIBER = "Locking subscriber, id: ";
+    public static String LOG_UNLOCK_SUBSCRIBER= "Unlocking subscriber, id: ";
+    public static String LOG_UPDATE_SUBSCRIBERS_BALANCE="Updating subscriber's balance: ";
+    public static String LOG_UPDATE_SUBSCRIBER="Updating subscriber: ";
+    public static String LOG_DELETE_SUBSCRIBERS_SERVICES = "Deleting subscriber's service, id: ";
+    public static String LOG_UPDATE_SUBSCRIBERS_SERVICES = "Updating subscriber's service, sub: ";
+    public static String LOG_NAME_IN_USE="Checking for using name: ";
+    public static String LOG_SET_UNEDIT_TO_SERVICE = "Setting edit FALSE to service, id: ";
+    public static String LOG_SET_EDIT_TO_SERVICE = "Setting edit TRUE to service, id: ";
+    public static String LOG_DELETE_SERVICE = "Deleting service, id: ";
+    public static String LOG_UPDATE_SERVICE  = "Updating service: ";
+    public static String LOG_CREATE_SERVICE = "Creating service: ";
+    public static String LOG_FIND_ALL_SERVICE = "Searching for all services: ";
+    public static String LOG_FIND_SERVICE= "Searching for service, id: ";
 
 //    public static ResourceBundle getBundle() {
 //        return bundle;

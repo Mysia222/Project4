@@ -1,5 +1,6 @@
 package command;
 
+import dao.DAOException;
 import ent.Subscriber;
 import services.SubService;
 import views.View;
@@ -18,7 +19,13 @@ public class ServiceSubscribersList implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Subscriber> list = SubService.getInstance().getSubsList();
+        List<Subscriber> list = null;
+        try {
+            list = SubService.getInstance().getSubsList();
+        } catch (DAOException e) {
+            request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            return ViewURL.ERROR_PAGE;
+        }
         request.setAttribute(View.USER_LIST_PAGE, list);
         request.setAttribute(View.FIRST_NAME_PAGE_H, View.FIRST_NAME);
         request.setAttribute(View.SECOND_NAME_PAGE_H, View.SECOND_NAME);

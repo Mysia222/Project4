@@ -31,6 +31,6 @@ public interface Command {
      * @throws ServletException
      * @throws IOException
      */
-        String execute(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException;
+        String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 
 }

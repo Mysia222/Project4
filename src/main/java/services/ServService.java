@@ -33,18 +33,12 @@ public class ServService {
     /**
      * This method returns list of all services
      * @return
-     * @throws SQLException
-     * @throws NamingException
+     * @throws DAOException
      */
-    public List<Service> getServiceList() {
+    public List<Service> getServiceList() throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            return sd.findAll();
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return sd.findAll();
     }
 
     /**
@@ -52,89 +46,57 @@ public class ServService {
      * @param id is Service's id
      * @return
      */
-    public Service getService(int id){
-
+    public Service getService(int id)  throws DAOException {
         DaoFactory df =  DaoFactory.getFactory();
         ServicesDao sd =  df.createServicesDao();
-        Service service = null;
-        try {
-            service = sd.find(id);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        return service;
+        return sd.find(id);
     }
 
     /**
      * This method create an item in DB by Service object
      * @param service is Service object
      */
-    public void create(Service service) {
+    public void create(Service service)  throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            sd.create(service);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        sd.create(service);
     }
 
     /**
      * This method deletes service item from DB by id
      * @param id is id
      */
-    public void delete(int id){
+    public void delete(int id) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            sd.delete(id);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        sd.delete(id);
     }
 
     /**
      * This method updates service item in DB by service object
      * @param service is service object
      */
-    public void update(Service service) {
+    public void update(Service service) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            sd.update(service);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        sd.update(service);
     }
 
-    public void editService(int id) {
+    public void editService(int id) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            sd.edit(id);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        sd.edit(id);
     }
 
-    public void unEditService(int id) {
+    public void unEditService(int id) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            sd.unEdit(id);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        sd.unEdit(id);
     }
 
-    public boolean nameInUse(String name) {
+    public boolean nameInUse(String name) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        try {
-            return sd.nameInUse(name);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        return false;
+        return sd.nameInUse(name);
     }
 }

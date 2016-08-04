@@ -5,6 +5,7 @@ package dao;
  */
 public class DAOException extends Exception {
 
+
     /**
      * Constructor
      * @param s is string message

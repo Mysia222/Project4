@@ -22,7 +22,7 @@
                     <input type="submit" name="cabinet" value="${toTheCabinet}">
                     <input type="hidden" name="command" value="USER_CABINET">
                 </form>
-
+                <p class="wrongLogin">${serviceInUse}</p>
                 <table>
                 <tr><th>${name}</th><TH>${price}</TH><TH>${enableAction}</TH></tr>
                 <c:forEach var="service" items="${services}" varStatus="status">

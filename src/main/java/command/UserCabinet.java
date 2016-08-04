@@ -1,5 +1,6 @@
 package command;
 
+import dao.DAOException;
 import ent.Subscriber;
 import views.View;
 import views.ViewURL;
@@ -16,6 +17,12 @@ public class UserCabinet implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Subscriber sub = (Subscriber) request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
+        try {
+            sub=subService.subByContract(sub.getContract());
+        } catch (DAOException e) {
+            request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            return ViewURL.ERROR_PAGE;
+        }
         request.setAttribute(View.BLOCKED_PAGE, sub.isBlocked()?View.BLOCKED_TRUE:View.BLOCKED_FALSE);
         request.setAttribute(View.FIRST_NAME_PAGE, sub.getInfo().getFirstName());
         request.setAttribute(View.SECOND_NAME_PAGE, sub.getInfo().getSecondName());

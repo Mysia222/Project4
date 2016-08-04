@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="../style.css" type="text/css" media="screen" rel="stylesheet" />
+
 <html>
 <head>
     <title>Home</title>
@@ -21,10 +22,21 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <%--${pageContext.servletContext.contextPath}--%>
+                    <div class="flags">
 
-
+                        <form class="flags" action="/Controller" method="post">
+                            <input class="flags_UA" type="submit" value=""/>
+                            <input type="hidden" name="command" value="LOCALE" />
+                            <input type="hidden" name="country" value="UA" />
+                        </form>
+                        <form  class="flags" action="/Controller" method="post">
+                            <input class="flags_EN" type="submit" value=""/>
+                            <input type="hidden" name="command" value="LOCALE" />
+                            <input type="hidden" name="country" value="EN" />
+                        </form>
+                    </div>
                         <%--<a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>--%>
-                        <a href="/view/secure/Test.jsp">Go test jsp</a>
+                        <a href="/view/secure/Admin.jsp">Go test jsp</a>
                          <form action="/Controller" method="post">
                              <input type="submit" name="direct_service" value="${direct_service_button}">
                              <input type="hidden" name="command" value="USER_DIRECT_SERVICE">

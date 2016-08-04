@@ -1,5 +1,6 @@
 package command;
 
+import dao.DAOException;
 import ent.Subscriber;
 import views.View;
 import views.ViewURL;
@@ -28,7 +29,12 @@ public class UserFootTheBill implements Command {
             Double value = sub.getBalance()+Double.valueOf(d);
             sub.setBalance(value);
             request.getSession().setAttribute(View.SUBSCRIBER_SESSION,sub);
-            subService.setSub(sub);
+            try {
+                subService.setSub(sub);
+            } catch (DAOException e) {
+                request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+                return ViewURL.ERROR_PAGE;
+            }
             Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
             return command.execute(request, response);
         }

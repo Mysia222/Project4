@@ -15,5 +15,6 @@ public class ViewURL {
     public static final String ADMIN_HOME_JSP = "/view/secure/Admin.jsp";
     public static final String USER_LIST_JSP = "/view/secure/UserList.jsp";
     public static final String SERVICE_LIST_EDIT_JSP = "/view/secure/ServiceListEdit.jsp";
+    public static final String ERROR_PAGE = "/view/ErrorPage.jsp";
 }
 

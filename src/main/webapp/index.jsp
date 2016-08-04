@@ -18,6 +18,19 @@
         <div class="mainbody ">
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
+                    <div class="flags">
+                        <form class="flags" action="/Controller" method="post">
+                            <input class="flags_UA" type="submit" value=""/>
+                            <input type="hidden" name="command" value="LOCALE_INDEX" />
+                            <input type="hidden" name="country" value="UA" />
+                        </form>
+                        <form  class="flags" action="/Controller" method="post">
+                            <input class="flags_EN" type="submit" value=""/>
+                            <input type="hidden" name="command" value="LOCALE_INDEX" />
+                            <input type="hidden" name="country" value="EN" />
+                        </form>
+                    </div>
+
                     <form action="/Controller" method="post">
                         <br>
                         <p class="wrongLogin" >${wrongLogin}</p>
@@ -34,6 +47,8 @@
                         <input type="submit" name="create_account" value="${create_account}">
                         <input type="hidden" name="command" value="USER_CREATE">
                     </form>
+
+
 
                 </div>
             </div>

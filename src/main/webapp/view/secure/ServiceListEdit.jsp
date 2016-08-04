@@ -22,24 +22,28 @@
                         <input type="submit" value="${createService}">
                         <input type="hidden"  name="command" value="SERVICE_CREATE_NEW">
                     </form>
+                    <form action="/Controller" method="post">
+                        <input type="submit" name="cabinet" value="${toTheCabinet}">
+                        <input type="hidden" name="command" value="SERVICE_ADMIN_CABINET">
+                    </form>
                     <p class="wrongLogin"> ${nameInUse}</p>
                     <table>
 
                         <tr><th>${name}</th><th>${price}</th>
-                            <th>${delete}</th><th>${change}</th></tr>
+                            <th>${change}</th><th>${delete}</th></tr>
                         <c:forEach var="service" items="${services}" varStatus="status">
                             <c:if test="${!service.edit}">
                             <tr>
                                 <td>${service.name}</td>
                                 <td>${service.price}</td>
                                 <td><form action="/Controller" method="post">
-                                    <input type="submit"  value ="${delete}"/>
-                                    <input type="hidden" name="command" value="SERVICE_DELETE_SERVICE"/>
+                                    <input type="submit" value ="${change}"/>
+                                    <input type="hidden" name="command" value ="SERVICE_CHANGE_SERVICE"/>
                                     <input type="hidden" name="id" value="${service.id}"/>
                                 </form></td>
                                 <td><form action="/Controller" method="post">
-                                    <input type="submit" value ="${change}"/>
-                                    <input type="hidden" name="command" value ="SERVICE_CHANGE_SERVICE"/>
+                                    <input type="submit"  value ="${delete}"/>
+                                    <input type="hidden" name="command" value="SERVICE_DELETE_SERVICE"/>
                                     <input type="hidden" name="id" value="${service.id}"/>
                                 </form></td>
                             </tr></c:if>
@@ -48,25 +52,19 @@
                                     <form action="/Controller" method="post">
                                     <td><input type="text" name="name" value="${service.name}"></td>
                                     <td><input type="number" min="0" name="price" value="${service.price}"></td>
-                                    <td colspan="2">
+                                    <td>
                                         <input type="submit"  value ="${save}"/>
                                         <input type="hidden" name="command" value="SERVICE_SAVE_SERVICE"/>
+                                        <input type="hidden" name="id" value="${service.id}"/>
+                                    </form></td>
+                                    <td><form action="/Controller" method="post">
+                                        <input type="submit" value ="${delete}"/>
+                                        <input type="hidden" name="command" value ="SERVICE_DELETE_SERVICE"/>
                                         <input type="hidden" name="id" value="${service.id}"/>
                                     </form></td>
                                 </tr></c:if>
 
                         </c:forEach>
-                        <c:if test="${createFlag==true}">
-                            <tr>
-                                <form action="/Controller" method="post">
-                                    <td><input type="text" name="name"></td>
-                                    <td><input type="number" min="0" name="price" ></td>
-                                    <td colspan="2">
-                                        <input type="submit"  value ="${save}"/>
-                                        <input type="hidden" name="command" value="SERVICE_SAVE_SERVICE"/>
-                                        <input type="hidden" name="newFlag" value="${createFlag}"/>
-                                </form></td>
-                            </tr></c:if>
                     </table>
                 </div>
             </div>
