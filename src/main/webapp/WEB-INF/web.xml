@@ -4,16 +4,19 @@
            xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
            version="3.0">
-    <context-param>
-        <param-name>javax.faces.CONFIG_FILES</param-name>
-        <param-value>/log4j2.xml</param-value>
-    </context-param>
+    <!--<context-param>-->
+        <!--<param-name>javax.faces.CONFIG_FILES</param-name>-->
+        <!--<param-value>/log4j2.xml</param-value>-->
+    <!--</context-param>-->
     <!--<resource-ref>-->
         <!--<description>DB Connection</description>-->
         <!--<res-ref-name>jdbc/mysql</res-ref-name> &lt;!&ndash; тут можно также написать dao/TestDB &ndash;&gt;-->
         <!--<res-type>javax.sql.DataSource</res-type>-->
         <!--<res-auth>Container</res-auth>-->
     <!--</resource-ref>-->
+    <welcome-file-list>
+        <welcome-file>/index.html</welcome-file>
+    </welcome-file-list>
     <filter>
         <filter-name>SecureFilter</filter-name>
         <filter-class>filter.SecureFilter</filter-class>

@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by potaychuk on 03.08.2016.
@@ -17,6 +18,7 @@ import java.io.IOException;
 public class UserSetService implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber) request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         int id = Integer.parseInt(request.getParameter(View.ID_PAGE));
         try {
@@ -28,7 +30,7 @@ public class UserSetService implements Command {
             Service service = servService.getService(id);
             //Is service in edit --> hold on DirectService.jsp
             if(service.isEdit()){
-                request.setAttribute(View.USER_SERVICE_IN_USE_PAGE, View.USER_SERVICE_IN_USE);
+                request.setAttribute(View.USER_SERVICE_IN_USE_PAGE, bundle.getString(View.USER_SERVICE_IN_USE));
                 Command command = CommandList.valueOf(View.USER_DIRECT_SERVICE).getCommand();
                 return command.execute(request, response);
             }
@@ -38,7 +40,7 @@ public class UserSetService implements Command {
             subService.setBalance(sub);
             subService.setService(sub);
         }catch (DAOException e){
-            request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }
 

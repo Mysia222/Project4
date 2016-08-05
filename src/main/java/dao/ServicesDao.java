@@ -8,6 +8,7 @@ import ent.Service;
 public interface ServicesDao extends GenericDao<Service> {
     void edit(int id) throws DAOException;
     void unEdit(int id) throws DAOException;
+    Service find(String name) throws DAOException;
 
     boolean nameInUse(String name) throws DAOException;
 }

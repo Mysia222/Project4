@@ -13,6 +13,7 @@ public enum CommandList {
     USER_SET_SERVICE(new UserSetService()),
     USER_FOOT_THE_BILL(new UserFootTheBill()),
     LOGOUT(new UserLogout()),
+    DRAW_INDEX(new DrawIndex()),
     USER_DIRECT_INFO(new UserDirectInfo()),
     SERVICE_SUBSCRIBERS(new ServiceSubscribersList()),
     SERVICE_ADMIN_CABINET(new ServiceAdminCabinet()),

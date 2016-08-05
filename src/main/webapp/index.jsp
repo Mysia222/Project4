@@ -30,20 +30,28 @@
                             <input type="hidden" name="country" value="EN" />
                         </form>
                     </div>
-
+                    <table border="0px" class="indexTable">
                     <form action="/Controller" method="post">
-                        <br>
-                        <p class="wrongLogin" >${wrongLogin}</p>
-                        ${login}:
-                        <input type="text" name="login" value="${preparedLogin}">
-                        <br>
-                        ${password}:
-                        <input type="password" name="password">
-                        <br>
-                        <input type="submit" name="submit_enter" value="${submit_enter}">
-                        <input type="hidden" name="command" value="USER_ENTER">
+                        <tr>
+                            <td colspan="2"><p class="wrongLogin" >${wrongLogin}</p>
+                        </tr>
+                        <tr>
+                            <td>${login}:</td>
+                            <td><input type="text" name="login" value="${preparedLogin}"></td>
+                        </tr>
+                        <tr>
+                            <td>${password}: </td>
+                            <td><input type="password" name="password"></td>
+                        </tr>
+                        <tr>
+                            <td> <input type="submit" name="submit_enter" value="${submit_enter}">
+                                <input type="hidden" name="command" value="USER_ENTER"></td>
+                            <td>
+                                </td>
+                        </tr>
                     </form>
-                    <form action="/Controller" method="post">
+                    </table>
+                    <form action="/Controller" method="get">
                         <input type="submit" name="create_account" value="${create_account}">
                         <input type="hidden" name="command" value="USER_CREATE">
                     </form>

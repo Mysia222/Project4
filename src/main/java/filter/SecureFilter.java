@@ -8,6 +8,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by Славик on 30.07.2016.
@@ -27,9 +28,10 @@ public class SecureFilter implements Filter {
      * @throws IOException
      */
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+        ResourceBundle bundle = (ResourceBundle) ((HttpServletRequest)req).getSession().getAttribute(View.BUNDLE);
         Subscriber sub =(Subscriber)((HttpServletRequest) req).getSession().getAttribute(View.SUBSCRIBER_SESSION);
         if (!sub.isAdmin()){
-            req.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            req.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             req.getRequestDispatcher(ViewURL.ERROR_PAGE).forward(req, resp);
         }else {
             chain.doFilter(req,resp);

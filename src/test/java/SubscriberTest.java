@@ -1,5 +1,3 @@
-package test;
-
 import ent.Service;
 import ent.Subscriber;
 import org.junit.Assert;

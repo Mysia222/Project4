@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by potaychuk on 03.08.2016.
@@ -16,13 +17,14 @@ import java.io.IOException;
 public class UserFootTheBill implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType ("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
+//        response.setContentType ("text/html; charset=UTF-8");
+//        request.setCharacterEncoding("UTF-8");
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
-        if(request.getParameter(View.FOOT_THE_BILL_BUTTON).equals(View.FOOT_THE_BILL)){   //from Home jsp
-            request.setAttribute(View.MONEY_VALUE_PAGE_L,View.MONEY_VALUE_L);
-            request.setAttribute(View.MONEY_PAY_PAGE,View.MONEY_PAY );
-            request.setAttribute(View.RETURN_CABINET_PAGE, View.RETURN_CABINET);
+        if(request.getParameter(View.FOOT_THE_BILL_BUTTON).equals(bundle.getString(View.FOOT_THE_BILL))){   //from Home jsp
+            request.setAttribute(View.MONEY_VALUE_PAGE_L,bundle.getString(View.MONEY_VALUE_L));
+            request.setAttribute(View.MONEY_PAY_PAGE,bundle.getString(View.MONEY_PAY ));
+            request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
             return ViewURL.FILL_BALANCE_JSP;
         }else {
             String d = request.getParameter(View.MONEY_VALUE_PAGE);
@@ -32,7 +34,7 @@ public class UserFootTheBill implements Command {
             try {
                 subService.setSub(sub);
             } catch (DAOException e) {
-                request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+                request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
                 return ViewURL.ERROR_PAGE;
             }
             Command command = CommandList.valueOf(View.USER_CABINET).getCommand();

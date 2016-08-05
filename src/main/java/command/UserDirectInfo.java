@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by potaychuk on 03.08.2016.
@@ -16,23 +17,23 @@ import java.io.IOException;
 public class UserDirectInfo implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         //request from Home.jsp
-        if(request.getParameter(View.DIRECT_INFO_BUTTON).equals(View.DIRECT_INFO)){
+        if(request.getParameter(View.DIRECT_INFO_BUTTON).equals(bundle.getString(View.DIRECT_INFO))){
             request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
             request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
             request.setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
             request.setAttribute(View.SAVED_LOGIN, sub.getInfo().getLogin());
-            request.setAttribute(View.USER_INFO_PAGE, View.USER_INFO);
-            request.setAttribute(View.FIRST_NAME_PAGE_H, View.FIRST_NAME);
-            request.setAttribute(View.SECOND_NAME_PAGE_H, View.SECOND_NAME);
-            request.setAttribute(View.LOGIN_PAGE_H, View.LOGIN);
-            request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
-            request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
-            request.setAttribute(View.CREATE_PAGE, View.CREATE);
-            request.setAttribute(View.SAVE_PAGE, View.SAVE);
-            request.setAttribute(View.RETURN_CABINET_PAGE, View.RETURN_CABINET);
+            request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
+            request.setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));
+            request.setAttribute(View.SECOND_NAME_PAGE_H, bundle.getString(View.SECOND_NAME));
+            request.setAttribute(View.LOGIN_PAGE_H, bundle.getString(View.LOGIN));
+            request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+            request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+            request.setAttribute(View.CREATE_PAGE, bundle.getString(View.CREATE));
+            request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
+            request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
             return ViewURL.DIRECT_INFO_JSP;
          //request from DirectInfo.jsp
         }else {
@@ -43,16 +44,16 @@ public class UserDirectInfo implements Command {
                     request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
                     request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
                     request.setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
-                    request.setAttribute(View.LOGIN_IN_USE_PAGE, View.LOGIN_IN_USE);
-                    request.setAttribute(View.USER_INFO_PAGE, View.USER_INFO);
-                    request.setAttribute(View.FIRST_NAME_PAGE_H, View.FIRST_NAME);
-                    request.setAttribute(View.SECOND_NAME_PAGE_H, View.SECOND_NAME);
-                    request.setAttribute(View.LOGIN_PAGE_H, View.LOGIN);
-                    request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
-                    request.setAttribute(View.PASSWORD_PAGE_H, View.PASSWORD);
-                    request.setAttribute(View.CREATE_PAGE, View.CREATE);
-                    request.setAttribute(View.SAVE_PAGE, View.SAVE);
-                    request.setAttribute(View.RETURN_CABINET_PAGE, View.RETURN_CABINET);
+                    request.setAttribute(View.LOGIN_IN_USE_PAGE, bundle.getString(View.LOGIN_IN_USE));
+                    request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
+                    request.setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));
+                    request.setAttribute(View.SECOND_NAME_PAGE_H, bundle.getString(View.SECOND_NAME));
+                    request.setAttribute(View.LOGIN_PAGE_H, bundle.getString(View.LOGIN));
+                    request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+                    request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+                    request.setAttribute(View.CREATE_PAGE, bundle.getString(View.CREATE));
+                    request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
+                    request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
                     return ViewURL.DIRECT_INFO_JSP;
                 }else {
                     sub.getInfo().setLogin(request.getParameter(View.LOGIN_PAGE));
@@ -65,7 +66,7 @@ public class UserDirectInfo implements Command {
                     return command.execute(request, response);
                 }
             }catch (DAOException e){
-                request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+                request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
                 return ViewURL.ERROR_PAGE;
             }
         }

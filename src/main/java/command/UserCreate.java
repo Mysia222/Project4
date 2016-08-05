@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by potaychuk on 02.08.2016.
@@ -16,22 +17,27 @@ import java.io.IOException;
 public class UserCreate implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getSession().getAttribute(View.BUNDLE)==null){
+            request.getSession().setAttribute(View.BUNDLE,ResourceBundle.getBundle(View.BUNDLE_NAME , View.localeEN));
+        }
+        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         response.setContentType ("text/html; charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
 
 
         //request from index.jsp
-        if(request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(View.CREATE_ACCOUNT)){
+        if(request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(bundle.getString(View.CREATE_ACCOUNT)) ||
+                request.getParameter(View.CREATE_ACCOUNT_PAGE).equals("Create account")){
             request.setAttribute(View.SAVED_FIRST_NAME, "");
             request.setAttribute(View.SAVED_SECOND_NAME, "");
             request.setAttribute(View.SAVED_PASSWORD,"");
-            request.setAttribute(View.USER_INFO_PAGE, View.USER_INFO);
-            request.setAttribute(View.FIRST_NAME_PAGE, View.FIRST_NAME);
-            request.setAttribute(View.SECOND_NAME_PAGE, View.SECOND_NAME);
-            request.setAttribute(View.LOGIN_PAGE, View.LOGIN);
-            request.setAttribute(View.PASSWORD_PAGE, View.PASSWORD);
-            request.setAttribute(View.PASSWORD_PAGE, View.PASSWORD);
-            request.setAttribute(View.CREATE_PAGE, View.CREATE);
+            request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
+            request.setAttribute(View.FIRST_NAME_PAGE,  bundle.getString(View.FIRST_NAME));
+            request.setAttribute(View.SECOND_NAME_PAGE,  bundle.getString(View.SECOND_NAME));
+            request.setAttribute(View.LOGIN_PAGE,  bundle.getString(View.LOGIN));
+            request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
+            request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
+            request.setAttribute(View.CREATE_PAGE,  bundle.getString(View.CREATE));
             return ViewURL.CREATE_SUB_JSP;
         }
         //request from CreateSub.jsp
@@ -55,14 +61,14 @@ public class UserCreate implements Command {
                 request.setAttribute(View.SAVED_FIRST_NAME, request.getParameter(View.FIRST_NAME_PAGE));
                 request.setAttribute(View.SAVED_SECOND_NAME, request.getParameter(View.SECOND_NAME_PAGE));
                 request.setAttribute(View.SAVED_PASSWORD, request.getParameter(View.PASSWORD_PAGE));
-                request.setAttribute(View.LOGIN_IN_USE_PAGE, View.LOGIN_IN_USE);
-                request.setAttribute(View.USER_INFO_PAGE, View.USER_INFO);
-                request.setAttribute(View.FIRST_NAME_PAGE, View.FIRST_NAME);
-                request.setAttribute(View.SECOND_NAME_PAGE, View.SECOND_NAME);
-                request.setAttribute(View.LOGIN_PAGE, View.LOGIN);
-                request.setAttribute(View.PASSWORD_PAGE, View.PASSWORD);
-                request.setAttribute(View.PASSWORD_PAGE, View.PASSWORD);
-                request.setAttribute(View.CREATE_PAGE, View.CREATE);
+                request.setAttribute(View.LOGIN_IN_USE_PAGE,  bundle.getString(View.LOGIN_IN_USE));
+                request.setAttribute(View.USER_INFO_PAGE,  bundle.getString(View.USER_INFO));
+                request.setAttribute(View.FIRST_NAME_PAGE,  bundle.getString(View.FIRST_NAME));
+                request.setAttribute(View.SECOND_NAME_PAGE,  bundle.getString(View.SECOND_NAME));
+                request.setAttribute(View.LOGIN_PAGE,  bundle.getString(View.LOGIN));
+                request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
+                request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
+                request.setAttribute(View.CREATE_PAGE, bundle.getString(View.CREATE));
                 return ViewURL.CREATE_SUB_JSP;
             }
         }catch (DAOException e){

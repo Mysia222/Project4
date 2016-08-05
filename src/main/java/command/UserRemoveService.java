@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * Created by potaychuk on 03.08.2016.
@@ -17,6 +18,7 @@ import java.io.IOException;
 public class UserRemoveService implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         int id = Integer.parseInt(request.getParameter(View.ID_PAGE));
         try {
             Service service = servService.getService(id);
@@ -25,7 +27,7 @@ public class UserRemoveService implements Command {
             subService.setService(sub);
             request.getSession().setAttribute(View.SUBSCRIBER_SESSION,sub);
         } catch (DAOException e) {
-            request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
+            request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }
         Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
