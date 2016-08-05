@@ -78,7 +78,7 @@ public class JdbcSubsDao implements SubsDao {
      * @return true if find else - false
      * @throws DAOException
      */
-    public boolean findByLogPas(String login, String password) throws DAOException {
+    public boolean existLogPas(String login, String password) throws DAOException {
 
         log.trace(View.LOG_FIND_BY_LOG_PAS + login +" "+ password);
         String s = "SELECT * FROM daotalk.abonents WHERE login=? and password=?;";
@@ -113,7 +113,7 @@ public class JdbcSubsDao implements SubsDao {
             PreparedStatement query = connection.prepareStatement(s);
             ResultSet rs = query.executeQuery();
             while (rs.next()){
-                list.add(getSubByLog(rs.getString(View.QUERY_LOGIN)));
+                list.add(find(rs.getString(View.QUERY_LOGIN)));
             }
             rs.close();
             log.trace(View.LOG_FIND_ALL_SUBSCRIBERS + View.LOG_FINISHED);
@@ -130,7 +130,7 @@ public class JdbcSubsDao implements SubsDao {
      * @return Subscriber
      * @throws DAOException
      */
-    public Subscriber getSubByLog(String login) throws DAOException {
+    public Subscriber find(String login) throws DAOException {
         log.trace(View.GET_SUB_BY_LOGIN + login);
         Subscriber sub = null;
         String s = "SELECT * FROM daotalk.abonents WHERE login=?;";
@@ -365,7 +365,7 @@ public class JdbcSubsDao implements SubsDao {
      */
     private void initService(Subscriber sub) throws DAOException {
         log.trace(View.LOG_INIT_SERVICE + sub);
-        sub = getSubByLog(sub.getInfo().getLogin());
+        sub = find(sub.getInfo().getLogin());
         String s = "INSERT INTO daotalk.sub_services  (sub_id) VALUES (?)";
         try(Connection connection = JdbcDaoFactory.getConnection()){
             log.trace(View.LOG_CONNECTED);

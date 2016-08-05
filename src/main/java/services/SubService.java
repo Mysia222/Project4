@@ -53,7 +53,7 @@ public class SubService {
     public boolean existByLogPas(String login, String password) throws DAOException{
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return sd.findByLogPas(login,password);
+        return sd.existLogPas(login,password);
     }
 
     /**
@@ -77,7 +77,7 @@ public class SubService {
     public Subscriber subByLog(String log) throws DAOException{
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return sd.getSubByLog(log);
+        return sd.find(log);
     }
 
     /**

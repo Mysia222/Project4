@@ -14,7 +14,7 @@ public interface SubsDao extends GenericDao<Subscriber> {
      * @return result of searching
      * @throws DAOException
      */
-    boolean findByLogPas(String login, String password) throws DAOException;
+    boolean existLogPas(String login, String password) throws DAOException;
 
     /**
      * This method find item in DB
@@ -30,7 +30,7 @@ public interface SubsDao extends GenericDao<Subscriber> {
      * @return Subscriber
      * @throws DAOException
      */
-    Subscriber getSubByLog(String log) throws DAOException;
+    Subscriber find(String log) throws DAOException;
 
     /**
      * This method blocks item
