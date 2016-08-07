@@ -1,6 +1,7 @@
 package command;
 
 import dao.DAOException;
+import services.ServService;
 import views.View;
 import views.ViewURL;
 
@@ -14,6 +15,7 @@ import java.util.ResourceBundle;
  * Created by Славик on 03.08.2016.
  */
 public class ServiceChangeService implements Command {
+    private ServService servService = ServService.getInstance();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,5 +29,13 @@ public class ServiceChangeService implements Command {
         }
         Command command = CommandList.valueOf(View.SERVICES_LIST_EDIT).getCommand();
         return command.execute(request,response);
+    }
+
+    public ServService getServService() {
+        return servService;
+    }
+
+    public void setServService(ServService servService) {
+        this.servService = servService;
     }
 }

@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import services.SubService;
 import views.View;
 import views.ViewURL;
 
@@ -15,6 +16,10 @@ import java.util.ResourceBundle;
  * Created by potaychuk on 02.08.2016.
  */
 public class UserCreate implements Command {
+
+    private SubService subService = SubService.getInstance();
+
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute(View.BUNDLE)==null){
@@ -27,7 +32,7 @@ public class UserCreate implements Command {
 
         //request from index.jsp
         if(request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(bundle.getString(View.CREATE_ACCOUNT)) ||
-                request.getParameter(View.CREATE_ACCOUNT_PAGE).equals("Create account")){
+                request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(View.CREATE_ACCOUNT_PAGE_DEFAULT)){
             request.setAttribute(View.SAVED_FIRST_NAME, "");
             request.setAttribute(View.SAVED_SECOND_NAME, "");
             request.setAttribute(View.SAVED_PASSWORD,"");
@@ -43,7 +48,7 @@ public class UserCreate implements Command {
         //request from CreateSub.jsp
         try{
 
-            Subscriber sub = subService.subByLog(request.getParameter(View.QUERY_LOGIN));
+            Subscriber sub = subService.find(request.getParameter(View.QUERY_LOGIN));
             //Is login in use?
             if(sub==null) {
                 sub=new Subscriber();
@@ -53,7 +58,7 @@ public class UserCreate implements Command {
                 sub.getInfo().setLogin(request.getParameter(View.LOGIN_PAGE));
                 sub.getInfo().setPassword(request.getParameter(View.PASSWORD_PAGE));
                 subService.create(sub);
-                sub = subService.subByLog(sub.getInfo().getLogin());
+                sub = subService.find(sub.getInfo().getLogin());
                 request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
                 Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
                 return command.execute(request, response);
@@ -76,5 +81,13 @@ public class UserCreate implements Command {
             return ViewURL.ERROR_PAGE;
         }
 
+    }
+
+    public SubService getSubService() {
+        return subService;
+    }
+
+    public void setSubService(SubService subService) {
+        this.subService = subService;
     }
 }

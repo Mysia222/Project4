@@ -16,7 +16,6 @@ public class ServiceAdminCabinet implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(View.BUNDLE);
-//        bundle.getString(
         request.setAttribute(View.LOGOUT_BUTTON, bundle.getString(View.LOGOUT));
         request.setAttribute(View.ADMIN_VIEW_SUBS_BUTTON, bundle.getString(View.ADMIN_VIEW_SUBS));
         request.setAttribute(View.ADMIN_VIEW_SERVICES_BUTTON, bundle.getString(View.ADMIN_VIEW_SERVICES));

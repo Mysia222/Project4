@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import services.SubService;
 import views.View;
 import views.ViewURL;
 
@@ -16,6 +17,8 @@ import java.util.ResourceBundle;
  */
 public class UserEnter implements Command {
 
+    private SubService subService = SubService.getInstance();
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,23 +28,23 @@ public class UserEnter implements Command {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         try {
             //successful enter
-            if (subService.existByLogPas(request.getParameter(View.LOGIN_PAGE), request.getParameter(View.PASSWORD_PAGE))) {
-                Subscriber sub = subService.subByLog(request.getParameter(View.LOGIN_PAGE));
+            if (subService.exist(request.getParameter(View.LOGIN_PAGE), request.getParameter(View.PASSWORD_PAGE))) {
+                Subscriber sub = subService.find(request.getParameter(View.LOGIN_PAGE));
                 request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
                 Command command = sub.isAdmin() ? CommandList.valueOf(View.ADMIN_CABINET).getCommand() :
                         CommandList.valueOf(View.USER_CABINET).getCommand();
                 return command.execute(request, response);
             } else {
                 //inform about wrong login
-                if (subService.subByLog(request.getParameter(View.LOGIN_PAGE)) != null) {
+                if (subService.find(request.getParameter(View.LOGIN_PAGE)) != null) {
                     request.setAttribute(View.WRONG_LOGIN_PAGE, bundle.getString(View.WRONG_PASSWORD));
                     request.setAttribute(View.PREPARED_LOGIN, request.getParameter(View.LOGIN_PAGE));
-                    //inform about wrong password
+                //inform about wrong password
                 } else {
                     request.setAttribute(View.WRONG_LOGIN_PAGE, bundle.getString(View.WRONG_LOGIN));
                     request.setAttribute(View.PREPARED_LOGIN, "");
                 }
-                //draw page
+                //draw index.jsp page
                 request.setAttribute(View.PASSWORD_PAGE, bundle.getString(View.PASSWORD));
                 request.setAttribute(View.LOGIN_PAGE, bundle.getString(View.LOGIN));
                 request.setAttribute(View.CREATE_ACCOUNT_PAGE, bundle.getString(View.CREATE_ACCOUNT));
@@ -52,5 +55,13 @@ public class UserEnter implements Command {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }
+    }
+
+    public SubService getSubService() {
+        return subService;
+    }
+
+    public void setSubService(SubService subService) {
+        this.subService = subService;
     }
 }

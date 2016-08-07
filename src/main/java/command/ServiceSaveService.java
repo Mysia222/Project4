@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Service;
+import services.ServService;
 import views.View;
 import views.ViewURL;
 
@@ -15,6 +16,9 @@ import java.util.ResourceBundle;
  * Created by Славик on 03.08.2016.
  */
 public class ServiceSaveService implements Command {
+
+    private ServService servService = ServService.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -41,5 +45,13 @@ public class ServiceSaveService implements Command {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }
+    }
+
+    public ServService getServService() {
+        return servService;
+    }
+
+    public void setServService(ServService servService) {
+        this.servService = servService;
     }
 }

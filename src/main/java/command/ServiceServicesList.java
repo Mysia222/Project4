@@ -17,12 +17,15 @@ import java.util.ResourceBundle;
  * Created by Славик on 03.08.2016.
  */
 public class ServiceServicesList implements Command {
+
+    private ServService servService = ServService.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         List<Service> list = null;
         try {
-            list = ServService.getInstance().getServiceList();
+            list = servService.getServiceList();
         } catch (DAOException e) {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
@@ -36,5 +39,13 @@ public class ServiceServicesList implements Command {
         request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
         request.setAttribute(View.CREATE_SERVICE_BUTTON, bundle.getString(View.CREATE_SERVICE));
         return ViewURL.SERVICE_LIST_EDIT_JSP;
+    }
+
+    public ServService getServService() {
+        return servService;
+    }
+
+    public void setServService(ServService servService) {
+        this.servService = servService;
     }
 }

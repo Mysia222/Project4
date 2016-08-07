@@ -50,10 +50,10 @@ public class SubService {
      * @param password
      * @return
      */
-    public boolean existByLogPas(String login, String password) throws DAOException{
+    public boolean exist(String login, String password) throws DAOException{
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
-        return sd.existLogPas(login,password);
+        return sd.exist(login,password);
     }
 
     /**
@@ -61,7 +61,7 @@ public class SubService {
      * @param contract is items id
      * @return Subscriber object
      */
-    public Subscriber subByContract(int contract) throws DAOException{
+    public Subscriber find(int contract) throws DAOException{
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
         return sd.find(contract);
@@ -74,7 +74,7 @@ public class SubService {
      * @throws SQLException
      * @throws NamingException
      */
-    public Subscriber subByLog(String log) throws DAOException{
+    public Subscriber find(String log) throws DAOException{
         DaoFactory df =  DaoFactory.getFactory();
         SubsDao sd =  df.createSubsDao();
         return sd.find(log);

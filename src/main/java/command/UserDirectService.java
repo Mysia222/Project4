@@ -3,6 +3,8 @@ package command;
 import dao.DAOException;
 import ent.Service;
 import ent.Subscriber;
+import services.ServService;
+import services.SubService;
 import views.View;
 import views.ViewURL;
 
@@ -16,13 +18,16 @@ import java.util.*;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserDirectService implements Command {
+    private SubService subService = SubService.getInstance();
+    private ServService servService = ServService.getInstance();
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         try {
-            if(subService.subByLog(sub.getInfo().getLogin()).isBlocked()){
+            if(subService.find(sub.getInfo().getLogin()).isBlocked()){
                 Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
                 return command.execute(request, response);
             }
@@ -51,5 +56,21 @@ public class UserDirectService implements Command {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }
+    }
+
+    public SubService getSubService() {
+        return subService;
+    }
+
+    public void setSubService(SubService subService) {
+        this.subService = subService;
+    }
+
+    public ServService getServService() {
+        return servService;
+    }
+
+    public void setServService(ServService servService) {
+        this.servService = servService;
     }
 }

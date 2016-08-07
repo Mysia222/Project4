@@ -42,7 +42,7 @@ public class JdbcSubsDao implements SubsDao {
             query.setString(4, sub.getInfo().getLogin());
             query.execute();
             query.close();
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -64,7 +64,7 @@ public class JdbcSubsDao implements SubsDao {
             query.setInt(1,id);
             query.executeQuery();
             query.close();
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -78,7 +78,7 @@ public class JdbcSubsDao implements SubsDao {
      * @return true if find else - false
      * @throws DAOException
      */
-    public boolean existLogPas(String login, String password) throws DAOException {
+    public boolean exist(String login, String password) throws DAOException {
 
         log.trace(View.LOG_FIND_BY_LOG_PAS + login +" "+ password);
         String s = "SELECT * FROM daotalk.abonents WHERE login=? and password=?;";
@@ -93,7 +93,7 @@ public class JdbcSubsDao implements SubsDao {
             query.close();
             log.trace(View.LOG_FIND_BY_LOG_PAS + login +" "+ password + View.LOG_FINISHED+" " + View.LOG_RESULT +exist);
             return exist;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_FIND_BY_LOG_PAS_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -118,7 +118,7 @@ public class JdbcSubsDao implements SubsDao {
             rs.close();
             log.trace(View.LOG_FIND_ALL_SUBSCRIBERS + View.LOG_FINISHED);
             return list;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_FIND_BY_LOG_PAS_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -152,7 +152,7 @@ public class JdbcSubsDao implements SubsDao {
             query.close();
             log.trace(View.GET_SUB_BY_LOGIN+ View.LOG_FINISHED + View.LOG_RESULT + sub);
             return sub;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -187,7 +187,7 @@ public class JdbcSubsDao implements SubsDao {
             query.close();
             log.trace(View.LOG_FIND_SUBSCRIBER + id + " " + View.LOG_FINISHED);
             return sub;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -208,7 +208,7 @@ public class JdbcSubsDao implements SubsDao {
             query.execute();
             query.close();
             log.trace(View.LOG_LOCK_SUBSCRIBER + id + View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -229,7 +229,7 @@ public class JdbcSubsDao implements SubsDao {
             query.execute();
             query.close();
             log.trace(View.LOG_UNLOCK_SUBSCRIBER + id + View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -251,7 +251,7 @@ public class JdbcSubsDao implements SubsDao {
             query.execute();
             query.close();
             log.trace(View.LOG_UPDATE_SUBSCRIBERS_BALANCE + subscriber + View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -277,7 +277,7 @@ public class JdbcSubsDao implements SubsDao {
             query.execute();
             query.close();
             log.trace(View.LOG_UPDATE_SUBSCRIBER + sub+ View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -298,7 +298,7 @@ public class JdbcSubsDao implements SubsDao {
             query.execute();
             query.close();
             log.trace(View.LOG_DELETE_SUBSCRIBERS_SERVICES + id+ View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -323,7 +323,7 @@ public class JdbcSubsDao implements SubsDao {
             }
             query.close();
             log.trace(View.LOG_UPDATE_SUBSCRIBERS_SERVICES + sub+ View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -352,7 +352,7 @@ public class JdbcSubsDao implements SubsDao {
             query.close();
             log.trace(View.LOG_GET_SUBS_SERVICES + id+ View.LOG_FINISHED);
             return set;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
@@ -373,7 +373,7 @@ public class JdbcSubsDao implements SubsDao {
             query.setInt(1, sub.getContract());
             query.execute();
             log.trace(View.LOG_INIT_SERVICE + sub+ View.LOG_FINISHED);
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }

@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import services.SubService;
 import views.View;
 import views.ViewURL;
 
@@ -9,19 +10,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * Created by potaychuk on 03.08.2016.
  */
 public class UserCabinet implements Command {
+
+
+    private SubService subService = SubService.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber) request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         try {
-            sub=subService.subByContract(sub.getContract());
+            sub=subService.find(sub.getContract());
         } catch (DAOException e) {
             request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
             return ViewURL.ERROR_PAGE;
@@ -47,5 +51,13 @@ public class UserCabinet implements Command {
         request.setAttribute(View.LOGOUT_PAGE, bundle.getString(View.LOGOUT));
         request.setAttribute(View.DIRECT_INFO_BUTTON, bundle.getString(View.DIRECT_INFO));
         return ViewURL.HOME_JSP;
+    }
+
+    public SubService getSubService() {
+        return subService;
+    }
+
+    public void setSubService(SubService subService) {
+        this.subService = subService;
     }
 }

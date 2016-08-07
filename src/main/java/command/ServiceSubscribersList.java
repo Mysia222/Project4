@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import services.ServService;
 import services.SubService;
 import views.View;
 import views.ViewURL;
@@ -18,12 +19,14 @@ import java.util.ResourceBundle;
  */
 public class ServiceSubscribersList implements Command {
 
+    private SubService subService = SubService.getInstance();
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         List<Subscriber> list = null;
         try {
-            list = SubService.getInstance().getSubsList();
+            list = subService.getSubsList();
         } catch (DAOException e) {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
@@ -41,5 +44,13 @@ public class ServiceSubscribersList implements Command {
         request.setAttribute(View.REFRESH_BUTTON,  bundle.getString(View.REFRESH));
         request.setAttribute(View.RETURN_CABINET_PAGE,  bundle.getString(View.RETURN_CABINET));
         return ViewURL.USER_LIST_JSP;
+    }
+
+    public SubService getSubService() {
+        return subService;
+    }
+
+    public void setSubService(SubService subService) {
+        this.subService = subService;
     }
 }

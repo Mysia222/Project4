@@ -3,6 +3,7 @@ package services;
 import dao.DAOException;
 import dao.DaoFactory;
 import dao.ServicesDao;
+import dao.jdbc.JdbcServiceDao;
 import ent.Service;
 
 import javax.naming.NamingException;
@@ -38,6 +39,7 @@ public class ServService {
     public List<Service> getServiceList() throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
+
         return sd.findAll();
     }
 

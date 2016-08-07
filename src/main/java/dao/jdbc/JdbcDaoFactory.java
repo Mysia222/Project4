@@ -3,6 +3,7 @@ package dao.jdbc;
 import dao.DaoFactory;
 import dao.ServicesDao;
 import dao.SubsDao;
+import org.apache.log4j.Logger;
 import views.View;
 
 import javax.naming.InitialContext;
@@ -17,20 +18,23 @@ import java.sql.SQLException;
 public class JdbcDaoFactory extends DaoFactory {
 
     /**
-     * Data source
+     * Logger
      */
-    private static DataSource ds;
+    private static Logger log =  Logger.getLogger(JdbcDaoFactory.class);
 
     /**
-     * Initial context
+     * Connection to DB
      */
-    private static InitialContext ic;
+    private static Connection connection;
 
     /**
      * Default Constructor
      */
     public JdbcDaoFactory() {
     }
+
+
+
 
     /**
      * Fabric method
@@ -51,12 +55,24 @@ public class JdbcDaoFactory extends DaoFactory {
     /**
      * This method makes connection with DB
      * @return connection
-     * @throws SQLException
-     * @throws NamingException
      */
-    public static Connection getConnection() throws SQLException, NamingException {
-        ic = new InitialContext();
-        ds = (DataSource) ic.lookup(View.DB_URL);
-        return ds.getConnection();
+    static Connection getConnection() {
+        if (connection==null) {
+            try {
+                log.trace("DATA SOURCE");
+                DataSource ds = (DataSource) new InitialContext().lookup(View.DB_URL);
+                return ds.getConnection();
+            } catch (SQLException | NamingException e) {
+                log.error(View.LOG_DATA_SOURCE_EXCEPTION, e);
+            }
+        }else {
+            log.trace("SETTED SOURCE");
+            return connection;
+        }
+        return null;
+    }
+
+    public static void setConnection(Connection connection) {
+        JdbcDaoFactory.connection = connection;
     }
 }

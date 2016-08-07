@@ -12,31 +12,31 @@ import java.util.Set;
 public class SubscriberTest {
     @Test
     public void getCurrentService() throws Exception {
-//        Subscriber subscriber = new Subscriber();
-//        subscriber.setInfo(subscriber.new SubInfo());
-//
-//        Set<Service> set = new HashSet<Service>();
-//        set.add(new Service("",0,1));
-//        set.add(new Service("",0,2));
-//        set.add(new Service("",0,3));
-//
-//        subscriber.setCurrentService(set);
-//        Assert.assertTrue(set.equals(subscriber.getCurrentService()));
+        Subscriber subscriber = new Subscriber();
+        subscriber.setInfo(subscriber.new SubInfo());
+
+        Set<Service> set = new HashSet<Service>();
+        set.add(new Service("",0,1,false));
+        set.add(new Service("",0,2,false));
+        set.add(new Service("",0,3,false));
+
+        subscriber.setCurrentService(set);
+        Assert.assertTrue(set.equals(subscriber.getCurrentService()));
 
     }
 
     @Test
     public void setCurrentService() throws Exception {
-//        Subscriber subscriber = new Subscriber();
-//        subscriber.setInfo(subscriber.new SubInfo());
-//
-//        Set<Service> set = new HashSet<Service>();
-//        set.add(new Service("1",1,1));
-//        set.add(new Service("2",2,2));
-//        set.add(new Service("3",2,3));
-//
-//        subscriber.setCurrentService(set);
-//        Assert.assertTrue(subscriber.getCurrentService().size()==3);
+        Subscriber subscriber = new Subscriber();
+        subscriber.setInfo(subscriber.new SubInfo());
+
+        Set<Service> set = new HashSet<Service>();
+        set.add(new Service("1",1,1,false));
+        set.add(new Service("2",2,2,false));
+        set.add(new Service("3",2,3,false));
+
+        subscriber.setCurrentService(set);
+        Assert.assertTrue(subscriber.getCurrentService().size()==3);
     }
 
     @Test

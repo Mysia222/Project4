@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 public class LocaleAppIndex implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String country = request.getParameter(View.COUNTRY_PAGE);
         if(request.getParameter(View.COUNTRY_PAGE).equals(View.UA)){
             request.getSession().setAttribute(View.BUNDLE,ResourceBundle.getBundle(View.BUNDLE_NAME , View.localeUA));
         }else {

@@ -14,7 +14,7 @@ public interface SubsDao extends GenericDao<Subscriber> {
      * @return result of searching
      * @throws DAOException
      */
-    boolean existLogPas(String login, String password) throws DAOException;
+    boolean exist(String login, String password) throws DAOException;
 
     /**
      * This method find item in DB

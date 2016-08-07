@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import services.SubService;
 import views.View;
 import views.ViewURL;
 
@@ -15,9 +16,12 @@ import java.util.ResourceBundle;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserDirectInfo implements Command {
+    private SubService subService = SubService.getInstance();
+
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
+         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         //request from Home.jsp
         if(request.getParameter(View.DIRECT_INFO_BUTTON).equals(bundle.getString(View.DIRECT_INFO))){
@@ -38,7 +42,7 @@ public class UserDirectInfo implements Command {
          //request from DirectInfo.jsp
         }else {
             try {
-                Subscriber temp = subService.subByLog(request.getParameter(View.LOGIN_PAGE));
+                Subscriber temp = subService.find(request.getParameter(View.LOGIN_PAGE));
                 //login in use?
                 if (temp!=null && temp.getContract()!=sub.getContract()){
                     request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
@@ -70,5 +74,13 @@ public class UserDirectInfo implements Command {
                 return ViewURL.ERROR_PAGE;
             }
         }
+    }
+
+    public SubService getSubService() {
+        return subService;
+    }
+
+    public void setSubService(SubService subService) {
+        this.subService = subService;
     }
 }

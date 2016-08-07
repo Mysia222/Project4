@@ -13,16 +13,7 @@ import java.io.IOException;
  */
 public interface Command {
 
-    /**
-     * it's subscriber's service
-     */
-    SubService subService = SubService.getInstance();
 
-
-    /**
-     * it's service's service
-     */
-    ServService servService = ServService.getInstance();
 
     /**
      * Command pattern implementation

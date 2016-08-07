@@ -14,6 +14,7 @@ public class View {
     public static final String COUNTRY_PAGE = "country";
     public static final String UA = "UA";
     public static final String DRAW_INDEX = "DRAW_INDEX";
+    public static final String LOG_DATA_SOURCE_EXCEPTION = "Can't return Data source connection!";
     public static Locale localeUA = new Locale("uk","UA");
     public static Locale localeEN = new Locale("en","EN");
 
@@ -88,6 +89,7 @@ public class View {
 
     public static final String CREATE_ACCOUNT="msg.create_account";   //index
     public static final String CREATE_ACCOUNT_PAGE="create_account";
+    public static final String CREATE_ACCOUNT_PAGE_DEFAULT="Create account";
     //index
     public static final String ENTER="msg.enter";
     public static final String ENTER_PAGE="submit_enter";
