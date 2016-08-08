@@ -15,6 +15,7 @@ public class View {
     public static final String UA = "UA";
     public static final String DRAW_INDEX = "DRAW_INDEX";
     public static final String LOG_DATA_SOURCE_EXCEPTION = "Can't return Data source connection!";
+
     public static Locale localeUA = new Locale("uk","UA");
     public static Locale localeEN = new Locale("en","EN");
 
@@ -72,6 +73,8 @@ public class View {
     public static final String LOGIN="msg.login";
     public static final String LOGIN_PAGE="login";
     public static final String LOGIN_PAGE_H="loginH";
+
+    public static final String SUBS_COUNT ="msg.subs_count" ;
 
     public static  String FIRST_NAME="msg.fName";
     public static final String FIRST_NAME_PAGE="fName";

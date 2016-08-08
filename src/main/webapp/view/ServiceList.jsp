@@ -7,6 +7,7 @@
 --%>
 <%@ page language="java" pageEncoding="UTF-8"  session="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link href="style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
@@ -44,6 +45,7 @@
                             <input type="hidden" name="id" value="${service.id}"/>
                         </form>
                     </c:if></td>
+
                  </tr>
                 </c:forEach>
                 </table>

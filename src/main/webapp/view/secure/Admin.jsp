@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="/WEB-INF/tld/servicestag.tld" prefix="tt" %>
 <link href="../../style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
@@ -17,6 +18,7 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <div class="flags">
+                        <tt:ServicesTag service="${subServiceTT}" bundleSubsSize="${bundleSizeTT}"/>
                         <form class="flags" action="/Controller" method="post">
                             <input class="flags_UA" type="submit" value=""/>
                             <input type="hidden" name="command" value="LOCALE" />

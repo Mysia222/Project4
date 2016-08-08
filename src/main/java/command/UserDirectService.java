@@ -50,6 +50,7 @@ public class UserDirectService implements Command {
                     idSet.add(s.getId());
             }
             request.setAttribute("idSet",idSet);
+
             return ViewURL.SERVICE_LIST_JSP;
 
         } catch (DAOException e) {
