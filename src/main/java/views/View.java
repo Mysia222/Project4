@@ -75,6 +75,8 @@ public class View {
     public static final String LOGIN_PAGE_H="loginH";
 
     public static final String SUBS_COUNT ="msg.subs_count" ;
+    public static final String SUBS_SERVICE_PAGE ="subServiceTT" ;
+    public static final String SUBS_SIZE_PAGE ="bundleSizeTT" ;
 
     public static  String FIRST_NAME="msg.fName";
     public static final String FIRST_NAME_PAGE="fName";

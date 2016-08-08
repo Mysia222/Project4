@@ -1,5 +1,6 @@
 package command;
 
+import services.SubService;
 import views.View;
 import views.ViewURL;
 
@@ -20,7 +21,8 @@ public class ServiceAdminCabinet implements Command {
         request.setAttribute(View.ADMIN_VIEW_SUBS_BUTTON, bundle.getString(View.ADMIN_VIEW_SUBS));
         request.setAttribute(View.ADMIN_VIEW_SERVICES_BUTTON, bundle.getString(View.ADMIN_VIEW_SERVICES));
         request.setAttribute(View.ADMIN_CREATE_SERVICE_BUTTON, bundle.getString(View.ADMIN_CREATE_SERVICE));
-
+        request.setAttribute(View.SUBS_SERVICE_PAGE,SubService.getInstance());
+        request.setAttribute(View.SUBS_SIZE_PAGE,bundle.getString(View.SUBS_COUNT));
         return ViewURL.ADMIN_HOME_JSP;
     }
 }

@@ -33,8 +33,8 @@ public class UserEnter implements Command {
                 request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
                 Command command = sub.isAdmin() ? CommandList.valueOf(View.ADMIN_CABINET).getCommand() :
                         CommandList.valueOf(View.USER_CABINET).getCommand();
-                request.setAttribute("subServiceTT",subService);
-                request.setAttribute("bundleSizeTT",bundle.getString(View.SUBS_COUNT));
+                request.setAttribute(View.SUBS_SERVICE_PAGE,subService);
+                request.setAttribute(View.SUBS_SIZE_PAGE,bundle.getString(View.SUBS_COUNT));
                 return command.execute(request, response);
             } else {
                 //inform about wrong login
