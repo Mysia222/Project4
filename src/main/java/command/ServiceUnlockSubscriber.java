@@ -17,15 +17,24 @@ import java.util.ResourceBundle;
  */
 public class ServiceUnlockSubscriber implements Command {
 
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
 
+    /**
+     * This method unlock subscriber
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return result of ServiceSubscribersList command execution
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         try {
-            Subscriber sub = subService.find(Integer.parseInt(request.getParameter(View.ID_PAGE)));
-            sub.setBlocked(true);
-            subService.unlockId(sub.getContract());
+            subService.unlockId(Integer.parseInt(request.getParameter(View.ID_PAGE)));
             Command command = CommandList.valueOf(View.SERVICE_SUBSCRIBERS).getCommand();
             return command.execute(request, response);
         }catch (DAOException e){
@@ -34,6 +43,7 @@ public class ServiceUnlockSubscriber implements Command {
         }
     }
 
+    //getters & setters
     public SubService getSubService() {
         return subService;
     }

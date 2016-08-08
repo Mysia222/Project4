@@ -11,9 +11,18 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Created by potaychuk on 04.08.2016.
+ * Created by  Potaychuck Sviatoslav on 04.08.2016.
  */
 public class LocaleApp implements Command {
+
+    /**
+     * This method sets Locale in session in cabinet
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return execution result of ServiceAdminCabinet or UserCabinet in according session's sub
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter(View.COUNTRY_PAGE).equals(View.UA)){

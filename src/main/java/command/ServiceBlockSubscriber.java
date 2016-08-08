@@ -13,19 +13,28 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
- * Created by Славик on 03.08.2016.
+ * Created by Potaychuck Sviatoslav on 03.08.2016.
  */
 public class ServiceBlockSubscriber implements Command {
 
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
 
+    /**
+     * This method block subscriber
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return result of ServiceSubscribersList command execution
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(View.BUNDLE);
         try {
-            Subscriber sub = subService.find(Integer.parseInt(request.getParameter(View.ID_PAGE)));
-            sub.setBlocked(true);
-            subService.blockId(sub.getContract());
+            subService.blockId(Integer.valueOf(request.getParameter(View.ID_PAGE)));
         }catch (DAOException e){
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;

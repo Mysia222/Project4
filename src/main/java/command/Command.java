@@ -13,8 +13,6 @@ import java.io.IOException;
  */
 public interface Command {
 
-
-
     /**
      * Command pattern implementation
      * @param request is request which will be processing

@@ -17,19 +17,29 @@ import java.util.ResourceBundle;
  */
 public class UserCreate implements Command {
 
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
 
-
+    /**
+     * This method creates new subscriber.
+     * If request comes from Index.jsp - method sets attributes to CreateSub.jsp and return String url of CreateSub.jsp
+     * If request comes from CreateSub.jsp method checks for unique login.
+     * If login is able method creates new subscriber, sets it in session and returns UserCabinet command's execution result
+     * If login is already in use, method will inform about it user with setting attributes to CreateSub.jsp and returning CreateSub.jsp String url
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute(View.BUNDLE)==null){
             request.getSession().setAttribute(View.BUNDLE,ResourceBundle.getBundle(View.BUNDLE_NAME , View.localeEN));
         }
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
-        response.setContentType ("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-
-
         //request from index.jsp
         if(request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(bundle.getString(View.CREATE_ACCOUNT)) ||
                 request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(View.CREATE_ACCOUNT_PAGE_DEFAULT)){
@@ -49,7 +59,7 @@ public class UserCreate implements Command {
         try{
 
             Subscriber sub = subService.find(request.getParameter(View.QUERY_LOGIN));
-            //Is login in use?
+            //Is login able?
             if(sub==null) {
                 sub=new Subscriber();
                 sub.setInfo(sub.new SubInfo());
@@ -62,6 +72,7 @@ public class UserCreate implements Command {
                 request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
                 Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
                 return command.execute(request, response);
+                //login in use
             }else {
                 request.setAttribute(View.SAVED_FIRST_NAME, request.getParameter(View.FIRST_NAME_PAGE));
                 request.setAttribute(View.SAVED_SECOND_NAME, request.getParameter(View.SECOND_NAME_PAGE));

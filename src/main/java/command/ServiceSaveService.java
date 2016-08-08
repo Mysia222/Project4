@@ -13,12 +13,24 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
- * Created by Славик on 03.08.2016.
+ * Created by Potaychuck Sviatoslav on 03.08.2016.
  */
 public class ServiceSaveService implements Command {
 
+    /**
+     * Service's service
+     */
     private ServService servService = ServService.getInstance();
 
+    /**
+     * This method checks for able of name. If name is able - method removes edit status and updates service,
+     * else - inform about inability of name according session's Locale
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return result of ServiceServicesList command execution
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -47,6 +59,7 @@ public class ServiceSaveService implements Command {
         }
     }
 
+    //getters & setters
     public ServService getServService() {
         return servService;
     }

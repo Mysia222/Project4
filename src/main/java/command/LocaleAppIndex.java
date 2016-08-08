@@ -9,9 +9,18 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**
- * Created by potaychuk on 04.08.2016.
+ * Created by  Potaychuck Sviatoslav on 04.08.2016.
  */
 public class LocaleAppIndex implements Command {
+
+    /**
+     * This method sets Locale in session in cabinet and draws Index.jsp
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return execution result of DrawIndex command
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if(request.getParameter(View.COUNTRY_PAGE).equals(View.UA)){

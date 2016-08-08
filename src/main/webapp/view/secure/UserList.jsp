@@ -38,27 +38,27 @@
                             <TH>${enableAction}</TH>
 
                         </tr>
-                        <c:forEach var="service" items="${users}">
+                        <c:forEach var="sub" items="${users}">
 
                                 <tr>
-                                     <td>${service.contract}</td>
-                                     <td>${service.balance}</td>
+                                     <td>${sub.contract}</td>
+                                     <td>${sub.balance}</td>
                                      <td>
-                                         <c:forEach items="${service.currentService}" var="item">
+                                         <c:forEach items="${sub.currentService}" var="item">
                                          ${item.name}<br>
                                         </c:forEach>
                                     </td>
-                                     <td>${service.info.login}</td>
-                                     <td>${service.info.firstName}</td>
-                                     <td>${service.info.secondName}</td>
-                                    <td><c:if test="${service.balance<0 && !service.blocked}"><form action="/Controller" method="post">
+                                     <td>${sub.info.login}</td>
+                                     <td>${sub.info.firstName}</td>
+                                     <td>${sub.info.secondName}</td>
+                                    <td><c:if test="${sub.balance<0 && !sub.blocked}"><form action="/Controller" method="post">
                                         <input type="submit"  value="${blockSubscriber}">
-                                        <input type="hidden" name="id" value="${service.contract}">
+                                        <input type="hidden" name="id" value="${sub.contract}">
                                         <input type="hidden" name="command" value="SERVICE_SUBSCRIBER_BLOCK">
                                     </form></c:if>
-                                    <c:if test="${service.balance>=0 && service.blocked}"><form action="/Controller" method="post">
+                                    <c:if test="${sub.balance>=0 && sub.blocked}"><form action="/Controller" method="post">
                                         <input type="submit"  value="${unlockSubscriber}">
-                                        <input type="hidden" name="id" value="${service.contract}">
+                                        <input type="hidden" name="id" value="${sub.contract}">
                                         <input type="hidden" name="command" value="SERVICE_SUBSCRIBER_UNLOCK">
                                     </form></c:if>
                                 </tr>

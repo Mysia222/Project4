@@ -18,10 +18,26 @@ import java.util.*;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserDirectService implements Command {
+
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
+
+    /**
+     * Service's service
+     */
     private ServService servService = ServService.getInstance();
 
-
+    /**
+     * This sets attributes to ServiceList.jsp according Locale in session
+     * If subscriber is blocked, method doesn't set attributes and executes UserCabinet command
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return string url of ServiceList.jsp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -38,7 +54,7 @@ public class UserDirectService implements Command {
                     services.add(s);
                 }
             }
-            request.setAttribute("services",services);
+            request.setAttribute(View.SERVICES_LIST_PAGE,services);
             request.setAttribute(View.REMOVE_USER_SERVICE_PAGE, bundle.getString(View.REMOVE_USER_SERVICE));
             request.setAttribute(View.SET_USER_SERVICE_PAGE, bundle.getString(View.SET_USER_SERVICE));
             request.setAttribute(View.PRICE_PAGE, bundle.getString(View.PRICE));
@@ -49,16 +65,15 @@ public class UserDirectService implements Command {
             for(Service s: sub.getCurrentService()){
                     idSet.add(s.getId());
             }
-            request.setAttribute("idSet",idSet);
-
+            request.setAttribute(View.SERVICES_LIST_ID,idSet);
             return ViewURL.SERVICE_LIST_JSP;
-
         } catch (DAOException e) {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }
     }
 
+    //getters & setters
     public SubService getSubService() {
         return subService;
     }

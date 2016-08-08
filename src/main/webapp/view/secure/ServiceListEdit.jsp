@@ -31,36 +31,36 @@
 
                         <tr><th>${name}</th><th>${price}</th>
                             <th>${change}</th><th>${delete}</th></tr>
-                        <c:forEach var="service" items="${services}" varStatus="status">
-                            <c:if test="${!service.edit}">
+                        <c:forEach var="sub" items="${services}" varStatus="status">
+                            <c:if test="${!sub.edit}">
                             <tr>
-                                <td>${service.name}</td>
-                                <td>${service.price}</td>
+                                <td>${sub.name}</td>
+                                <td>${sub.price}</td>
                                 <td><form action="/Controller" method="post">
                                     <input type="submit" value ="${change}"/>
                                     <input type="hidden" name="command" value ="SERVICE_CHANGE_SERVICE"/>
-                                    <input type="hidden" name="id" value="${service.id}"/>
+                                    <input type="hidden" name="id" value="${sub.id}"/>
                                 </form></td>
                                 <td><form action="/Controller" method="post">
                                     <input type="submit"  value ="${delete}"/>
                                     <input type="hidden" name="command" value="SERVICE_DELETE_SERVICE"/>
-                                    <input type="hidden" name="id" value="${service.id}"/>
+                                    <input type="hidden" name="id" value="${sub.id}"/>
                                 </form></td>
                             </tr></c:if>
-                            <c:if test="${service.edit}">
+                            <c:if test="${sub.edit}">
                                 <tr>
                                     <form action="/Controller" method="post">
-                                    <td><input type="text" name="name" value="${service.name}"></td>
-                                    <td><input type="number" min="0" name="price" value="${service.price}"></td>
+                                    <td><input type="text" name="name" value="${sub.name}"></td>
+                                    <td><input type="number" min="0" name="price" value="${sub.price}"></td>
                                     <td>
                                         <input type="submit"  value ="${save}"/>
                                         <input type="hidden" name="command" value="SERVICE_SAVE_SERVICE"/>
-                                        <input type="hidden" name="id" value="${service.id}"/>
+                                        <input type="hidden" name="id" value="${sub.id}"/>
                                     </form></td>
                                     <td><form action="/Controller" method="post">
                                         <input type="submit" value ="${delete}"/>
                                         <input type="hidden" name="command" value ="SERVICE_DELETE_SERVICE"/>
-                                        <input type="hidden" name="id" value="${service.id}"/>
+                                        <input type="hidden" name="id" value="${sub.id}"/>
                                     </form></td>
                                 </tr></c:if>
 

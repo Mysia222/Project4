@@ -16,6 +16,7 @@ public class View {
     public static final String DRAW_INDEX = "DRAW_INDEX";
     public static final String LOG_DATA_SOURCE_EXCEPTION = "Can't return Data source connection!";
 
+
     public static Locale localeUA = new Locale("uk","UA");
     public static Locale localeEN = new Locale("en","EN");
 
@@ -154,6 +155,7 @@ public class View {
 
     public static final String SAVE = "msg.save";
     public static final String SAVE_PAGE = "save";
+    public static final String SERVICES_LIST_ID = "idSet";
 
     public static final String SAVED_FIRST_NAME = "savedFName";
     public static final String SAVED_SECOND_NAME = "savedSName";
