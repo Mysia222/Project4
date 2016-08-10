@@ -17,10 +17,22 @@ import java.util.ResourceBundle;
  */
 public class UserDirectInfo implements Command {
 
-
+    /**
+     * It's subscriber's service
+     */
     private SubService subService = SubService.getInstance();
 
-
+    /**
+     * This method updates user's info (login, password, name).
+     * If request is from Home.jsp, method sets attributes and return String url of DirectInfo.jsp
+     * If request from DirectInfo.jsp method checks for login free and if it's - saves info and executes UserCabinet command
+     * else method informs about incorrect login
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
          ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -78,6 +90,7 @@ public class UserDirectInfo implements Command {
         }
     }
 
+    //getters & setters
     public SubService getSubService() {
         return subService;
     }

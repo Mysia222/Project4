@@ -17,9 +17,19 @@ import java.util.ResourceBundle;
  */
 public class UserEnter implements Command {
 
+    /**
+     * It's subscriber's service
+     */
     private SubService subService = SubService.getInstance();
 
-
+    /**
+     * This method checks for existing user with login and password 
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession().getAttribute(View.BUNDLE)==null){
@@ -59,6 +69,7 @@ public class UserEnter implements Command {
         }
     }
 
+    //setters & getters
     public SubService getSubService() {
         return subService;
     }

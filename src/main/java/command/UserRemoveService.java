@@ -19,9 +19,24 @@ import java.util.ResourceBundle;
  */
 public class UserRemoveService implements Command {
 
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
+
+    /**
+     * Service's service
+     */
     private ServService servService = ServService.getInstance();
 
+    /**
+     * This method removes service from subscriber's service list and updates this sub
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return result of UserCabinet command execution
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -40,7 +55,7 @@ public class UserRemoveService implements Command {
         return command.execute(request, response);
     }
 
-
+    //getters & setters
     public SubService getSubService() {
         return subService;
     }

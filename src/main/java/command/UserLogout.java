@@ -13,6 +13,15 @@ import java.util.ResourceBundle;
  * Created by Potaychuk Sviatoslav on 01.08.2016.
  */
 public class UserLogout implements Command {
+
+    /**
+     * This method sets attributes to Index.jsp and removes subscriber from session
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return Index.jsp String url
+     * @throws ServletException
+     * @throws IOException
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         request.getSession().removeAttribute(View.SUBSCRIBER_SESSION);

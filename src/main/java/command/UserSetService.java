@@ -18,9 +18,28 @@ import java.util.ResourceBundle;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserSetService implements Command {
+
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
+
+    /**
+     * Service's service
+     */
     private ServService servService = ServService.getInstance();
 
+    /**
+     * This method sets chosen service to subscriber's service list in case:
+     * 1) subscriber isn't blocked
+     * 2) service isn't in edit
+     * than updates user's balance and services
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return result of UserCabinet command execution
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -54,7 +73,7 @@ public class UserSetService implements Command {
         return command.execute(request, response);
     }
 
-
+    //setters & getters
     public SubService getSubService() {
         return subService;
     }

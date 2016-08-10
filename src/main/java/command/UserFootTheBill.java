@@ -17,8 +17,20 @@ import java.util.ResourceBundle;
  */
 public class UserFootTheBill implements Command {
 
+    /**
+     * Subscriber's service
+     */
     private SubService subService = SubService.getInstance();
 
+    /**
+     * If request from Home.jsp, method sets attributes and returns FillBalance.jsp's url
+     * Else session's subscriber will be updated with balnce
+     * @param request is request which will be processing
+     * @param response is response after processing
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
@@ -45,6 +57,7 @@ public class UserFootTheBill implements Command {
 
     }
 
+    //getters & setters
     public SubService getSubService() {
         return subService;
     }
