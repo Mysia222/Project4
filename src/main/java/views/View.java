@@ -17,6 +17,7 @@ public class View {
     public static final String LOG_DATA_SOURCE_EXCEPTION = "Can't return Data source connection!";
 
 
+
     public static Locale localeUA = new Locale("uk","UA");
     public static Locale localeEN = new Locale("en","EN");
 
@@ -66,6 +67,12 @@ public class View {
     public static  String BLOCKED_TRUE ="msg.blocked_true";
     public static  String BLOCKED_FALSE ="msg.blocked_false";
     public static final String BLOCKED_PAGE ="blocked";
+
+    public static final String USER_LOG_PATTERN_PAGE = "logPatternErr";
+    public static final String USER_LOG_PATTERN = "msg.logPatternErr";
+
+    public static final String USER_NAME_PATTERN_PAGE = "namePatternErr";
+    public static final String USER_NAME_PATTERN = "msg.namePatternErr";
 
     public static final String PASSWORD ="msg.password";
     public static final String PASSWORD_PAGE ="password";

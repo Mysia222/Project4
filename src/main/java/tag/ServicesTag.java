@@ -16,13 +16,21 @@ import java.util.List;
  */
 public class ServicesTag extends SimpleTagSupport {
 
+    /**
+     * Service
+     */
     private SubService service;
+
+    /**
+     * String label
+     */
     private String bundleSubsSize;
 
-
-
-
-
+    /**
+     * Tag gets count of subscribers in DB and pict it on jsp
+     * @throws JspException
+     * @throws IOException
+     */
     @Override
     public void doTag() throws JspException, IOException {
         Writer out = getJspContext().getOut();
@@ -37,6 +45,7 @@ public class ServicesTag extends SimpleTagSupport {
 
     }
 
+    //setters & getters
     public String getBundleSubsSize() {
         return bundleSubsSize;
     }

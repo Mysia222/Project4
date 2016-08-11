@@ -35,15 +35,14 @@ public class ServiceUnlockSubscriberTest  extends Mockito{
         Subscriber sub = new Subscriber();
         ResourceBundle bundle = ResourceBundle.getBundle(View.BUNDLE_NAME,View.localeUA);
         when(request.getSession()).thenReturn(session);
-        when(service.find(0)).thenReturn(sub);
+        when(service.find(anyInt())).thenReturn(sub);
         when(session.getAttribute(View.BUNDLE)).thenReturn(bundle);
         when(request.getParameter(View.NAME_PAGE)).thenReturn("test");
         when(request.getParameter(View.ID_PAGE)).thenReturn("0");
         JdbcDaoFactory.setConnection(DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "root"));
         String testString = command.execute(request,response);
 
-        verify(service,atLeastOnce()).find(0);
-        verify(service,atLeastOnce()).unlockId(0);
+        verify(service,atLeastOnce()).unlockId(anyInt());
         verify(session,atLeastOnce()).getAttribute(View.BUNDLE);
         verify(request,atLeastOnce()).getSession();
         assertEquals(testString, ViewURL.ERROR_PAGE);

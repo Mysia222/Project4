@@ -10,7 +10,7 @@
 <link href="../../style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
-    <title>admin</title>
+    <title>Administrator's cabinet</title>
 </head>
 <div>
     <div  class="wrapper ">
@@ -18,7 +18,7 @@
             <div class="aboutcontwrapper ">
                 <div class="aboutcont ">
                     <div class="flags">
-                        <tt:ServicesTag service="${subServiceTT}" bundleSubsSize="${bundleSizeTT}"/>
+
                         <form class="flags" action="/Controller" method="post">
                             <input class="flags_UA" type="submit" value=""/>
                             <input type="hidden" name="command" value="LOCALE" />
@@ -30,18 +30,22 @@
                             <input type="hidden" name="country" value="EN" />
                         </form>
                     </div>
-                    <form action="/Controller" method="post">
-                        <input type="submit" value="${logout}">
-                        <input type="hidden" name="command" value="LOGOUT">
-                    </form>
-                    <form action="/Controller" method="get">
-                        <input type="submit" value="${showSubs}">
-                        <input type="hidden" name="command" value="SERVICE_SUBSCRIBERS">
-                    </form>
-                    <form action="/Controller" method="get">
-                        <input type="submit" value="${showServices}">
-                        <input type="hidden" name="command" value="SERVICE_SERVICES">
-                    </form>
+
+                    <ul>
+                            <li><form action="/Controller" method="post">
+                                <input type="submit" value="${logout}">
+                                <input type="hidden" name="command" value="LOGOUT">
+                            </form></li>
+                            <li><form action="/Controller" method="get">
+                                <input type="submit" value="${showServices}">
+                                <input type="hidden" name="command" value="SERVICE_SERVICES">
+                            </form></li>
+                            <li><form action="/Controller" method="get">
+                                <input type="submit" value="${showSubs}">
+                                <input type="hidden" name="command" value="SERVICE_SUBSCRIBERS">
+                            </form>
+                            <tt:ServicesTag service="${subServiceTT}" bundleSubsSize="${bundleSizeTT}"/></li>
+                    </ul>
                     <%--<form action="/Controller" method="post">--%>
                         <%--<input type="submit" value="${createService}">--%>
                         <%--<input type="hidden" name="command" value="SERVICE_CREATE_NEW">--%>

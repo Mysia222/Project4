@@ -15,6 +15,29 @@
     width: 100%;
 
 }
+.userCabinetItem:first-child{
+    float: left;
+    width: 33%;
+    margin-left: 40px;
+}
+.userCabinetItem:last-child{
+    text-align: left;
+    float: right;
+    width: 50%;
+    margin-right: 40px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 0px solid black;
+    margin: auto;
+}
+.HomeTable{
+    margin: inherit;
+}
+ul{
+    text-align: left;
+}
 .aboutcont {
     background-color: #ddeaba;;
 
@@ -34,11 +57,7 @@
 .wrongLogin{
     color: #ed2030;
 }
-table {
-    border-collapse: collapse;
-    border: 0px solid black;
-    margin: auto;
-}
+
 td {
     border: 1px solid black;
     text-align: left;
@@ -85,3 +104,14 @@ th{
 .indexTable td{
     border: 0;
 }
+.adminMenu{
+    float: right;
+    margin-top: auto;
+    width: 60%;
+}
+ul{
+    padding-left: 45%;
+}
+/*li{*/
+    /*padding-left: 45%;*/
+/*}*/

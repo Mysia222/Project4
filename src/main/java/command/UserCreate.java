@@ -47,6 +47,8 @@ public class UserCreate implements Command {
             request.setAttribute(View.SAVED_SECOND_NAME, "");
             request.setAttribute(View.SAVED_PASSWORD,"");
             request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
+            request.setAttribute(View.USER_LOG_PATTERN_PAGE, bundle.getString(View.USER_LOG_PATTERN));
+            request.setAttribute(View.USER_NAME_PATTERN_PAGE, bundle.getString(View.USER_NAME_PATTERN));
             request.setAttribute(View.FIRST_NAME_PAGE,  bundle.getString(View.FIRST_NAME));
             request.setAttribute(View.SECOND_NAME_PAGE,  bundle.getString(View.SECOND_NAME));
             request.setAttribute(View.LOGIN_PAGE,  bundle.getString(View.LOGIN));

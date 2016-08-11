@@ -35,27 +35,30 @@
                             <input type="hidden" name="country" value="EN" />
                         </form>
                     </div>
-                        <%--<a href="/cabinet">Cabinet</a> <a href="/T1Servlet?command=DIRECT_USER_INFO">Direct info</a>--%>
-                        <a href="/view/secure/Admin.jsp">Go test jsp</a>
-                         <form action="/Controller" method="get">
+                        <div class="userCabinetContent">
+                            <div class="userCabinetItem">
+                        <ul>
+                         <li><form action="/Controller" method="get">
                              <input type="submit" name="direct_service" value="${direct_service_button}">
                              <input type="hidden" name="command" value="USER_DIRECT_SERVICE">
-                         </form>
-                        <form action="/Controller" method="get">
+                         </form></li>
+                            <li><form action="/Controller" method="get">
                             <input type="submit" name="foot_the_bill" value="${foot_the_bill_button}">
                             <input type="hidden" name="command" value="USER_FOOT_THE_BILL">
-                        </form>
-                        <form action="/Controller" method="get">
+                        </form></li>
+                            <li><form action="/Controller" method="get">
                             <input type="submit" name="direct_info" value="${direct_info}">
                             <input type="hidden" name="command" value="USER_DIRECT_INFO">
-                        </form>
-                        <form action="/Controller" method="post">
+                        </form></li>
+                            <li><form action="/Controller" method="post">
                             <input type="submit" name="logout" value="${logout}">
                             <input type="hidden" name="command" value="LOGOUT">
-                        </form>
+                        </form></li>
+                        </ul></div>
                         <%--<a href="/T1Servlet?command=LOGOUT">Logout</a><br>--%>
+                                <div class="userCabinetItem">
                         ${blocked}
-                        <table border="1px solid black">
+                        <table class="HomeTable">
                             <tr>
                                 <td>${contractH}:</td>
                                 <td>${contract}</td>
@@ -89,7 +92,8 @@
                                 <td>${password}</td>
                             </tr>
                         </table>
-
+                                </div>
+                        </div>
 
                 </div>
             </div>

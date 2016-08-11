@@ -36,8 +36,7 @@ public class ServiceBlockSubscriberTest extends Mockito{
         when(service.find(Integer.parseInt(request.getParameter(View.ID_PAGE)))).thenReturn(new Subscriber());
         JdbcDaoFactory.setConnection(DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "root"));
         command.execute(request,response);
-        verify(service,atLeastOnce()).find(0);
-        verify(service,atLeastOnce()).blockId(0);
+        verify(service,atLeastOnce()).blockId(anyInt());
         verify(session,atLeastOnce()).getAttribute(View.BUNDLE);
         verify(request,atLeastOnce()).getSession();
         assertEquals( command.execute(request,response), ViewURL.ERROR_PAGE);

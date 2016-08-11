@@ -9,7 +9,7 @@
 <link href="style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
-    <title>DirectInfo</title>
+    <title>Edit Information</title>
 </head>
 <body>
 <div>
@@ -25,19 +25,19 @@
                         <table>
                             <tr>
                                 <td>${fNameH}:</td>
-                                <td><input type="text" name="fName" value="${savedFName}"></td>
+                                <td><input type="text" pattern="^[a-zA-Zа-яА-Я]{1,15}$" oninvalid="setCustomValidity('${namePatternErr}')" name="fName" value="${savedFName}"></td>
                             </tr>
                             <tr>
                                 <td>${sNameH}:</td>
-                                <td><input type="text" name="sName" value="${savedSName}"></td>
+                                <td><input type="text" pattern="^[a-zA-Zа-яА-Я]{1,15}$" oninvalid="setCustomValidity('${namePatternErr}')" name="sName" value="${savedSName}"></td>
                             </tr>
                             <tr>
                                 <td>${loginH}:</td>
-                                <td><input type="text" name="login" value="${savedLogin}"></td>
+                                <td><input type="text" pattern="^[a-zA-Zа-яА-Я]{1,15}$" oninvalid="setCustomValidity('${namePatternErr}')" name="login" value="${savedLogin}"></td>
                             </tr>
                             <tr>
                                 <td>${passwordH}:</td>
-                                <td><input type="text" name="password" value="${savedPassword}"></td>
+                                <td><input type="text"  pattern="^[a-zA-Zа-яА-Я0-9]{1,15}$" oninvalid="setCustomValidity('${logPatternErr}')" name="password" value="${savedPassword}"></td>
                             </tr>
                             </table>
                         <input type="submit" name ="direct_info" value="${save}">

@@ -56,6 +56,8 @@ public class UserDirectService implements Command {
             }
             request.setAttribute(View.SERVICES_LIST_PAGE,services);
             request.setAttribute(View.REMOVE_USER_SERVICE_PAGE, bundle.getString(View.REMOVE_USER_SERVICE));
+            request.setAttribute(View.USER_LOG_PATTERN_PAGE, bundle.getString(View.USER_LOG_PATTERN));
+            request.setAttribute(View.USER_NAME_PATTERN_PAGE, bundle.getString(View.USER_NAME_PATTERN));
             request.setAttribute(View.SET_USER_SERVICE_PAGE, bundle.getString(View.SET_USER_SERVICE));
             request.setAttribute(View.PRICE_PAGE, bundle.getString(View.PRICE));
             request.setAttribute(View.NAME_PAGE, bundle.getString(View.NAME));

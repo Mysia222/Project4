@@ -10,7 +10,7 @@
 <link href="/style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
-    <title>${userListH}</title>
+    <title>User list</title>
 </head>
 <body>
 <div>

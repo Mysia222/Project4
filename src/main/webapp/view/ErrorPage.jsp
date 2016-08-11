@@ -10,7 +10,7 @@
 <link href="/style.css" type="text/css" media="screen" rel="stylesheet" />
 <html>
 <head>
-    <title>Home</title>
+    <title>Error</title>
 </head>
 <body>
 
