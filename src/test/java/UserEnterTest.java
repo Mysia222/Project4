@@ -33,7 +33,8 @@ public class UserEnterTest extends Mockito{
         command.setSubService(service);
         ResourceBundle bundle = ResourceBundle.getBundle(View.BUNDLE_NAME,View.localeUA);
         Subscriber sub = new Subscriber();
-        sub.setInfo(sub.new SubInfo());
+        sub.setContract(1);
+        sub.setInfo(sub.new SubInfo("test","test","test","test"));
 
         when(request.getSession()).thenReturn(session);
         when(request.getParameter(View.PASSWORD_PAGE)).thenReturn("testPassword");

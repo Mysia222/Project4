@@ -37,6 +37,7 @@ public class UserSetServiceTest extends Mockito {
         sub.setBlocked(true);
         sub.setInfo(sub.new SubInfo());
         sub.getInfo().setLogin("test");
+        sub.setContract(1);
 
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(View.BUNDLE)).thenReturn(bundle);
@@ -67,9 +68,10 @@ public class UserSetServiceTest extends Mockito {
         command.setServService(servService);
         Subscriber sub = new Subscriber();
         sub.setInfo(sub.new SubInfo());
-        sub.getInfo().setLogin("Ivan");
+        sub.getInfo().setLogin("Admin");
         Service service = new Service();
         service.setEdit(true);
+        sub.setContract(1);
 
 
         when(request.getSession()).thenReturn(session);
@@ -104,6 +106,7 @@ public class UserSetServiceTest extends Mockito {
         sub.setInfo(sub.new SubInfo());
         sub.getInfo().setLogin("Ivan");
         Service service = new Service();
+        sub.setContract(1);
 
 
         when(request.getSession()).thenReturn(session);

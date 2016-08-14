@@ -36,6 +36,7 @@ public class UserRemoveServiceTest extends Mockito {
         Service service = new Service();
         Subscriber sub = new Subscriber();
         sub.setInfo(sub.new SubInfo());
+        sub.setContract(1);
 
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute(View.BUNDLE)).thenReturn(bundle);

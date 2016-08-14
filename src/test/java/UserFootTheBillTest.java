@@ -57,6 +57,7 @@ public class UserFootTheBillTest extends Mockito{
         command.setSubService(service);
         ResourceBundle bundle = ResourceBundle.getBundle(View.BUNDLE_NAME,View.localeUA);
         Subscriber sub = new Subscriber();
+        sub.setContract(1);
         sub.setInfo(sub.new SubInfo());
 
         when(request.getSession()).thenReturn(session);

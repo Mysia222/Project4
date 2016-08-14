@@ -27,6 +27,7 @@ public class LocaleAppTest extends Mockito{
     @Test
     public void execute() throws Exception {
         Subscriber sub = new Subscriber();
+        sub.setContract(1);
         HttpServletResponse response = mock(HttpServletResponse.class);
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpSession session = mock(HttpSession.class);
