@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td>${passwordH}:</td>
-                                <td><input type="text"  pattern="^[a-zA-Zа-яА-Я0-9]{1,15}$" oninvalid="setCustomValidity('${logPatternErr}')" name="password" value="${savedPassword}"></td>
+                                <td><input type="text"  pattern="^[a-zA-Zа-яА-Я0-9]{1,15}$" oninvalid="setCustomValidity('${logPatternErr}')" name="password" value=""></td>
                             </tr>
                             </table>
                         <input type="submit" name ="direct_info" value="${save}">

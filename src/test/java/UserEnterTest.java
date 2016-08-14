@@ -36,6 +36,7 @@ public class UserEnterTest extends Mockito{
         sub.setInfo(sub.new SubInfo());
 
         when(request.getSession()).thenReturn(session);
+        when(request.getParameter(View.PASSWORD_PAGE)).thenReturn("testPassword");
         when(session.getAttribute(View.SUBSCRIBER_SESSION)).thenReturn(sub);
         when(service.exist(anyString(),anyString())).thenReturn(true);
         when(service.find(anyString())).thenReturn(sub);
@@ -65,6 +66,7 @@ public class UserEnterTest extends Mockito{
         sub.setInfo(sub.new SubInfo());
 
         when(request.getSession()).thenReturn(session);
+        when(request.getParameter(View.PASSWORD_PAGE)).thenReturn("testPassword");
         when(session.getAttribute(View.SUBSCRIBER_SESSION)).thenReturn(sub);
         when(service.exist(anyString(),anyString())).thenReturn(false);
         when(service.find(anyString())).thenReturn(sub);

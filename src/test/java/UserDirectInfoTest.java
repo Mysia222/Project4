@@ -38,7 +38,7 @@ public class UserDirectInfoTest extends Mockito {
         String testString = command.execute(request,response);
         verify(request, atLeastOnce()).setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
         verify(request, atLeastOnce()).setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
-        verify(request, atLeastOnce()).setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
+//        verify(request, atLeastOnce()).setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
         verify(request, atLeastOnce()).setAttribute(View.SAVED_LOGIN, sub.getInfo().getLogin());
         verify(request, atLeastOnce()).setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
         verify(request, atLeastOnce()).setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));

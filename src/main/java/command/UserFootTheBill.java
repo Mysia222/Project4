@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import org.apache.log4j.Logger;
 import services.SubService;
 import views.View;
 import views.ViewURL;
@@ -16,6 +17,11 @@ import java.util.ResourceBundle;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserFootTheBill implements Command {
+
+    /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(UserFootTheBill.class);
 
     /**
      * Subscriber's service
@@ -33,22 +39,24 @@ public class UserFootTheBill implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
-        if(request.getParameter(View.FOOT_THE_BILL_BUTTON).equals(bundle.getString(View.FOOT_THE_BILL))){   //from Home jsp
+        //from Home jsp
+        if(request.getParameter(View.FOOT_THE_BILL_BUTTON).equals(bundle.getString(View.FOOT_THE_BILL))){
             request.setAttribute(View.MONEY_VALUE_PAGE_L,bundle.getString(View.MONEY_VALUE_L));
             request.setAttribute(View.MONEY_PAY_PAGE,bundle.getString(View.MONEY_PAY ));
             request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
             return ViewURL.FILL_BALANCE_JSP;
+            //from FillBalance.jsp
         }else {
-            String d = request.getParameter(View.MONEY_VALUE_PAGE);
-            Double value = sub.getBalance()+Double.valueOf(d);
-            sub.setBalance(value);
+            sub.setBalance(sub.getBalance()+Double.valueOf(request.getParameter(View.MONEY_VALUE_PAGE)));
             request.getSession().setAttribute(View.SUBSCRIBER_SESSION,sub);
             try {
                 subService.setSub(sub);
             } catch (DAOException e) {
                 request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
+                log.error(View.LOG_BY_USER + request.getSession().getAttribute(View.SUBSCRIBER_SESSION));
                 return ViewURL.ERROR_PAGE;
             }
             Command command = CommandList.valueOf(View.USER_CABINET).getCommand();

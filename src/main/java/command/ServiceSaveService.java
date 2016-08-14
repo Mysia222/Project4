@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Service;
+import org.apache.log4j.Logger;
 import services.ServService;
 import views.View;
 import views.ViewURL;
@@ -16,6 +17,11 @@ import java.util.ResourceBundle;
  * Created by Potaychuck Sviatoslav on 03.08.2016.
  */
 public class ServiceSaveService implements Command {
+
+    /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(ServiceSaveService.class);
 
     /**
      * Service's service
@@ -33,18 +39,20 @@ public class ServiceSaveService implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         try {
             //is name in use?
             if (request.getParameter(View.NAME_PAGE).equals(View.JUST_CREATED_SERVICE_NAME) ||/*name is default and not edited, that's why can't be saved*/
                     servService.nameInUse(request.getParameter(View.NAME_PAGE))/*name used by another one service*/
                             && !request.getParameter(View.NAME_PAGE).equals(servService.getService(Integer.valueOf(request.getParameter(View.ID_PAGE))).getName())) {
-
+                log.trace(View.LOG_ENABLE);
                 request.setAttribute(View.NAME_IN_USE_PAGE,
                         request.getParameter(View.NAME_PAGE).equals(View.JUST_CREATED_SERVICE_NAME) ?
                                 bundle.getString(View.EDIT_SERVICE_NAME_FIRST) : bundle.getString(View.NAME_IN_USE));
                 //name is free
             } else {
+                log.trace(View.LOG_ABLE_NAME);
                 Service service = servService.getService(Integer.valueOf(request.getParameter(View.ID_PAGE)));
                 service.setName(request.getParameter(View.NAME_PAGE));
                 service.setPrice(Double.valueOf(request.getParameter(View.PRICE_PAGE)));

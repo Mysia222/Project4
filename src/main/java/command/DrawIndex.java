@@ -1,5 +1,7 @@
 package command;
 
+import dao.jdbc.JdbcServiceDao;
+import org.apache.log4j.Logger;
 import views.View;
 import views.ViewURL;
 
@@ -15,6 +17,11 @@ import java.util.ResourceBundle;
 public class DrawIndex implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(DrawIndex.class);
+
+    /**
      * This method sets attributes to Index.jsp according session's Locale
      * @param request is request which will be processing
      * @param response is response after processing
@@ -24,6 +31,7 @@ public class DrawIndex implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE) ;
         request.setAttribute(View.PASSWORD_PAGE, bundle.getString(View.PASSWORD));
         request.setAttribute(View.LOGIN_PAGE,  bundle.getString(View.LOGIN));

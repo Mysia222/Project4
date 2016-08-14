@@ -1,5 +1,6 @@
 package command;
 
+import org.apache.log4j.Logger;
 import views.View;
 import views.ViewURL;
 
@@ -15,6 +16,11 @@ import java.util.ResourceBundle;
 public class UserLogout implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(UserLogout.class);
+
+    /**
      * This method sets attributes to Index.jsp and removes subscriber from session
      * @param request is request which will be processing
      * @param response is response after processing
@@ -23,6 +29,7 @@ public class UserLogout implements Command {
      * @throws IOException
      */
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         request.getSession().removeAttribute(View.SUBSCRIBER_SESSION);
         request.setAttribute(View.PASSWORD_PAGE, bundle.getString(View.PASSWORD));

@@ -1,6 +1,7 @@
 package command;
 
 import dao.DAOException;
+import org.apache.log4j.Logger;
 import services.ServService;
 import views.View;
 import views.ViewURL;
@@ -17,6 +18,11 @@ import java.util.ResourceBundle;
 public class ServiceDeleteService implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(ServiceDeleteService.class);
+
+    /**
      * Service's service
      */
     private ServService servService = ServService.getInstance();
@@ -31,6 +37,7 @@ public class ServiceDeleteService implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         try {
             servService.delete(Integer.valueOf(request.getParameter(View.ID_PAGE)));

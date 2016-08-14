@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import org.apache.log4j.Logger;
 import services.ServService;
 import services.SubService;
 import views.View;
@@ -20,6 +21,11 @@ import java.util.ResourceBundle;
 public class ServiceSubscribersList implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(ServiceSubscribersList.class);
+
+    /**
      * Subscriber's service
      */
     private SubService subService = SubService.getInstance();
@@ -34,6 +40,7 @@ public class ServiceSubscribersList implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         try {
             List<Subscriber>   list = subService.getSubsList();

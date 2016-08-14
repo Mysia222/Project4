@@ -3,6 +3,7 @@ package command;
 import dao.DAOException;
 import ent.Service;
 import ent.Subscriber;
+import org.apache.log4j.Logger;
 import services.ServService;
 import services.SubService;
 import views.View;
@@ -18,6 +19,11 @@ import java.util.ResourceBundle;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserRemoveService implements Command {
+
+    /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(UserRemoveService.class);
 
     /**
      * Subscriber's service
@@ -39,6 +45,7 @@ public class UserRemoveService implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         int id = Integer.parseInt(request.getParameter(View.ID_PAGE));
         try {
@@ -49,6 +56,7 @@ public class UserRemoveService implements Command {
             request.getSession().setAttribute(View.SUBSCRIBER_SESSION,sub);
         } catch (DAOException e) {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
+            log.error(View.LOG_BY_USER + request.getSession().getAttribute(View.SUBSCRIBER_SESSION));
             return ViewURL.ERROR_PAGE;
         }
         Command command = CommandList.valueOf(View.USER_CABINET).getCommand();

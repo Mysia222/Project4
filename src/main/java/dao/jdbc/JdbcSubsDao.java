@@ -62,13 +62,34 @@ public class JdbcSubsDao implements SubsDao {
             log.trace(View.LOG_CONNECTED);
             PreparedStatement query = connection.prepareStatement(s);
             query.setInt(1,id);
-            query.executeQuery();
+            query.execute();
             query.close();
         } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
         log.trace(View.LOG_DELETE_SUBSCRIBER+id+View.LOG_FINISHED);
+    }
+    /**
+     * This method deletes an item from DB
+     * @param login is login
+     * @throws DAOException
+     */
+    @Override
+    public void delete(String login) throws DAOException {
+        log.trace(View.LOG_DELETE_SUBSCRIBER_LOGIN + login);
+        String s = "UPDATE daotalk.abonents SET deleted=TRUE WHERE login=?;";
+        try(Connection connection = JdbcDaoFactory.getConnection()){
+            log.trace(View.LOG_CONNECTED);
+            PreparedStatement query = connection.prepareStatement(s);
+            query.setString(1,login);
+            query.execute();
+            query.close();
+        } catch (SQLException e) {
+            log.error(View.LOG_EXECUTE_EXCEPTION,e);
+            throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
+        }
+        log.trace(View.LOG_DELETE_SUBSCRIBER_LOGIN+login+View.LOG_FINISHED);
     }
 
     /**
@@ -145,7 +166,7 @@ public class JdbcSubsDao implements SubsDao {
                 sub.setContract(rs.getInt(View.QUERY_CONTRACT));
                 sub.setAdmin(rs.getBoolean(View.QUERY_ADMIN));
                 sub.setBlocked(rs.getBoolean(View.QUERY_BLOCKED));
-                sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_PASSWORD), login));
+                sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_PASSWORD), login));
                 sub.setCurrentService(getSubsServices(sub.getContract()));
             }
             rs.close();
@@ -180,7 +201,7 @@ public class JdbcSubsDao implements SubsDao {
                 sub.setAdmin(rs.getBoolean(View.QUERY_ADMIN));
                 sub.setBlocked(rs.getBoolean(View.QUERY_BLOCKED));
                 sub.setCurrentService(getSubsServices(sub.getContract()));
-                sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_F_NAME),
+                sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_S_NAME),
                 rs.getString(View.QUERY_PASSWORD), rs.getString(View.QUERY_LOGIN)));
             }
             rs.close();
@@ -328,6 +349,8 @@ public class JdbcSubsDao implements SubsDao {
             throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
         }
     }
+
+
 
     /**
      * This method find and write in collection all sub's services

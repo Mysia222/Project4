@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import org.apache.log4j.Logger;
 import services.SubService;
 import views.View;
 import views.ViewURL;
@@ -18,6 +19,11 @@ import java.util.ResourceBundle;
 public class ServiceUnlockSubscriber implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(ServiceUnlockSubscriber.class);
+
+    /**
      * Subscriber's service
      */
     private SubService subService = SubService.getInstance();
@@ -32,6 +38,7 @@ public class ServiceUnlockSubscriber implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         try {
             subService.unlockId(Integer.parseInt(request.getParameter(View.ID_PAGE)));

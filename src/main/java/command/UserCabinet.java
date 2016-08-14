@@ -2,6 +2,7 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import org.apache.log4j.Logger;
 import services.SubService;
 import views.View;
 import views.ViewURL;
@@ -18,6 +19,11 @@ import java.util.ResourceBundle;
 public class UserCabinet implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(UserCabinet.class);
+
+    /**
      * Subscriber's service
      */
     private SubService subService = SubService.getInstance();
@@ -32,6 +38,7 @@ public class UserCabinet implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber) request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         try {
@@ -40,14 +47,12 @@ public class UserCabinet implements Command {
             request.setAttribute(View.FIRST_NAME_PAGE, sub.getInfo().getFirstName());
             request.setAttribute(View.SECOND_NAME_PAGE, sub.getInfo().getSecondName());
             request.setAttribute(View.LOGIN_PAGE, sub.getInfo().getLogin());
-            request.setAttribute(View.PASSWORD_PAGE, sub.getInfo().getPassword());
             request.setAttribute(View.BALANCE_PAGE, sub.getBalance());
             request.setAttribute(View.CONTRACT_PAGE, sub.getContract());
             request.setAttribute(View.CURRENT_SERVICE_PAGE, sub.getCurrentService());
             request.setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));
             request.setAttribute(View.SECOND_NAME_PAGE_H, bundle.getString(View.SECOND_NAME));
             request.setAttribute(View.LOGIN_PAGE_H, bundle.getString(View.LOGIN));
-            request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
             request.setAttribute(View.BALANCE_PAGE_H, bundle.getString(View.BALANCE));
             request.setAttribute(View.CONTRACT_PAGE_H, bundle.getString(View.CONTRACT));
             request.setAttribute(View.CURRENT_SERVICE_PAGE_H, bundle.getString(View.CURRENT_SERVICE));
@@ -58,6 +63,7 @@ public class UserCabinet implements Command {
             request.getSession().setAttribute(View.SUBSCRIBER_SESSION,sub);
             return ViewURL.HOME_JSP;
         } catch (DAOException e) {
+            log.error(View.LOG_BY_USER + request.getSession().getAttribute(View.SUBSCRIBER_SESSION));
             request.setAttribute(View.ERROR_CAUSE, View.CANT_DO_REQUEST);
             return ViewURL.ERROR_PAGE;
         }

@@ -59,4 +59,11 @@ public interface SubsDao extends GenericDao<Subscriber> {
      * @throws DAOException
      */
     void updateSubsServices(Subscriber sub) throws DAOException;
+
+    /**
+     * This method deletes subscriber with login
+     * @param login is subscriber's login
+     * @throws DAOException
+     */
+    void delete(String login) throws DAOException;
 }

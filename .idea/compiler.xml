@@ -27,7 +27,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MoreLess" target="1.7" />
+      <module name="MoreLess" target="1.8" />
       <module name="Tsk4v2" target="1.5" />
     </bytecodeTargetLevel>
   </component>

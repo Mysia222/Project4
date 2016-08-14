@@ -39,14 +39,14 @@ public class UserCabinetTest extends Mockito{
         verify(request, atLeastOnce()).setAttribute(View.FIRST_NAME_PAGE, sub.getInfo().getFirstName());
         verify(request, atLeastOnce()).setAttribute(View.SECOND_NAME_PAGE, sub.getInfo().getSecondName());
         verify(request, atLeastOnce()).setAttribute(View.LOGIN_PAGE, sub.getInfo().getLogin());
-        verify(request, atLeastOnce()).setAttribute(View.PASSWORD_PAGE, sub.getInfo().getPassword());
+//        verify(request, atLeastOnce()).setAttribute(View.PASSWORD_PAGE, sub.getInfo().getPassword());
         verify(request, atLeastOnce()).setAttribute(View.BALANCE_PAGE, sub.getBalance());
         verify(request, atLeastOnce()).setAttribute(View.CONTRACT_PAGE, sub.getContract());
         verify(request, atLeastOnce()).setAttribute(View.CURRENT_SERVICE_PAGE, sub.getCurrentService());
         verify(request, atLeastOnce()).setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));
         verify(request, atLeastOnce()).setAttribute(View.SECOND_NAME_PAGE_H, bundle.getString(View.SECOND_NAME));
         verify(request, atLeastOnce()).setAttribute(View.LOGIN_PAGE_H, bundle.getString(View.LOGIN));
-        verify(request, atLeastOnce()).setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+//        verify(request, atLeastOnce()).setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
         verify(request, atLeastOnce()).setAttribute(View.BALANCE_PAGE_H, bundle.getString(View.BALANCE));
         verify(request, atLeastOnce()).setAttribute(View.CONTRACT_PAGE_H, bundle.getString(View.CONTRACT));
         verify(request, atLeastOnce()).setAttribute(View.CURRENT_SERVICE_PAGE_H, bundle.getString(View.CURRENT_SERVICE));

@@ -1,5 +1,6 @@
 package command;
 
+import org.apache.log4j.Logger;
 import services.SubService;
 import views.View;
 import views.ViewURL;
@@ -16,6 +17,11 @@ import java.util.ResourceBundle;
 public class ServiceAdminCabinet implements Command {
 
     /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(ServiceAdminCabinet.class);
+
+    /**
      * This method sets attributes to Admin.jsp according session's Locale
      * @param request is request which will be processing
      * @param response is response after processing
@@ -25,6 +31,7 @@ public class ServiceAdminCabinet implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(View.BUNDLE);
         request.setAttribute(View.LOGOUT_BUTTON, bundle.getString(View.LOGOUT));
         request.setAttribute(View.ADMIN_VIEW_SUBS_BUTTON, bundle.getString(View.ADMIN_VIEW_SUBS));

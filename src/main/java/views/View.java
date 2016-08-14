@@ -15,6 +15,8 @@ public class View {
     public static final String UA = "UA";
     public static final String DRAW_INDEX = "DRAW_INDEX";
     public static final String LOG_DATA_SOURCE_EXCEPTION = "Can't return Data source connection!";
+    public static final String LOG_LOCALE_SETTED = "Resource bundle setted: ";
+    public static final String LOG_SUB = "Account: ";
 
 
 
@@ -64,8 +66,8 @@ public class View {
     public static final String BALANCE_PAGE_H ="balanceH";
 
 
-    public static  String BLOCKED_TRUE ="msg.blocked_true";
-    public static  String BLOCKED_FALSE ="msg.blocked_false";
+    public static final  String BLOCKED_TRUE ="msg.blocked_true";
+    public static final String BLOCKED_FALSE ="msg.blocked_false";
     public static final String BLOCKED_PAGE ="blocked";
 
     public static final String USER_LOG_PATTERN_PAGE = "logPatternErr";
@@ -209,20 +211,6 @@ public class View {
 
     public static final String EDIT_SERVICE_NAME_FIRST = "msg.editServiceNameFirst";
 
-
-
-
-//*****************************************
-//    public static final String PAGE_LOGIN = "login";
-//    public static final String PAGE_PASSWORD = "password";
-
-
-
-//    public static final String LOGIN_B = "Login";
-//    public static final String LOGIN_L = "Login_l";
-//    public static final String PASSWORD_B = "Password";
-//    public static final String PASSWORD_L = "Password_l";
-
     public static final String QUERY_LOGIN = "login";
     public static final String QUERY_SERVICE_NAME = "name";
     public static final String QUERY_SERVICE_PRICE = "price";
@@ -238,29 +226,38 @@ public class View {
     public static final String QUERY_F_NAME = "first_name";
     public static final String QUERY_SUB_SERVICE_ID = "service_id";
 
-    public static final String CLOSE_EXCEPTION = "Close exception";
     public static final String LOG_EXECUTE_EXCEPTION = "Execute exception";
 
     public static final String DB_URL = "java:comp/env/jdbc/mysql";
 
 
-    public static String LOG_FIND_BY_LOG_PAS = "Checking for login and password in DB: ";
+    public static final String LOG_FIND_BY_LOG_PAS = "Checking for login and password in DB: ";
     public static final String LOG_FIND_BY_LOG_PAS_EXCEPTION = "Exception while searching subscriber by login and password!";
-    public static String LOG_DELETE_SUBSCRIBER = "Deleting subscriber, id: ";
-    public static String LOG_RESULT = "Result: ";
-    public static String LOG_LOCK_SUBSCRIBER = "Locking subscriber, id: ";
-    public static String LOG_UNLOCK_SUBSCRIBER= "Unlocking subscriber, id: ";
-    public static String LOG_UPDATE_SUBSCRIBERS_BALANCE="Updating subscriber's balance: ";
-    public static String LOG_UPDATE_SUBSCRIBER="Updating subscriber: ";
-    public static String LOG_DELETE_SUBSCRIBERS_SERVICES = "Deleting subscriber's service, id: ";
-    public static String LOG_UPDATE_SUBSCRIBERS_SERVICES = "Updating subscriber's service, sub: ";
-    public static String LOG_NAME_IN_USE="Checking for using name: ";
-    public static String LOG_SET_UNEDIT_TO_SERVICE = "Setting edit FALSE to service, id: ";
-    public static String LOG_SET_EDIT_TO_SERVICE = "Setting edit TRUE to service, id: ";
-    public static String LOG_DELETE_SERVICE = "Deleting service, id: ";
-    public static String LOG_UPDATE_SERVICE  = "Updating service: ";
-    public static String LOG_CREATE_SERVICE = "Creating service: ";
-    public static String LOG_FIND_ALL_SERVICE = "Searching for all services: ";
-    public static String LOG_FIND_SERVICE= "Searching for service, param: ";
+    public static final String LOG_DELETE_SUBSCRIBER = "Deleting subscriber, id: ";
+    public static final String LOG_DELETE_SUBSCRIBER_LOGIN = "Deleting subscriber, login: ";
+    public static final String LOG_RESULT = "Result: ";
+    public static final String LOG_LOCK_SUBSCRIBER = "Locking subscriber, id: ";
+    public static final String LOG_UNLOCK_SUBSCRIBER= "Unlocking subscriber, id: ";
+    public static final String LOG_UPDATE_SUBSCRIBERS_BALANCE="Updating subscriber's balance: ";
+    public static final String LOG_UPDATE_SUBSCRIBER="Updating subscriber: ";
+    public static final String LOG_DELETE_SUBSCRIBERS_SERVICES = "Deleting subscriber's service, id: ";
+    public static final String LOG_UPDATE_SUBSCRIBERS_SERVICES = "Updating subscriber's service, sub: ";
+    public static final String LOG_NAME_IN_USE="Checking for using name: ";
+    public static final String LOG_SET_UNEDIT_TO_SERVICE = "Setting edit FALSE to service, id: ";
+    public static final String LOG_SET_EDIT_TO_SERVICE = "Setting edit TRUE to service, id: ";
+    public static final String LOG_DELETE_SERVICE = "Deleting service, id: ";
+    public static final String LOG_UPDATE_SERVICE  = "Updating service: ";
+    public static final String LOG_CREATE_SERVICE = "Creating service: ";
+    public static final String LOG_FIND_ALL_SERVICE = "Searching for all services: ";
+    public static final String LOG_FIND_SERVICE= "Searching for service, param: ";
 
+    public static final String COMMAND_EXECUTE = "Executing command name: ";
+    public static final String LOG_ENABLE = "Name is enable!";
+    public static final String LOG_ABLE_NAME = "Name is able!";
+    public static final String LOG_ENABLE_LOGIN = "Login is enable!";
+    public static final String LOG_ABLE_LOGIN = "Login is able!";
+    public static final String LOG_SUCCESSFUL_ENTER = "Successful enter";
+    public static final String LOG_WRONG_LOGIN = "Wrong login!";
+    public static final String LOG_WRONG_PASSWORD = "Wrong password!";
+    public static final String LOG_BY_USER = "User's entity: ";
 }

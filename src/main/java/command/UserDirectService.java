@@ -3,6 +3,7 @@ package command;
 import dao.DAOException;
 import ent.Service;
 import ent.Subscriber;
+import org.apache.log4j.Logger;
 import services.ServService;
 import services.SubService;
 import views.View;
@@ -18,6 +19,11 @@ import java.util.*;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserDirectService implements Command {
+
+    /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(UserDirectService.class);
 
     /**
      * Subscriber's service
@@ -40,6 +46,7 @@ public class UserDirectService implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         try {
@@ -65,11 +72,12 @@ public class UserDirectService implements Command {
             request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
             Set idSet = new HashSet();
             for(Service s: sub.getCurrentService()){
-                    idSet.add(s.getId());
+                idSet.add(s.getId());
             }
             request.setAttribute(View.SERVICES_LIST_ID,idSet);
             return ViewURL.SERVICE_LIST_JSP;
         } catch (DAOException e) {
+            log.error(View.LOG_BY_USER + request.getSession().getAttribute(View.SUBSCRIBER_SESSION));
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;
         }

@@ -74,29 +74,28 @@ th{
     width: 45px;
     background-image: url(en_EN.png);
 
-    background-repeat: no-repeat; /*Убираем повтор изображения*/
-    background-position: 100%; /*Позиционируем*/
-    outline: none; /*убираем стандартную обводку браузера*/
-    -moz-border-radius: 5px; /*закругляем углы для Mozilla*/
-    -webkit-border-radius: 5px; /*закругляем углы для Chrome, Safari*/
-    border-radius: 5px; /*закругляем углы для остальных браузеров*/
-    padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/
-    height: 30px; /*высота строки ввода*/
-    font-size: 13px; /*размер шрифта*/
+    background-repeat: no-repeat;
+    background-position: 100%;
+    outline: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding-left: 20px;
+    height: 30px;
+    font-size: 13px;
 }
 .flags_UA{
 
     width: 45px;
     background-image: url(uk_UA.png);
-    background-repeat: no-repeat; /*Убираем повтор изображения*/
-    /*background-position: 100%; !*Позиционируем*!*/
-    outline: none; /*убираем стандартную обводку браузера*/
-    -moz-border-radius: 5px; /*закругляем углы для Mozilla*/
-    -webkit-border-radius: 5px; /*закругляем углы для Chrome, Safari*/
-    border-radius: 5px; /*закругляем углы для остальных браузеров*/
-    padding-left: 20px; /*отступ слева от ввода, чтобы текст не был на картинке(выбирать по размеру картинки)*/
-    height: 30px; /*высота строки ввода*/
-    font-size: 13px; /*размер шрифта*/
+    background-repeat: no-repeat;
+    outline: none;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding-left: 20px;
+    height: 30px;
+    font-size: 13px;
 }
 .flags{
     display: inline-block;

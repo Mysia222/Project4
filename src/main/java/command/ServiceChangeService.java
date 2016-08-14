@@ -1,6 +1,7 @@
 package command;
 
 import dao.DAOException;
+import org.apache.log4j.Logger;
 import services.ServService;
 import views.View;
 import views.ViewURL;
@@ -15,6 +16,11 @@ import java.util.ResourceBundle;
  * Created by Potaychuck Sviatoslav on 03.08.2016.
  */
 public class ServiceChangeService implements Command {
+
+    /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(ServiceChangeService.class);
 
     /**
      * Service's service
@@ -32,6 +38,7 @@ public class ServiceChangeService implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
         try {

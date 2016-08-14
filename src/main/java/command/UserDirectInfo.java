@@ -2,6 +2,8 @@ package command;
 
 import dao.DAOException;
 import ent.Subscriber;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.log4j.Logger;
 import services.SubService;
 import views.View;
 import views.ViewURL;
@@ -16,6 +18,11 @@ import java.util.ResourceBundle;
  * Created by potaychuk on 03.08.2016.
  */
 public class UserDirectInfo implements Command {
+
+    /**
+     * Logger
+     */
+    private static Logger log =  Logger.getLogger(UserDirectInfo.class);
 
     /**
      * It's subscriber's service
@@ -35,13 +42,13 @@ public class UserDirectInfo implements Command {
      */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
+        log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
+        ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         //request from Home.jsp
         if(request.getParameter(View.DIRECT_INFO_BUTTON).equals(bundle.getString(View.DIRECT_INFO))){
             request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
             request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
-            request.setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
             request.setAttribute(View.SAVED_LOGIN, sub.getInfo().getLogin());
             request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
             request.setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));
@@ -53,12 +60,13 @@ public class UserDirectInfo implements Command {
             request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
             request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
             return ViewURL.DIRECT_INFO_JSP;
-         //request from DirectInfo.jsp
+            //request from DirectInfo.jsp
         }else {
             try {
                 Subscriber temp = subService.find(request.getParameter(View.LOGIN_PAGE));
                 //login in use?
                 if (temp!=null && temp.getContract()!=sub.getContract()){
+                    log.trace(View.LOG_ENABLE_LOGIN);
                     request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
                     request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
                     request.setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
@@ -73,9 +81,11 @@ public class UserDirectInfo implements Command {
                     request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
                     request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
                     return ViewURL.DIRECT_INFO_JSP;
+                    //all right
                 }else {
+                    log.trace(View.LOG_ABLE_LOGIN);
                     sub.getInfo().setLogin(request.getParameter(View.LOGIN_PAGE));
-                    sub.getInfo().setPassword(request.getParameter(View.PASSWORD_PAGE));
+                    sub.getInfo().setPassword(DigestUtils.md5Hex(request.getParameter(View.PASSWORD_PAGE)));
                     sub.getInfo().setFirstName(request.getParameter(View.FIRST_NAME_PAGE));
                     sub.getInfo().setSecondName(request.getParameter(View.SECOND_NAME_PAGE));
                     request.getSession().setAttribute(View.SUBSCRIBER_SESSION, sub);
@@ -84,6 +94,7 @@ public class UserDirectInfo implements Command {
                     return command.execute(request, response);
                 }
             }catch (DAOException e){
+                log.error(View.LOG_BY_USER + request.getSession().getAttribute(View.SUBSCRIBER_SESSION));
                 request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
                 return ViewURL.ERROR_PAGE;
             }

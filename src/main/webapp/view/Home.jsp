@@ -87,10 +87,10 @@
                                 <td>${loginH}:</td>
                                 <td>${login}</td>
                             </tr>
-                            <tr>
+                            <%--<tr>
                                 <td>${passwordH}:</td>
                                 <td>${password}</td>
-                            </tr>
+                            </tr>--%>
                         </table>
                                 </div>
                         </div>
