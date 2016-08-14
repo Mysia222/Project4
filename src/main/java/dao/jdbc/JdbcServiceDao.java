@@ -164,7 +164,7 @@ public class JdbcServiceDao implements ServicesDao {
     public void delete(int id) throws DAOException {
         log.trace(View.LOG_DELETE_SERVICE+id);
         String s = "UPDATE daotalk.tel_service SET deleted=TRUE WHERE id=?;";
-        String s2 = "UPDATE daotalk.sub_services SET deleted=TRUE WHERE service_id=?;";
+        String s2 = " DELETE FROM daotalk.sub_services WHERE service_id=?;";
         try(Connection connection = JdbcDaoFactory.getConnection()) {
             log.trace(View.LOG_CONNECTED);
             PreparedStatement query = connection.prepareStatement(s);
@@ -172,7 +172,7 @@ public class JdbcServiceDao implements ServicesDao {
             query.setInt(1, id);
             query.execute();
             query2.setInt(1, id);
-            query.execute();
+            query2.execute();
             query.close();
             query2.close();
             log.trace(View.LOG_DELETE_SERVICE+id+ View.LOG_FINISHED);

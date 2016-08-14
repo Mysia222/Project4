@@ -51,15 +51,15 @@ public class UserCreate implements Command {
         }
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         //request from index.jsp
+        //in this case CreateSub.jsp will be "painted" and it's url will be returned as String
         if(request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(bundle.getString(View.CREATE_ACCOUNT)) ||
                 request.getParameter(View.CREATE_ACCOUNT_PAGE).equals(View.CREATE_ACCOUNT_PAGE_DEFAULT)){
             log.trace(View.COMMAND_EXECUTE + this.getClass().getName());
+            request = setPatterns(request);
             request.setAttribute(View.SAVED_FIRST_NAME, "");
             request.setAttribute(View.SAVED_SECOND_NAME, "");
             request.setAttribute(View.SAVED_PASSWORD,"");
             request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
-            request.setAttribute(View.USER_LOG_PATTERN_PAGE, bundle.getString(View.USER_LOG_PATTERN));
-            request.setAttribute(View.USER_NAME_PATTERN_PAGE, bundle.getString(View.USER_NAME_PATTERN));
             request.setAttribute(View.FIRST_NAME_PAGE,  bundle.getString(View.FIRST_NAME));
             request.setAttribute(View.SECOND_NAME_PAGE,  bundle.getString(View.SECOND_NAME));
             request.setAttribute(View.LOGIN_PAGE,  bundle.getString(View.LOGIN));
@@ -69,10 +69,32 @@ public class UserCreate implements Command {
             return ViewURL.CREATE_SUB_JSP;
         }
         //request from CreateSub.jsp
+        //in this case request will be checked for valid data and processed
         try{
-            log.trace(View.LOG_ABLE_NAME);
+            //empty fields
+            //inform about it while all fields will be filled according patterns
+            String s = request.getParameter(View.FIRST_NAME_PAGE);
+            if (request.getParameter(View.FIRST_NAME_PAGE).equals("") || request.getParameter(View.SECOND_NAME_PAGE).equals("")||
+                    request.getParameter(View.LOGIN_PAGE).equals("")|| request.getParameter(View.PASSWORD_PAGE).equals("")){
+                request = setPatterns(request);
+                request.setAttribute(View.SAVED_FIRST_NAME, request.getParameter(View.FIRST_NAME_PAGE));
+                request.setAttribute(View.SAVED_SECOND_NAME, request.getParameter(View.SECOND_NAME_PAGE));
+                request.setAttribute(View.SAVED_PASSWORD, request.getParameter(View.PASSWORD_PAGE));
+                request.setAttribute(View.SAVED_LOGIN, request.getParameter(View.LOGIN_PAGE));
+                request.setAttribute(View.LOGIN_IN_USE_PAGE,  bundle.getString(View.EMPTY_FIELDS));
+                request.setAttribute(View.USER_INFO_PAGE,  bundle.getString(View.USER_INFO));
+                request.setAttribute(View.FIRST_NAME_PAGE,  bundle.getString(View.FIRST_NAME));
+                request.setAttribute(View.SECOND_NAME_PAGE,  bundle.getString(View.SECOND_NAME));
+                request.setAttribute(View.LOGIN_PAGE,  bundle.getString(View.LOGIN));
+                request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
+                request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
+                request.setAttribute(View.CREATE_PAGE, bundle.getString(View.CREATE));
+                return ViewURL.CREATE_SUB_JSP;
+
+            }
             Subscriber sub = subService.find(request.getParameter(View.QUERY_LOGIN));
             //Is login able?
+            //if it's redirect to cabinet
             if(sub==null) {
                 log.trace(View.LOG_ABLE_LOGIN);
                 sub=new Subscriber();
@@ -87,12 +109,13 @@ public class UserCreate implements Command {
                 Command command = CommandList.valueOf(View.USER_CABINET).getCommand();
                 return command.execute(request, response);
                 //login in use
+                //inform about it with attribute View.LOGIN_IN_USE_PAGE
             }else {
                 log.trace(View.LOG_ENABLE_LOGIN);
+                request.setAttribute(View.LOGIN_IN_USE_PAGE,  bundle.getString(View.LOGIN_IN_USE));
                 request.setAttribute(View.SAVED_FIRST_NAME, request.getParameter(View.FIRST_NAME_PAGE));
                 request.setAttribute(View.SAVED_SECOND_NAME, request.getParameter(View.SECOND_NAME_PAGE));
                 request.setAttribute(View.SAVED_PASSWORD, request.getParameter(View.PASSWORD_PAGE));
-                request.setAttribute(View.LOGIN_IN_USE_PAGE,  bundle.getString(View.LOGIN_IN_USE));
                 request.setAttribute(View.USER_INFO_PAGE,  bundle.getString(View.USER_INFO));
                 request.setAttribute(View.FIRST_NAME_PAGE,  bundle.getString(View.FIRST_NAME));
                 request.setAttribute(View.SECOND_NAME_PAGE,  bundle.getString(View.SECOND_NAME));
@@ -108,6 +131,21 @@ public class UserCreate implements Command {
             return ViewURL.ERROR_PAGE;
         }
 
+    }
+
+    /**
+     * This method setts login, name and password's patterns to jsp
+     * @param request is request in which attributes patterns will be setted
+     * @return request
+     */
+    private HttpServletRequest setPatterns(HttpServletRequest request){
+        request.setAttribute(View.USER_LOG_PATTERN_PAGE, ((ResourceBundle)request.getSession().getAttribute(View.BUNDLE)).getString(View.USER_LOG_PATTERN));
+        request.setAttribute(View.USER_NAME_PATTERN_PAGE, ((ResourceBundle)request.getSession().getAttribute(View.BUNDLE)).getString(View.USER_NAME_PATTERN));
+        request.setAttribute(View.USER_PASSWORD_PATTERN_PAGE, ((ResourceBundle)request.getSession().getAttribute(View.BUNDLE)).getString(View.USER_PASSWORD_PATTERN));
+        request.setAttribute(View.PATTERN_LOGIN_PAGE, View.PATTERN_LOGIN);
+        request.setAttribute(View.PATTERN_NAME_PAGE, View.PATTERN_NAME);
+        request.setAttribute(View.PATTERN_PASSWORD_PAGE, View.PATTERN_PASSWORD);
+        return request;
     }
 
     public SubService getSubService() {

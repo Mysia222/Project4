@@ -47,6 +47,7 @@ public class UserDirectInfo implements Command {
         Subscriber sub = (Subscriber)request.getSession().getAttribute(View.SUBSCRIBER_SESSION);
         //request from Home.jsp
         if(request.getParameter(View.DIRECT_INFO_BUTTON).equals(bundle.getString(View.DIRECT_INFO))){
+            request = setPatterns(request);
             request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
             request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
             request.setAttribute(View.SAVED_LOGIN, sub.getInfo().getLogin());
@@ -67,6 +68,7 @@ public class UserDirectInfo implements Command {
                 //login in use?
                 if (temp!=null && temp.getContract()!=sub.getContract()){
                     log.trace(View.LOG_ENABLE_LOGIN);
+                    request=setPatterns(request);
                     request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
                     request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
                     request.setAttribute(View.SAVED_PASSWORD, sub.getInfo().getPassword());
@@ -101,6 +103,20 @@ public class UserDirectInfo implements Command {
         }
     }
 
+    /**
+     * This method setts login, name and password's patterns to jsp
+     * @param request is request in which attributes patterns will be setted
+     * @return request
+     */
+    private HttpServletRequest setPatterns(HttpServletRequest request){
+        request.setAttribute(View.PATTERN_LOGIN_PAGE, View.PATTERN_LOGIN);
+        request.setAttribute(View.PATTERN_NAME_PAGE, View.PATTERN_NAME);
+        request.setAttribute(View.PATTERN_PASSWORD_PAGE, View.PATTERN_PASSWORD);
+        request.setAttribute(View.USER_LOG_PATTERN_PAGE, ((ResourceBundle)request.getSession().getAttribute(View.BUNDLE)).getString(View.USER_LOG_PATTERN));
+        request.setAttribute(View.USER_NAME_PATTERN_PAGE, ((ResourceBundle)request.getSession().getAttribute(View.BUNDLE)).getString(View.USER_NAME_PATTERN));
+        request.setAttribute(View.USER_PASSWORD_PATTERN_PAGE, ((ResourceBundle)request.getSession().getAttribute(View.BUNDLE)).getString(View.USER_PASSWORD_PATTERN));
+        return request;
+    }
     //getters & setters
     public SubService getSubService() {
         return subService;

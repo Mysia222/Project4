@@ -65,6 +65,11 @@ public class UserCreateTest extends Mockito{
         when(session.getAttribute(View.BUNDLE)).thenReturn(bundle);
         Subscriber sub = new Subscriber();
         when(request.getParameter(View.QUERY_LOGIN)).thenReturn("0");
+        when(request.getParameter(View.FIRST_NAME_PAGE)).thenReturn("test");
+        when(request.getParameter(View.SECOND_NAME_PAGE)).thenReturn("test");
+        when(request.getParameter(View.LOGIN_PAGE)).thenReturn("test");
+        when(request.getParameter(View.PASSWORD_PAGE)).thenReturn("test");
+
         when(service.find(request.getParameter(View.QUERY_LOGIN))).thenReturn(sub);
 
         String testString = command.execute(request,response);

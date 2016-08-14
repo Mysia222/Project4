@@ -28,19 +28,19 @@
                         <table>
                             <tr>
                                 <td>${fName}:</td>
-                                <td><input type="text" pattern="^[a-zA-Zа-яА-Я]{1,15}$" oninvalid="setCustomValidity('${namePatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="fName" value="${savedFName}"></td>
+                                <td><input type="text" pattern="${patternName}" oninvalid="setCustomValidity('${namePatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="fName" value="${savedFName}"></td>
                             </tr>
                             <tr>
                                 <td>${sName}:</td>
-                                <td><input type="text" pattern="^[a-zA-Zа-яА-Я]{1,15}$" oninvalid="setCustomValidity('${namePatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="sName" value="${savedSName}"></td>
+                                <td><input type="text" pattern="${patternName}" oninvalid="setCustomValidity('${namePatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="sName" value="${savedSName}"></td>
                             </tr>
                             <tr>
                                 <td>${login}:</td>
-                                <td><input type="text"  pattern="^[A-Za-z0-9]{1,15}$" oninvalid="setCustomValidity('${logPatternErr}')" onchange="try{setCustomValidity('')}catch(e){}"  name="login"></td>
+                                <td><input type="text"  pattern="${patternLogin}" oninvalid="setCustomValidity('${logPatternErr}')" onchange="try{setCustomValidity('')}catch(e){}"  name="login" value="${savedLogin}"></td>
                             </tr>
                             <tr>
                                 <td>${password}:</td>
-                                <td><input type="text" name="password" value="${savedPassword}"></td>
+                                <td><input type="text" pattern="${patternPassword}" oninvalid="setCustomValidity('${passwordPatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="password" value="${savedPassword}"></td>
                             </tr>
                         </table>
                            <input type="submit" name="create_account" value="${create}">

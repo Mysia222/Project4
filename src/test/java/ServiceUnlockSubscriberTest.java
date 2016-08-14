@@ -45,7 +45,7 @@ public class ServiceUnlockSubscriberTest  extends Mockito{
         verify(service,atLeastOnce()).unlockId(anyInt());
         verify(session,atLeastOnce()).getAttribute(View.BUNDLE);
         verify(request,atLeastOnce()).getSession();
-        assertEquals(testString, ViewURL.ERROR_PAGE);
+        assertEquals(testString, ViewURL.USER_LIST_JSP);
 
     }
 

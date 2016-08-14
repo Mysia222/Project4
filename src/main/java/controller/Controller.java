@@ -20,14 +20,18 @@ import java.util.ResourceBundle;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandName = request.getParameter("command");
+        response.setContentType ("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String commandName = request.getParameter(View.COMMAND_PAGE);
         Command command = CommandList.valueOf(commandName).getCommand();
         String goTo = command.execute(request, response);
         request.getRequestDispatcher(goTo).forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandName = request.getParameter("command");
+        response.setContentType ("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String commandName = request.getParameter(View.COMMAND_PAGE);
         Command command = CommandList.valueOf(commandName).getCommand();
         String goTo = command.execute(request, response);
         request.getRequestDispatcher(goTo).forward(request, response);

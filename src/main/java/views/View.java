@@ -17,24 +17,17 @@ public class View {
     public static final String LOG_DATA_SOURCE_EXCEPTION = "Can't return Data source connection!";
     public static final String LOG_LOCALE_SETTED = "Resource bundle setted: ";
     public static final String LOG_SUB = "Account: ";
-
-
+    public static final String COMMAND_PAGE = "command";
 
     public static Locale localeUA = new Locale("uk","UA");
     public static Locale localeEN = new Locale("en","EN");
 
-    //    public static ResourceBundle bundle = ResourceBundle.getBundle(BUNDLE_NAME , new Locale("uk" ,"UA"));
-    public static final String WRONG_ENTER = "Wrong enter! Please repeat input login and password.";
     public static final String SUBSCRIBER_SESSION ="subscriber" ;
     public static final String USER_CABINET ="USER_CABINET" ;
     public static final String ADMIN_CABINET = "SERVICE_ADMIN_CABINET";
     public static final String SERVICE_SUBSCRIBERS = "SERVICE_SUBSCRIBERS";
     public static final String SERVICES_LIST_EDIT = "SERVICE_SERVICES";
     public static final String USER_DIRECT_SERVICE = "USER_DIRECT_SERVICE";
-    public static final String CREATE_NEW_FLAG = "createFlag";
-    public static final String CREATE_NEW_FLAG_BUTTON = "newFlag";
-    public static final String CREATE_NEW_FLAG_TRUE = "true";
-    public static final String CREATE_NEW_FLAG_FALSE = "false";
     public static final String JUST_CREATED_SERVICE_NAME = "New Service";
     public static final String LOG_CREATE_SUBSCRIBER = "Creating new subscriber.";
     public static final String LOG_CONNECTED = "Successfully connected to Data Source.";
@@ -65,16 +58,25 @@ public class View {
     public static final String BALANCE_PAGE ="balance";
     public static final String BALANCE_PAGE_H ="balanceH";
 
-
     public static final  String BLOCKED_TRUE ="msg.blocked_true";
     public static final String BLOCKED_FALSE ="msg.blocked_false";
     public static final String BLOCKED_PAGE ="blocked";
+
+    public static final String PATTERN_NAME = "^[a-zA-Zа-яА-ЯіІїЇ]{1,15}";
+    public static final String PATTERN_NAME_PAGE = "patternName";
+    public static final String PATTERN_LOGIN = "^[a-zA-Z0-9]{1,15}";
+    public static final String PATTERN_LOGIN_PAGE = "patternLogin";
+    public static final String PATTERN_PASSWORD = "(.){6,15}";
+    public static final String PATTERN_PASSWORD_PAGE = "patternPassword";
 
     public static final String USER_LOG_PATTERN_PAGE = "logPatternErr";
     public static final String USER_LOG_PATTERN = "msg.logPatternErr";
 
     public static final String USER_NAME_PATTERN_PAGE = "namePatternErr";
     public static final String USER_NAME_PATTERN = "msg.namePatternErr";
+
+    public static final String USER_PASSWORD_PATTERN_PAGE = "passwordPatternErr";
+    public static final String USER_PASSWORD_PATTERN = "msg.passwordPatternErr";
 
     public static final String PASSWORD ="msg.password";
     public static final String PASSWORD_PAGE ="password";
@@ -97,6 +99,7 @@ public class View {
     public static final String SECOND_NAME_PAGE_H="sNameH";
 
     public static final String LOGIN_IN_USE="msg.loginInUse";
+    public static final String EMPTY_FIELDS = "msg.emptyField";
     public static final String LOGIN_IN_USE_PAGE="loginInUse";
 
     public static final String USER_INFO="msg.userInfo";

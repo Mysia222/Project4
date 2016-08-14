@@ -62,7 +62,7 @@ public class JdbcSubsDao implements SubsDao {
             log.trace(View.LOG_CONNECTED);
             PreparedStatement query = connection.prepareStatement(s);
             query.setInt(1,id);
-            query.execute();
+            query.executeQuery();
             query.close();
         } catch (SQLException e) {
             log.error(View.LOG_EXECUTE_EXCEPTION,e);
@@ -311,7 +311,7 @@ public class JdbcSubsDao implements SubsDao {
      */
     private void deleteSubsServices(int id) throws DAOException {
         log.trace(View.LOG_DELETE_SUBSCRIBERS_SERVICES + id);
-        String s = "UPDATE daotalk.sub_services SET deleted=TRUE WHERE sub_id=?";
+        String s = "DELETE FROM daotalk.sub_services WHERE sub_id=?";
         try(Connection connection = JdbcDaoFactory.getConnection()){
             log.trace(View.LOG_CONNECTED);
             PreparedStatement query = connection.prepareStatement(s);
