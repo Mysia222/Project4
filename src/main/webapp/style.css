@@ -18,7 +18,7 @@
 .userCabinetItem:first-child{
     float: left;
     width: 33%;
-    margin-left: 40px;
+    margin-left: 20px;
 }
 .userCabinetItem:last-child{
     text-align: left;
