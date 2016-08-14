@@ -361,7 +361,7 @@ public class JdbcSubsDao implements SubsDao {
     private Set<Service> getSubsServices(int id) throws DAOException {
 
         log.trace(View.LOG_GET_SUBS_SERVICES + id);
-        String s = "SELECT * FROM  daotalk.sub_services WHERE sub_id=? AND deleted=FALSE ";
+        String s = "SELECT * FROM  daotalk.sub_services WHERE sub_id=?";
         try(Connection connection = JdbcDaoFactory.getConnection()){
             log.trace(View.LOG_CONNECTED);
             PreparedStatement query = connection.prepareStatement(s);
@@ -371,7 +371,6 @@ public class JdbcSubsDao implements SubsDao {
             while (rs.next()){
                 set.add(ServService.getInstance().getService(rs.getInt(View.QUERY_SUB_SERVICE_ID)));
             }
-            System.out.println(set);
             query.close();
             log.trace(View.LOG_GET_SUBS_SERVICES + id+ View.LOG_FINISHED);
             return set;

@@ -24,7 +24,6 @@ CREATE TABLE daotalk.tel_service
 );
 
 CREATE TABLE daotalk.sub_services (
-  deleted TINYINT(1) NOT NULL DEFAULT '0',
   service_id INT(11) NOT NULL DEFAULT '1',
   sub_id INT(11) NOT NULL,
 #   INDEX fk_sub_services_tel_service1_idx (service_id ASC),
@@ -50,6 +49,6 @@ INSERT INTO daotalk.tel_service  (name, price, id) VALUES ('3g+',85,0);
 INSERT INTO daotalk.tel_service  (name, price, id) VALUES ('4g+',100,0);
 INSERT INTO daotalk.abonents (first_name,second_name,login, password, admin,contract)
 VALUES ('Admin','Admin','Admin', 'e3afed0047b08059d0fada10f400c1e5', TRUE , 0);
-INSERT INTO daotalk.sub_services (sub_id, service_id, deleted) VALUES (1, 1, 0);
+INSERT INTO daotalk.sub_services (sub_id, service_id) VALUES (1, 1);
 DELETE FROM daotalk.sub_services WHERE service_id =14;
 
