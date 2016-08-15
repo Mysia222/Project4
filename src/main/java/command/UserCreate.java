@@ -73,7 +73,6 @@ public class UserCreate implements Command {
         try{
             //empty fields
             //inform about it while all fields will be filled according patterns
-            String s = request.getParameter(View.FIRST_NAME_PAGE);
             if (request.getParameter(View.FIRST_NAME_PAGE).equals("") || request.getParameter(View.SECOND_NAME_PAGE).equals("")||
                     request.getParameter(View.LOGIN_PAGE).equals("")|| request.getParameter(View.PASSWORD_PAGE).equals("")){
                 request = setPatterns(request);
@@ -90,7 +89,6 @@ public class UserCreate implements Command {
                 request.setAttribute(View.PASSWORD_PAGE,  bundle.getString(View.PASSWORD));
                 request.setAttribute(View.CREATE_PAGE, bundle.getString(View.CREATE));
                 return ViewURL.CREATE_SUB_JSP;
-
             }
             Subscriber sub = subService.find(request.getParameter(View.QUERY_LOGIN));
             //Is login able?

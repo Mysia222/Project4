@@ -65,6 +65,29 @@ public class UserDirectInfo implements Command {
         }else {
             try {
                 Subscriber temp = subService.find(request.getParameter(View.LOGIN_PAGE));
+
+                //empty fields
+                //inform about it while all fields will be filled according patterns
+                if (request.getParameter(View.FIRST_NAME_PAGE).equals("") || request.getParameter(View.SECOND_NAME_PAGE).equals("")||
+                        request.getParameter(View.LOGIN_PAGE).equals("")|| request.getParameter(View.PASSWORD_PAGE).equals("")){
+                    request = setPatterns(request);
+                    request=setPatterns(request);
+                    request.setAttribute(View.SAVED_FIRST_NAME, sub.getInfo().getFirstName());
+                    request.setAttribute(View.SAVED_SECOND_NAME, sub.getInfo().getSecondName());
+                    request.setAttribute(View.SAVED_LOGIN, sub.getInfo().getLogin());
+                    request.setAttribute(View.LOGIN_IN_USE_PAGE, bundle.getString(View.EMPTY_FIELDS));
+                    request.setAttribute(View.USER_INFO_PAGE, bundle.getString(View.USER_INFO));
+                    request.setAttribute(View.FIRST_NAME_PAGE_H, bundle.getString(View.FIRST_NAME));
+                    request.setAttribute(View.SECOND_NAME_PAGE_H, bundle.getString(View.SECOND_NAME));
+                    request.setAttribute(View.LOGIN_PAGE_H, bundle.getString(View.LOGIN));
+                    request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+                    request.setAttribute(View.PASSWORD_PAGE_H, bundle.getString(View.PASSWORD));
+                    request.setAttribute(View.CREATE_PAGE, bundle.getString(View.CREATE));
+                    request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
+                    request.setAttribute(View.RETURN_CABINET_PAGE, bundle.getString(View.RETURN_CABINET));
+                    return ViewURL.DIRECT_INFO_JSP;
+                }
+
                 //login in use?
                 if (temp!=null && temp.getContract()!=sub.getContract()){
                     log.trace(View.LOG_ENABLE_LOGIN);

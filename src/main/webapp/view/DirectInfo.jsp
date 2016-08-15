@@ -37,7 +37,7 @@
                             </tr>
                             <tr>
                                 <td>${passwordH}:</td>
-                                <td><input type="text" pattern="${patternPassword}" oninvalid="setCustomValidity('${passwordPatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="password" value="${savedPassword}"></td>
+                                <td><input type="text" pattern="${patternPassword}" oninvalid="setCustomValidity('${passwordPatternErr}')" onchange="try{setCustomValidity('')}catch(e){}" name="password" value=""></td>
                             </tr>
                             </table>
                         <input type="submit" name ="direct_info" value="${save}">

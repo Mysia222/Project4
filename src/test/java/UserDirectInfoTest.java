@@ -77,6 +77,11 @@ public class UserDirectInfoTest extends Mockito {
         when(request.getParameter(View.DIRECT_INFO_BUTTON)).thenReturn("test");
         when(session.getAttribute(View.BUNDLE)).thenReturn(bundle);
         when(session.getAttribute(View.SUBSCRIBER_SESSION)).thenReturn(sub2);
+        when(request.getParameter(View.QUERY_LOGIN)).thenReturn("0");
+        when(request.getParameter(View.FIRST_NAME_PAGE)).thenReturn("test");
+        when(request.getParameter(View.SECOND_NAME_PAGE)).thenReturn("test");
+        when(request.getParameter(View.LOGIN_PAGE)).thenReturn("test");
+        when(request.getParameter(View.PASSWORD_PAGE)).thenReturn("test");
 
         String testString = command.execute(request,response);
 
