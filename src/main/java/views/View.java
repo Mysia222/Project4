@@ -18,6 +18,8 @@ public class View {
     public static final String LOG_LOCALE_SETTED = "Resource bundle setted: ";
     public static final String LOG_SUB = "Account: ";
     public static final String COMMAND_PAGE = "command";
+    public static final String RESPONSE_CONTENT_TYPE = "text/html; charset=UTF-8";
+    public static final String REQUEST_ENCODING = "UTF-8";
 
     public static Locale localeUA = new Locale("uk","UA");
     public static Locale localeEN = new Locale("en","EN");

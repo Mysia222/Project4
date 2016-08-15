@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.*;
 
 /**
- * Created by Славик on 07.08.2016.
+ * Created by Potaychuk Sviatoslav on 07.08.2016.
  */
 public class UserCabinetTest extends Mockito{
 

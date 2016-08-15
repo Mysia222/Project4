@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 
 /**
- * Created by Славик on 14.08.2016.
+ * Created by Potaychuk Sviatoslav on 14.08.2016.
  */
 public class JdbcSubsDaoTest {
 

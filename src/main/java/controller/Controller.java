@@ -20,8 +20,8 @@ import java.util.ResourceBundle;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType ("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding(View.REQUEST_ENCODING);
+        response.setContentType (View.RESPONSE_CONTENT_TYPE);
         String commandName = request.getParameter(View.COMMAND_PAGE);
         Command command = CommandList.valueOf(commandName).getCommand();
         String goTo = command.execute(request, response);
@@ -29,8 +29,8 @@ public class Controller extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType ("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
+        response.setContentType (View.RESPONSE_CONTENT_TYPE);
+        request.setCharacterEncoding(View.REQUEST_ENCODING);
         String commandName = request.getParameter(View.COMMAND_PAGE);
         Command command = CommandList.valueOf(commandName).getCommand();
         String goTo = command.execute(request, response);

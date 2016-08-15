@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.*;
 
 /**
- * Created by Славик on 06.08.2016.
+ * Created by Potaychuk Sviatoslav on 06.08.2016.
  */
 public class ServiceDeleteServiceTest extends Mockito{
     @Test

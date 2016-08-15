@@ -19,9 +19,10 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.*;
 
 /**
- * Created by Славик on 07.08.2016.
+ * Created by Potaychuk Sviatoslav on 07.08.2016.
  */
 public class UserSetServiceTest extends Mockito {
+
     @Test
     public void executeAccountBlocked() throws Exception {
         HttpServletResponse response = mock(HttpServletResponse.class);
