@@ -26,17 +26,15 @@ public class JdbcSubsDaoTest {
 
     @Test
     public void create() throws Exception {
-        int testContract = -1;
         Subscriber subTest= new Subscriber();
         subTest.setInfo(subTest.new SubInfo("test", "test", "test", "test"));
-        subTest.setContract(testContract);
         JdbcSubsDao dao = new JdbcSubsDao();
         try{
             setTestConnection();
             dao.create(subTest);
             setTestConnection();
             subTest = dao.find(subTest.getContract());
-            assertTrue(testContract==subTest.getContract());
+            assertTrue(subTest!=null);
             setTestConnection();
             dao.delete(subTest.getContract());
         } catch (DAOException e) {
@@ -44,7 +42,7 @@ public class JdbcSubsDaoTest {
         }finally {
             try {
                 setTestConnection();
-                dao.delete(subTest.getInfo().getLogin());
+                dao.deleteTest(subTest.getInfo().getLogin());
             }catch (DAOException e) {
                 e.printStackTrace();
             }
@@ -70,7 +68,7 @@ public class JdbcSubsDaoTest {
         }finally {
             try {
                 setTestConnection();
-                dao.delete(subTest.getInfo().getLogin());
+                dao.deleteTest(subTest.getInfo().getLogin());
             }catch (DAOException e) {
                 e.printStackTrace();
             }
@@ -96,7 +94,7 @@ public class JdbcSubsDaoTest {
         }finally {
             try {
                 setTestConnection();
-                dao.delete(subTest.getInfo().getLogin());
+                dao.deleteTest(subTest.getInfo().getLogin());
             }catch (DAOException e) {
                 e.printStackTrace();
             }
