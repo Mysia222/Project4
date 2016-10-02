@@ -3,6 +3,7 @@ package services;
 import dao.DAOException;
 import dao.DaoFactory;
 import dao.ServicesDao;
+import dao.hibernate.HibernateDao;
 import dao.jdbc.JdbcServiceDao;
 import ent.Service;
 
@@ -61,6 +62,7 @@ public class ServService {
     public void create(Service service)  throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
+//        HibernateDao sd =  new HibernateDao();
         sd.create(service);
     }
 

@@ -3,6 +3,7 @@ package dao.jdbc;
 import dao.DaoFactory;
 import dao.ServicesDao;
 import dao.SubsDao;
+import dao.hibernate.HibernateDao;
 import org.apache.log4j.Logger;
 import views.View;
 
@@ -33,15 +34,13 @@ public class JdbcDaoFactory extends DaoFactory {
     public JdbcDaoFactory() {
     }
 
-
-
-
     /**
      * Fabric method
      * @return new JdbcServiceDao()
      */
     public ServicesDao createServicesDao() {
-        return new JdbcServiceDao();
+//        return new JdbcServiceDao();
+        return new HibernateDao();
     }
 
     /**
