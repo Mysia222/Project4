@@ -78,7 +78,14 @@ public class HibernateDao implements ServicesDao{
 
     @Override
     public void delete(int id) throws DAOException {
-
+        Session session = factory.openSession();
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.delete(new Service(null, 0, id, false));
+        }finally {
+            transaction.commit();
+            session.close();
+        }
     }
 
     @Override
