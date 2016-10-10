@@ -1,6 +1,7 @@
 package command;
 
 import dao.DAOException;
+import ent.SubInfo;
 import ent.Subscriber;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.log4j.Logger;
@@ -96,7 +97,7 @@ public class UserCreate implements Command {
             if(sub==null) {
                 log.trace(View.LOG_ABLE_LOGIN);
                 sub=new Subscriber();
-                sub.setInfo(sub.new SubInfo());
+                sub.setInfo(new SubInfo());
                 sub.getInfo().setFirstName(request.getParameter(View.FIRST_NAME_PAGE));
                 sub.getInfo().setSecondName(request.getParameter(View.SECOND_NAME_PAGE));
                 sub.getInfo().setLogin(request.getParameter(View.LOGIN_PAGE));

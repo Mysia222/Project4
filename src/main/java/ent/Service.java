@@ -1,5 +1,8 @@
 package ent;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Славик on 24.07.2016.
  */
@@ -24,6 +27,8 @@ public class Service {
      * It's editing status
      */
     private boolean edit;
+
+    private Set<Subscriber> subs = new HashSet<>();
 
     /**
      * Default constructor
@@ -77,6 +82,14 @@ public class Service {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Set<Subscriber> getSubs() {
+        return subs;
+    }
+
+    public void setSubs(Set<Subscriber> subs) {
+        this.subs = subs;
     }
 
     @Override

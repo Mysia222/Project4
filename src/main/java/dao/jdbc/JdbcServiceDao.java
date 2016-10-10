@@ -186,13 +186,15 @@ public class JdbcServiceDao implements ServicesDao {
      * This method marks item with edit
      * @param id is item id
      */
-    public void edit(int id) throws DAOException {
+    @Override
+    public void edit(int id, boolean edit) throws DAOException {
         log.trace(View.LOG_SET_EDIT_TO_SERVICE+id);
-        String s = "UPDATE daotalk.tel_service SET edit=TRUE WHERE id=?;";
+        String s = "UPDATE daotalk.tel_service SET edit=? WHERE id=?;";
         try(Connection connection = JdbcDaoFactory.getConnection()) {
             log.trace(View.LOG_CONNECTED);
             PreparedStatement query = connection.prepareStatement(s);
-            query.setInt(1, id);
+            query.setBoolean(1, edit);
+            query.setInt(2, id);
             query.execute();
             query.close();
             log.trace(View.LOG_SET_EDIT_TO_SERVICE+id+View.LOG_FINISHED);
@@ -202,22 +204,6 @@ public class JdbcServiceDao implements ServicesDao {
         }
     }
 
-    @Override
-    public void unEdit(int id) throws DAOException {
-        log.trace(View.LOG_SET_UNEDIT_TO_SERVICE+id);
-        String s = "UPDATE daotalk.tel_service SET edit=FALSE WHERE id=?;";
-        try(Connection connection = JdbcDaoFactory.getConnection()) {
-            log.trace(View.LOG_CONNECTED);
-            PreparedStatement query = connection.prepareStatement(s);
-            query.setInt(1, id);
-            query.execute();
-            query.close();
-            log.trace(View.LOG_SET_UNEDIT_TO_SERVICE+id+View.LOG_FINISHED);
-        } catch (SQLException e) {
-            log.error(View.LOG_EXECUTE_EXCEPTION,e);
-            throw new DAOException(View.LOG_EXECUTE_EXCEPTION, e);
-        }
-    }
 
     @Override
     public boolean nameInUse(String name) throws DAOException {

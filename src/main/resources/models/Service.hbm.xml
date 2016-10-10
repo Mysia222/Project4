@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        <!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD//EN"
+                "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="ent.Service" table="daotalk.tel_service">
-        <meta attribute="class-description">
-            This class contains the service detail.
-        </meta>
-        <id name="id" type="int" column="id">
-            <generator class="identity"/>
-        </id>
-        <property name="name" column="name" type="string"/>
-        <property name="edit" column="edit" type="boolean"/>
-        <property name="price" column="price" type="double"/>
-    </class>
+<class name="ent.Service" schema="daotalk" table="tel_service">
+    <meta attribute="class-description">
+        This class contains the service detail.
+    </meta>
+    <id name="id" type="int" column="id">
+        <generator class="identity"/>
+    </id>
+    <property name="name" column="name" type="string"/>
+    <property name="edit" column="edit" type="boolean"/>
+    <property name="price" column="price" type="double"/>
+    <set name="subs" table="sub_services" lazy="false" >
+        <key column="service_id"></key>
+        <many-to-many column="sub_id" class="ent.Subscriber"></many-to-many>
+    </set>
+
+</class>
 </hibernate-mapping>

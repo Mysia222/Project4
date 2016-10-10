@@ -3,12 +3,8 @@ package services;
 import dao.DAOException;
 import dao.DaoFactory;
 import dao.ServicesDao;
-import dao.hibernate.HibernateDao;
-import dao.jdbc.JdbcServiceDao;
 import ent.Service;
 
-import javax.naming.NamingException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -62,7 +58,7 @@ public class ServService {
     public void create(Service service)  throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-//        HibernateDao sd =  new HibernateDao();
+//        ServiceHibernateDao sd =  new ServiceHibernateDao();
         sd.create(service);
     }
 
@@ -86,17 +82,12 @@ public class ServService {
         sd.update(service);
     }
 
-    public void editService(int id) throws DAOException {
+    public void editService(int id, boolean edit) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();
         ServicesDao sd = df.createServicesDao();
-        sd.edit(id);
+        sd.edit(id, edit);
     }
 
-    public void unEditService(int id) throws DAOException {
-        DaoFactory df = DaoFactory.getFactory();
-        ServicesDao sd = df.createServicesDao();
-        sd.unEdit(id);
-    }
 
     public boolean nameInUse(String name) throws DAOException {
         DaoFactory df = DaoFactory.getFactory();

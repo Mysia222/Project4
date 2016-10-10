@@ -42,7 +42,7 @@ public class ServiceChangeService implements Command {
         ResourceBundle bundle = (ResourceBundle)request.getSession().getAttribute(View.BUNDLE);
         request.setAttribute(View.SAVE_PAGE, bundle.getString(View.SAVE));
         try {
-            servService.editService(Integer.valueOf(request.getParameter(View.ID_PAGE)));
+            servService.editService(Integer.valueOf(request.getParameter(View.ID_PAGE)),true);
         } catch (DAOException e) {
             request.setAttribute(View.ERROR_CAUSE, bundle.getString(View.CANT_DO_REQUEST));
             return ViewURL.ERROR_PAGE;

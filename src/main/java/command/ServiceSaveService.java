@@ -56,7 +56,7 @@ public class ServiceSaveService implements Command {
                 Service service = servService.getService(Integer.valueOf(request.getParameter(View.ID_PAGE)));
                 service.setName(request.getParameter(View.NAME_PAGE));
                 service.setPrice(Double.valueOf(request.getParameter(View.PRICE_PAGE)));
-                servService.unEditService(Integer.valueOf(request.getParameter(View.ID_PAGE)));
+                servService.editService(Integer.valueOf(request.getParameter(View.ID_PAGE)),false);
                 servService.update(service);
             }
             Command command = CommandList.valueOf(View.SERVICES_LIST_EDIT).getCommand();

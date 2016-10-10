@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="ent.Subscriber"  schema="daotalk" table="abonents">
+        <meta attribute="class-description">
+            This class contains the service detail.
+        </meta>
+        <id name="contract" type="int" column="contract">
+            <generator class="identity"/>
+        </id>
+        <property name="balance" column="balance" type="double"/>
+        <property name="admin" column="admin" type="boolean"/>
+        <property name="blocked" column="blocked" type="boolean"/>
+        <one-to-one name="info" class="ent.SubInfo" cascade="save-update"></one-to-one>
+        <set name="currentService" table="sub_services" lazy="false" >
+            <key column="sub_id"></key>
+            <many-to-many column="service_id" class="ent.Service"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -3,6 +3,7 @@ package dao.jdbc;
 import dao.DAOException;
 import dao.SubsDao;
 import ent.Service;
+import ent.SubInfo;
 import ent.Subscriber;
 import views.View;
 import services.ServService;
@@ -98,27 +99,6 @@ public class JdbcSubsDao implements SubsDao {
         log.trace(View.LOG_DELETE_SUBSCRIBER_LOGIN+login+View.LOG_FINISHED);
     }
 
-    /**
-     * This method deletes an item from DB
-     * @param login is login
-     * @throws DAOException
-     */
-    @Override
-    public void deleteTest(String login) throws DAOException {
-        log.trace(View.LOG_DELETE_SUBSCRIBER_LOGIN + login);
-        String s = "UPDATE daotalk.abonent_info SET deleted=TRUE WHERE login=?;";
-        try(Connection connection = JdbcDaoFactory.getConnection()){
-            log.trace(View.LOG_CONNECTED);
-            PreparedStatement query = connection.prepareStatement(s);
-            query.setString(1,login);
-            query.execute();
-            query.close();
-        } catch (SQLException e) {
-            log.error(View.LOG_EXECUTE_EXCEPTION,e);
-            throw new DAOException(View.LOG_EXECUTE_EXCEPTION,e);
-        }
-        log.trace(View.LOG_DELETE_SUBSCRIBER_LOGIN+login+View.LOG_FINISHED);
-    }
 
     /**
      * This method finds an item in DB by login and password
@@ -197,7 +177,7 @@ public class JdbcSubsDao implements SubsDao {
                 sub.setContract(rs.getInt(View.QUERY_CONTRACT));
 //                sub.setAdmin(rs.getBoolean(View.QUERY_ADMIN));
 //                sub.setBlocked(rs.getBoolean(View.QUERY_BLOCKED));
-                sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_PASSWORD), login));
+                sub.setInfo(new SubInfo(sub.getContract(),rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_S_NAME), rs.getString(View.QUERY_PASSWORD), login));
                 sub.setCurrentService(getSubsServices(sub.getContract()));
                 find=true;
             }
@@ -240,7 +220,7 @@ public class JdbcSubsDao implements SubsDao {
     public Subscriber find(int id) throws DAOException {
         log.trace(View.LOG_FIND_SUBSCRIBER + id);
         Subscriber sub = new Subscriber();
-        String s = "SELECT * FROM daotalk.abonent_info WHERE sub_contract=? AND deleted=FALSE ;";
+        String s = "SELECT * FROM daotalk.abonent_info WHERE id=? AND deleted=FALSE ;";
         String s2 = "SELECT * FROM daotalk.abonents WHERE contract=? AND deleted=FALSE ;";
         try (Connection connection = JdbcDaoFactory.getConnection()){
             log.trace(View.LOG_CONNECTED);
@@ -255,7 +235,7 @@ public class JdbcSubsDao implements SubsDao {
 //                sub.setAdmin(rs.getBoolean(View.QUERY_ADMIN));
 //                sub.setBlocked(rs.getBoolean(View.QUERY_BLOCKED));
                 sub.setCurrentService(getSubsServices(sub.getContract()));
-                sub.setInfo(sub.new SubInfo(rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_S_NAME),
+                sub.setInfo(new SubInfo(id,rs.getString(View.QUERY_F_NAME), rs.getString(View.QUERY_S_NAME),
                         rs.getString(View.QUERY_PASSWORD), rs.getString(View.QUERY_LOGIN)));
             }
             ResultSet rs2 = query2.executeQuery();
@@ -351,7 +331,7 @@ public class JdbcSubsDao implements SubsDao {
      */
     public void update(Subscriber sub) throws DAOException {
         log.trace(View.LOG_UPDATE_SUBSCRIBER + sub);
-        String s = "UPDATE daotalk.abonent_info SET login=? ,password=? ,first_name=?, second_name=? WHERE sub_contract=?;";
+        String s = "UPDATE daotalk.abonent_info SET login=? ,password=? ,first_name=?, second_name=? WHERE id=?;";
         String s2 = "UPDATE daotalk.abonents SET balance=?  WHERE contract=?;";
         try(Connection connection = JdbcDaoFactory.getConnection()){
             log.trace(View.LOG_CONNECTED);

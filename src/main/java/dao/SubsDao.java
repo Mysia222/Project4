@@ -7,7 +7,6 @@ import ent.Subscriber;
  */
 public interface SubsDao extends GenericDao<Subscriber> {
 
-    void deleteTest(String login) throws DAOException;
 
     /**
      * This method looking for item in DB with same login and password

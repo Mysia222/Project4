@@ -223,7 +223,7 @@ public class View {
     public static final String QUERY_SERVICE_EDIT = "edit" ;
     public static final String QUERY_PASSWORD = "password";
     public static final String QUERY_BALANCE = "balance";
-    public static final String QUERY_CONTRACT = "sub_contract";
+    public static final String QUERY_CONTRACT = "id";
     public static final String QUERY_ADMIN = "admin";
     public static final String QUERY_BLOCKED = "blocked";
     public static final String QUERY_DELETED = "deleted";
