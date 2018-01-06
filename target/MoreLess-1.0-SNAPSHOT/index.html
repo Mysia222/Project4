@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<link href="style.css" type="text/css" media="screen" rel="stylesheet" />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+<div>
+    <div  class="wrapper ">
+        <div class="mainbody ">
+            <div class="aboutcontwrapper ">
+                <div class="aboutcont " style="height: 2000px">
+                    <div class="flags">
+                        <form class="flags" action="/Controller" method="post">
+                            <input class="flags_UA" type="submit" value=""/>
+                            <input type="hidden" name="command" value="LOCALE_INDEX" />
+                            <input type="hidden" name="country" value="UA" />
+                        </form>
+                        <form  class="flags" action="/Controller" method="post">
+                            <input class="flags_EN" type="submit" value=""/>
+                            <input type="hidden" name="command" value="LOCALE_INDEX" />
+                            <input type="hidden" name="country" value="EN" />
+                        </form>
+                    </div>
+                    <table border="0px" class="indexTable">
+                        <form action="/Controller" method="post">
+                            <tr>
+                                <td colspan="2"><p class="wrongLogin" ></p>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 1.5ch">Login:</td>
+                                <td><input type="text" name="login"></td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 1.5ch">Password: </td>
+                                <td><input type="password" name="password"></td>
+                            </tr>
+                            <tr>
+                                <td> <input type="submit" name="submit_enter" value="Enter">
+                                    <input type="hidden" name="command" value="USER_ENTER"></td>
+                                <td>
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                    <form action="/Controller" method="post">
+                        <input type="submit" name="create_account" value="Create account">
+                        <input type="hidden" name="command" value="USER_CREATE">
+                    </form>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
